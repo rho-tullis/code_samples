@@ -1,0 +1,2257 @@
+<!DOCTYPE html>
+<html class="ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5" lang="en" xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta charset="utf-8"/>
+<meta content="SAS 9.4" name="generator"/>
+<title>Results: Program 1</title>
+<style>
+/*<![CDATA[*/
+.ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .body.c section > table, .ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .body.c section > pre, .ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .body.c div > table,
+.ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .body.c div > pre, .ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .body.c article > table, .ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .body.c article > pre,
+.ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .body.j section > table, .ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .body.j section > pre, .ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .body.j div > table,
+.ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .body.j div > pre, .ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .body.j article > table, .ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .body.j article > pre,
+.ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .body.c p.note, .ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .body.c p.warning, .ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .body.c p.error, .ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .body.c p.fatal,
+.ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .body.j p.note, .ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .body.j p.warning, .ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .body.j p.error, .ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .body.j p.fatal,
+.ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .body.c > table.layoutcontainer, .ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .body.j > table.layoutcontainer { margin-left: auto; margin-right: auto }
+.ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .layoutregion.l table, .ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .layoutregion.l pre, .ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .layoutregion.l p.note,
+.ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .layoutregion.l p.warning, .ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .layoutregion.l p.error, .ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .layoutregion.l p.fatal { margin-left: 0 }
+.ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .layoutregion.c table, .ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .layoutregion.c pre, .ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .layoutregion.c p.note,
+.ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .layoutregion.c p.warning, .ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .layoutregion.c p.error, .ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .layoutregion.c p.fatal { margin-left: auto; margin-right: auto }
+.ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .layoutregion.r table, .ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .layoutregion.r pre, .ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .layoutregion.r p.note,
+.ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .layoutregion.r table, .ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .layoutregion.r pre, .ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .layoutregion.r p.note,
+.ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .layoutregion.r p.warning, .ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .layoutregion.r p.error, .ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .layoutregion.r p.fatal { margin-right: 0 }
+.ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 article, .ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 aside, .ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 details, .ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 figcaption, .ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 figure, .ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 footer, .ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 header, .ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 hgroup, .ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 nav, .ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 section { display: block }
+html.ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 { font-size: 100% }
+.ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .body { margin: 1em; font-size: 13px; line-height: 1.231 }
+.ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 sup { position: relative; vertical-align: baseline; bottom: 0.25em; font-size: 0.8em }
+.ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 sub { position: relative; vertical-align: baseline; top: 0.25em; font-size: 0.8em }
+.ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 ul, .ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 ol { margin: 1em 0; padding: 0 0 0 40px }
+.ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 dd { margin: 0 0 0 40px }
+.ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 nav ul, .ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 nav ol { list-style: none; list-style-image: none; margin: 0; padding: 0 }
+.ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 img { border: 0; vertical-align: middle }
+.ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 svg:not(:root) { overflow: hidden }
+.ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 figure { margin: 0 }
+.ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 table { border-collapse: collapse; border-spacing: 0 }
+.ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .layoutcontainer { border-collapse: separate; border-spacing: 0 }
+.ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 p { margin-top: 0; text-align: left }
+.ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 h1.heading1 { text-align: left }
+.ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 h2.heading2 { text-align: left }
+.ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 h3.heading3 { text-align: left }
+.ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 h4.heading4 { text-align: left }
+.ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 h5.heading5 { text-align: left }
+.ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 h6.heading6 { text-align: left }
+.ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 span { text-align: left }
+.ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 table { margin-bottom: 1em }
+.ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 td, .ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 th { text-align: left; padding: 3px 6px; vertical-align: top }
+.ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 td[class$="fixed"], .ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 th[class$="fixed"] { white-space: pre }
+.ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 section, .ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 article { padding-top: 1px; padding-bottom: 8px }
+.ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 hr.pagebreak { height: 0px; border: 0; border-bottom: 1px solid #c0c0c0; margin: 1em 0 }
+.ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .stacked-value { text-align: left; display: block }
+.ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .stacked-cell > .stacked-value, .ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 td.data > td.data, .ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 th.data > td.data, .ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 th.data > th.data, .ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 td.data > th.data, .ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 th.header > th.header { border: 0 }
+.ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .stacked-cell > div.data { border-width: 0 }
+.ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .systitleandfootercontainer { white-space: nowrap; margin-bottom: 1em }
+.ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .systitleandfootercontainer > p { margin: 0 }
+.ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .systitleandfootercontainer > p > span { display: inline-block; width: 100%; white-space: normal }
+.ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .batch { display: table }
+.ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .toc { display: none }
+.ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .proc_note_group, .ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .proc_title_group { margin-bottom: 1em }
+.ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 p.proctitle { margin: 0 }
+.ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 p.note, .ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 p.warning, .ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 p.error, .ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 p.fatal { display: table }
+.ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .notebanner, .ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .warnbanner, .ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .errorbanner, .ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .fatalbanner,
+.ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .notecontent, .ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .warncontent, .ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .errorcontent, .ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .fatalcontent { display: table-cell; padding: 0.5em }
+.ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .notebanner, .ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .warnbanner, .ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .errorbanner, .ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .fatalbanner { padding-right: 0 }
+.ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .body > div > ol li { text-align: left }
+.ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .beforecaption > h4 { margin-top: 0; margin-bottom: 0 }
+.ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .c { text-align: center }
+.ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .r { text-align: right }
+.ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .l { text-align: left }
+.ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .j { text-align: justify }
+.ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .d { text-align: right }
+.ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .b { vertical-align: bottom }
+.ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .m { vertical-align: middle }
+.ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .t { vertical-align: top }
+.ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .accessiblecaption {
+    background-color: #fafbfe;
+    color: #112277;
+    font-family: Arial, 'Albany AMT', Helvetica, Helv;
+    font-size: x-small;
+    font-style: normal;
+    font-weight: bold;
+}
+.ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 a:active { color: #800080 }
+.ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .aftercaption {
+    background-color: #fafbfe;
+    border-spacing: 0;
+    color: #112277;
+    font-family: Arial, 'Albany AMT', Helvetica, Helv;
+    font-size: x-small;
+    font-style: normal;
+    font-weight: bold;
+    padding-top: 4pt;
+}
+.ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .batch > colgroup {
+    border-left: 1px solid #c1c1c1;
+    border-right: 1px solid #c1c1c1;
+}
+.ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .batch > tbody, .ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .batch > thead, .ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .batch > tfoot {
+    border-top: 1px solid #c1c1c1;
+    border-bottom: 1px solid #c1c1c1;
+}
+.ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .batch { border: hidden; }
+.ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .batch {
+    background-color: #fafbfe;
+    border: 1px solid #c1c1c1;
+    border-collapse: separate;
+    border-spacing: 1px;
+    color: #000000;
+    font-family: 'SAS Monospace', 'Courier New', Courier, monospace;
+    font-size: x-small;
+    font-style: normal;
+    font-weight: normal;
+    padding: 7px;
+    }
+.ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .beforecaption {
+    background-color: #fafbfe;
+    border-spacing: 0;
+    color: #112277;
+    font-family: Arial, 'Albany AMT', Helvetica, Helv;
+    font-size: x-small;
+    font-style: normal;
+    font-weight: bold;
+}
+.ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .body {
+    background-color: #fafbfe;
+    color: #000000;
+    font-family: Arial, 'Albany AMT', Helvetica, Helv;
+    font-size: x-small;
+    font-style: normal;
+    font-weight: normal;
+    margin-left: 8px;
+    margin-right: 8px;
+}
+.ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .bodydate {
+    background-color: #fafbfe;
+    border-spacing: 0;
+    color: #000000;
+    font-family: Arial, 'Albany AMT', Helvetica, Helv;
+    font-size: x-small;
+    font-style: normal;
+    font-weight: normal;
+    text-align: right;
+    vertical-align: top;
+    width: 100%;
+}
+.ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .bycontentfolder {
+    color: #000000;
+    font-family: Arial, 'Albany AMT', Helvetica, Helv;
+    font-size: x-small;
+    font-style: normal;
+    font-weight: normal;
+    list-style-type: none;
+    margin-left: 6pt;
+}
+.ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .byline {
+    background-color: #fafbfe;
+    border-spacing: 0;
+    color: #112277;
+    font-family: Arial, 'Albany AMT', Helvetica, Helv;
+    font-size: x-small;
+    font-style: normal;
+    font-weight: bold;
+}
+.ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .bylinecontainer > col, .ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .bylinecontainer > colgroup > col, .ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .bylinecontainer > colgroup, .ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .bylinecontainer > tr, .ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .bylinecontainer > * > tr, .ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .bylinecontainer > thead, .ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .bylinecontainer > tbody, .ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .bylinecontainer > tfoot { border: none; }
+.ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .bylinecontainer {
+    background-color: #fafbfe;
+    border: none;
+    border-spacing: 1px;
+    color: #000000;
+    font-family: Arial, 'Albany AMT', Helvetica, Helv;
+    font-size: x-small;
+    font-style: normal;
+    font-weight: normal;
+    width: 100%;
+}
+.ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .caption {
+    background-color: #fafbfe;
+    border-spacing: 0;
+    color: #112277;
+    font-family: Arial, 'Albany AMT', Helvetica, Helv;
+    font-size: x-small;
+    font-style: normal;
+    font-weight: bold;
+}
+.ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .cell, .ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .container {
+    background-color: #fafbfe;
+    color: #000000;
+    font-family: Arial, 'Albany AMT', Helvetica, Helv;
+    font-size: x-small;
+    font-style: normal;
+    font-weight: normal;
+}
+.ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .contentfolder, .ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .contentitem {
+    color: #000000;
+    font-family: Arial, 'Albany AMT', Helvetica, Helv;
+    font-size: x-small;
+    font-style: normal;
+    font-weight: normal;
+    list-style-type: none;
+    margin-left: 6pt;
+}
+.ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .contentproclabel, .ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .contentprocname {
+    background-color: #fafbfe;
+    color: #112277;
+    font-family: Arial, 'Albany AMT', Helvetica, Helv;
+    font-size: x-small;
+    font-style: normal;
+    font-weight: bold;
+}
+.ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .contents {
+    background-color: #fafbfe;
+    color: #000000;
+    font-family: Arial, 'Albany AMT', Helvetica, Helv;
+    font-size: x-small;
+    font-style: normal;
+    font-weight: normal;
+    list-style-type: decimal;
+    margin-left: 8px;
+    margin-right: 8px;
+}
+.ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .contentsdate {
+    background-color: #fafbfe;
+    color: #000000;
+    font-family: Arial, 'Albany AMT', Helvetica, Helv;
+    font-size: x-small;
+    font-style: normal;
+    font-weight: normal;
+    width: 100%;
+}
+.ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .contenttitle {
+    background-color: #fafbfe;
+    color: #112277;
+    font-family: Arial, 'Albany AMT', Helvetica, Helv;
+    font-size: x-small;
+    font-style: italic;
+    font-weight: bold;
+}
+.ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .continued {
+    background-color: #fafbfe;
+    border-spacing: 0;
+    color: #112277;
+    font-family: Arial, 'Albany AMT', Helvetica, Helv;
+    font-size: x-small;
+    font-style: normal;
+    font-weight: bold;
+    width: 100%;
+}
+.ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .data, .ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .dataemphasis {
+    background-color: #ffffff;
+    border-color: #c1c1c1;
+    border-style: solid;
+    border-width: 0 1px 1px 0;
+    font-family: Arial, 'Albany AMT', Helvetica, Helv;
+    font-size: x-small;
+    font-style: normal;
+    font-weight: normal;
+}
+.ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .dataemphasisfixed {
+    background-color: #ffffff;
+    border-color: #c1c1c1;
+    border-style: solid;
+    border-width: 0 1px 1px 0;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: x-small;
+    font-style: italic;
+    font-weight: normal;
+}
+.ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .dataempty {
+    background-color: #ffffff;
+    border-color: #c1c1c1;
+    border-style: solid;
+    border-width: 0 1px 1px 0;
+    font-family: Arial, 'Albany AMT', Helvetica, Helv;
+    font-size: x-small;
+    font-style: normal;
+    font-weight: normal;
+}
+.ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .datafixed {
+    background-color: #ffffff;
+    border-color: #c1c1c1;
+    border-style: solid;
+    border-width: 0 1px 1px 0;
+    font-family: 'Courier New', Courier;
+    font-size: x-small;
+    font-style: normal;
+    font-weight: normal;
+}
+.ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .datastrong {
+    background-color: #ffffff;
+    border-color: #c1c1c1;
+    border-style: solid;
+    border-width: 0 1px 1px 0;
+    color: #000000;
+    font-family: Arial, 'Albany AMT', Helvetica, Helv;
+    font-size: x-small;
+    font-style: normal;
+    font-weight: bold;
+}
+.ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .datastrongfixed {
+    background-color: #ffffff;
+    border-color: #c1c1c1;
+    border-style: solid;
+    border-width: 0 1px 1px 0;
+    color: #000000;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: x-small;
+    font-style: normal;
+    font-weight: bold;
+}
+.ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .date {
+    background-color: #fafbfe;
+    color: #000000;
+    font-family: Arial, 'Albany AMT', Helvetica, Helv;
+    font-size: x-small;
+    font-style: normal;
+    font-weight: normal;
+    width: 100%;
+}
+.ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .document {
+    background-color: #fafbfe;
+    color: #000000;
+    font-family: Arial, 'Albany AMT', Helvetica, Helv;
+    font-size: x-small;
+    font-style: normal;
+    font-weight: normal;
+}
+.ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .errorbanner {
+    background-color: #fafbfe;
+    color: #112277;
+    font-family: Arial, 'Albany AMT', Helvetica, Helv;
+    font-size: x-small;
+    font-style: normal;
+    font-weight: bold;
+}
+.ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .errorcontent {
+    background-color: #fafbfe;
+    color: #112277;
+    font-family: Arial, 'Albany AMT', Helvetica, Helv;
+    font-size: x-small;
+    font-style: normal;
+    font-weight: normal;
+}
+.ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .errorcontentfixed {
+    background-color: #fafbfe;
+    color: #112277;
+    font-family: 'Courier New', Courier;
+    font-size: x-small;
+    font-style: normal;
+    font-weight: normal;
+}
+.ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .extendedpage {
+    background-color: #fafbfe;
+    border-style: solid;
+    border-width: 1pt;
+    color: #112277;
+    font-family: Arial, 'Albany AMT', Helvetica, Helv;
+    font-size: x-small;
+    font-style: italic;
+    font-weight: normal;
+    text-align: center;
+}
+.ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .fatalbanner {
+    background-color: #fafbfe;
+    color: #112277;
+    font-family: Arial, 'Albany AMT', Helvetica, Helv;
+    font-size: x-small;
+    font-style: normal;
+    font-weight: bold;
+}
+.ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .fatalcontent {
+    background-color: #fafbfe;
+    color: #112277;
+    font-family: Arial, 'Albany AMT', Helvetica, Helv;
+    font-size: x-small;
+    font-style: normal;
+    font-weight: normal;
+}
+.ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .fatalcontentfixed {
+    background-color: #fafbfe;
+    color: #112277;
+    font-family: 'Courier New', Courier;
+    font-size: x-small;
+    font-style: normal;
+    font-weight: normal;
+}
+.ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .folderaction {
+    color: #000000;
+    font-family: Arial, 'Albany AMT', Helvetica, Helv;
+    font-size: x-small;
+    font-style: normal;
+    font-weight: normal;
+    list-style-type: none;
+    margin-left: 6pt;
+}
+.ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .footer {
+    background-color: #edf2f9;
+    border-color: #b0b7bb;
+    border-style: solid;
+    border-width: 0 1px 1px 0;
+    color: #112277;
+    font-family: Arial, 'Albany AMT', Helvetica, Helv;
+    font-size: x-small;
+    font-style: normal;
+    font-weight: bold;
+}
+.ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .footeremphasis {
+    background-color: #edf2f9;
+    border-color: #b0b7bb;
+    border-style: solid;
+    border-width: 0 1px 1px 0;
+    color: #112277;
+    font-family: Arial, 'Albany AMT', Helvetica, Helv;
+    font-size: x-small;
+    font-style: italic;
+    font-weight: normal;
+}
+.ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .footeremphasisfixed {
+    background-color: #edf2f9;
+    border-color: #b0b7bb;
+    border-style: solid;
+    border-width: 0 1px 1px 0;
+    color: #112277;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: x-small;
+    font-style: italic;
+    font-weight: normal;
+}
+.ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .footerempty {
+    background-color: #edf2f9;
+    border-color: #b0b7bb;
+    border-style: solid;
+    border-width: 0 1px 1px 0;
+    color: #112277;
+    font-family: Arial, 'Albany AMT', Helvetica, Helv;
+    font-size: x-small;
+    font-style: normal;
+    font-weight: bold;
+}
+.ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .footerfixed {
+    background-color: #edf2f9;
+    border-color: #b0b7bb;
+    border-style: solid;
+    border-width: 0 1px 1px 0;
+    color: #112277;
+    font-family: 'Courier New', Courier;
+    font-size: x-small;
+    font-style: normal;
+    font-weight: normal;
+}
+.ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .footerstrong {
+    background-color: #edf2f9;
+    border-color: #b0b7bb;
+    border-style: solid;
+    border-width: 0 1px 1px 0;
+    color: #112277;
+    font-family: Arial, 'Albany AMT', Helvetica, Helv;
+    font-size: x-small;
+    font-style: normal;
+    font-weight: bold;
+}
+.ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .footerstrongfixed {
+    background-color: #edf2f9;
+    border-color: #b0b7bb;
+    border-style: solid;
+    border-width: 0 1px 1px 0;
+    color: #112277;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: x-small;
+    font-style: normal;
+    font-weight: bold;
+}
+.ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .frame {
+    background-color: #fafbfe;
+    color: #000000;
+    font-family: Arial, 'Albany AMT', Helvetica, Helv;
+    font-size: x-small;
+    font-style: normal;
+    font-weight: normal;
+}
+.ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .graph > colgroup {
+    border-left: 1px solid #c1c1c1;
+    border-right: 1px solid #c1c1c1;
+}
+.ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .graph > tbody, .ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .graph > thead, .ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .graph > tfoot {
+    border-top: 1px solid #c1c1c1;
+    border-bottom: 1px solid #c1c1c1;
+}
+.ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .graph { border: hidden; }
+.ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .graph {
+    background-color: #fafbfe;
+    border: 1px solid #c1c1c1;
+    border-collapse: separate;
+    border-spacing: 1px;
+    color: #000000;
+    font-family: Arial, 'Albany AMT', Helvetica, Helv;
+    font-size: x-small;
+    font-style: normal;
+    font-weight: normal;
+    }
+.ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .header {
+    background-color: #edf2f9;
+    border-color: #b0b7bb;
+    border-style: solid;
+    border-width: 0 1px 1px 0;
+    color: #112277;
+    font-family: Arial, 'Albany AMT', Helvetica, Helv;
+    font-size: x-small;
+    font-style: normal;
+    font-weight: bold;
+}
+.ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .headeremphasis {
+    background-color: #d8dbd3;
+    border-color: #b0b7bb;
+    border-style: solid;
+    border-width: 0 1px 1px 0;
+    color: #000000;
+    font-family: Arial, 'Albany AMT', Helvetica, Helv;
+    font-size: x-small;
+    font-style: italic;
+    font-weight: normal;
+}
+.ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .headeremphasisfixed {
+    background-color: #d8dbd3;
+    border-color: #b0b7bb;
+    border-style: solid;
+    border-width: 0 1px 1px 0;
+    color: #000000;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: x-small;
+    font-style: italic;
+    font-weight: normal;
+}
+.ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .headerempty {
+    background-color: #edf2f9;
+    border-color: #b0b7bb;
+    border-style: solid;
+    border-width: 0 1px 1px 0;
+    color: #112277;
+    font-family: Arial, 'Albany AMT', Helvetica, Helv;
+    font-size: x-small;
+    font-style: normal;
+    font-weight: bold;
+}
+.ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .headerfixed {
+    background-color: #edf2f9;
+    border-color: #b0b7bb;
+    border-style: solid;
+    border-width: 0 1px 1px 0;
+    color: #112277;
+    font-family: 'Courier New', Courier;
+    font-size: x-small;
+    font-style: normal;
+    font-weight: normal;
+}
+.ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .headersandfooters {
+    background-color: #edf2f9;
+    color: #000000;
+    font-family: Arial, 'Albany AMT', Helvetica, Helv;
+    font-size: x-small;
+    font-style: normal;
+    font-weight: bold;
+}
+.ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .headerstrong {
+    background-color: #d8dbd3;
+    border-color: #b0b7bb;
+    border-style: solid;
+    border-width: 0 1px 1px 0;
+    color: #000000;
+    font-family: Arial, 'Albany AMT', Helvetica, Helv;
+    font-size: x-small;
+    font-style: normal;
+    font-weight: bold;
+}
+.ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .headerstrongfixed {
+    background-color: #d8dbd3;
+    border-color: #b0b7bb;
+    border-style: solid;
+    border-width: 0 1px 1px 0;
+    color: #000000;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: x-small;
+    font-style: normal;
+    font-weight: bold;
+}
+.ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .heading1, .ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .heading2, .ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .heading3, .ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .heading4, .ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .heading5, .ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .heading6 { font-family: Arial, Helvetica, sans-serif }
+.ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .index {
+    background-color: #fafbfe;
+    color: #000000;
+    font-family: Arial, 'Albany AMT', Helvetica, Helv;
+    font-size: x-small;
+    font-style: normal;
+    font-weight: normal;
+}
+.ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .indexaction, .ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .indexitem {
+    color: #000000;
+    font-family: Arial, 'Albany AMT', Helvetica, Helv;
+    font-size: x-small;
+    font-style: normal;
+    font-weight: normal;
+    list-style-type: none;
+    margin-left: 6pt;
+}
+.ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .indexprocname {
+    background-color: #fafbfe;
+    color: #112277;
+    font-family: Arial, 'Albany AMT', Helvetica, Helv;
+    font-size: x-small;
+    font-style: normal;
+    font-weight: bold;
+}
+.ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .indextitle {
+    background-color: #fafbfe;
+    color: #112277;
+    font-family: Arial, 'Albany AMT', Helvetica, Helv;
+    font-size: x-small;
+    font-style: italic;
+    font-weight: bold;
+}
+.ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .layoutcontainer, .ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .layoutregion {
+    border-width: 0;
+    border-spacing: 30px;
+}
+.ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .linecontent {
+    background-color: #fafbfe;
+    border-color: #c1c1c1;
+    border-style: solid;
+    border-width: 0 1px 1px 0;
+    color: #112277;
+    font-family: Arial, 'Albany AMT', Helvetica, Helv;
+    font-size: x-small;
+    font-style: normal;
+    font-weight: normal;
+}
+.ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 a:link { color: #0000ff }
+.ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .list {
+    background-color: #fafbfe;
+    color: #000000;
+    font-family: Arial, 'Albany AMT', Helvetica, Helv;
+    font-size: x-small;
+    font-style: normal;
+    font-weight: normal;
+    list-style-type: disc;
+}
+.ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .list10 {
+    background-color: #fafbfe;
+    color: #000000;
+    font-family: Arial, 'Albany AMT', Helvetica, Helv;
+    font-size: x-small;
+    font-style: normal;
+    font-weight: normal;
+    list-style-type: square;
+}
+.ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .list2 {
+    background-color: #fafbfe;
+    color: #000000;
+    font-family: Arial, 'Albany AMT', Helvetica, Helv;
+    font-size: x-small;
+    font-style: normal;
+    font-weight: normal;
+    list-style-type: circle;
+}
+.ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .list3, .ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .list4, .ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .list5, .ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .list6, .ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .list7, .ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .list8, .ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .list9 {
+    background-color: #fafbfe;
+    color: #000000;
+    font-family: Arial, 'Albany AMT', Helvetica, Helv;
+    font-size: x-small;
+    font-style: normal;
+    font-weight: normal;
+    list-style-type: square;
+}
+.ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .listitem {
+    background-color: #fafbfe;
+    color: #000000;
+    font-family: Arial, 'Albany AMT', Helvetica, Helv;
+    font-size: x-small;
+    font-style: normal;
+    font-weight: normal;
+    list-style-type: disc;
+}
+.ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .listitem10 {
+    background-color: #fafbfe;
+    color: #000000;
+    font-family: Arial, 'Albany AMT', Helvetica, Helv;
+    font-size: x-small;
+    font-style: normal;
+    font-weight: normal;
+    list-style-type: square;
+}
+.ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .listitem2 {
+    background-color: #fafbfe;
+    color: #000000;
+    font-family: Arial, 'Albany AMT', Helvetica, Helv;
+    font-size: x-small;
+    font-style: normal;
+    font-weight: normal;
+    list-style-type: circle;
+}
+.ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .listitem3, .ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .listitem4, .ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .listitem5, .ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .listitem6, .ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .listitem7, .ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .listitem8, .ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .listitem9 {
+    background-color: #fafbfe;
+    color: #000000;
+    font-family: Arial, 'Albany AMT', Helvetica, Helv;
+    font-size: x-small;
+    font-style: normal;
+    font-weight: normal;
+    list-style-type: square;
+}
+.ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .note {
+    background-color: #fafbfe;
+    color: #112277;
+    font-family: Arial, 'Albany AMT', Helvetica, Helv;
+    font-size: x-small;
+    font-style: normal;
+    font-weight: normal;
+}
+.ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .notebanner {
+    background-color: #fafbfe;
+    color: #112277;
+    font-family: Arial, 'Albany AMT', Helvetica, Helv;
+    font-size: x-small;
+    font-style: normal;
+    font-weight: bold;
+}
+.ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .notecontent {
+    background-color: #fafbfe;
+    color: #112277;
+    font-family: Arial, 'Albany AMT', Helvetica, Helv;
+    font-size: x-small;
+    font-style: normal;
+    font-weight: normal;
+}
+.ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .notecontentfixed {
+    background-color: #fafbfe;
+    color: #112277;
+    font-family: 'Courier New', Courier;
+    font-size: x-small;
+    font-style: normal;
+    font-weight: normal;
+}
+.ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .output > colgroup {
+    border-left: 1px solid #c1c1c1;
+    border-right: 1px solid #c1c1c1;
+}
+.ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .output > tbody, .ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .output > thead, .ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .output > tfoot {
+    border-top: 1px solid #c1c1c1;
+    border-bottom: 1px solid #c1c1c1;
+}
+.ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .output { border: hidden; }
+.ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .output {
+    background-color: #fafbfe;
+    border: 1px solid #c1c1c1;
+    border-collapse: separate;
+    border-spacing: 1px;
+    color: #000000;
+    font-family: Arial, 'Albany AMT', Helvetica, Helv;
+    font-size: x-small;
+    font-style: normal;
+    font-weight: normal;
+    }
+.ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .pageno {
+    background-color: #fafbfe;
+    border-spacing: 0;
+    color: #112277;
+    font-family: Arial, 'Albany AMT', Helvetica, Helv;
+    font-size: x-small;
+    font-style: normal;
+    font-weight: bold;
+    text-align: right;
+    vertical-align: top;
+}
+.ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .pages {
+    background-color: #fafbfe;
+    color: #000000;
+    font-family: Arial, 'Albany AMT', Helvetica, Helv;
+    font-size: x-small;
+    font-style: normal;
+    font-weight: normal;
+    list-style-type: decimal;
+    margin-left: 8px;
+    margin-right: 8px;
+}
+.ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .pagesdate {
+    background-color: #fafbfe;
+    color: #000000;
+    font-family: Arial, 'Albany AMT', Helvetica, Helv;
+    font-size: x-small;
+    font-style: normal;
+    font-weight: normal;
+    width: 100%;
+}
+.ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .pagesitem {
+    color: #000000;
+    font-family: Arial, 'Albany AMT', Helvetica, Helv;
+    font-size: x-small;
+    font-style: normal;
+    font-weight: normal;
+    list-style-type: none;
+    margin-left: 6pt;
+}
+.ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .pagesproclabel, .ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .pagesprocname {
+    background-color: #fafbfe;
+    color: #112277;
+    font-family: Arial, 'Albany AMT', Helvetica, Helv;
+    font-size: x-small;
+    font-style: normal;
+    font-weight: bold;
+}
+.ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .pagestitle {
+    background-color: #fafbfe;
+    color: #112277;
+    font-family: Arial, 'Albany AMT', Helvetica, Helv;
+    font-size: x-small;
+    font-style: italic;
+    font-weight: bold;
+}
+.ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .paragraph {
+    background-color: #fafbfe;
+    color: #000000;
+    font-family: Arial, 'Albany AMT', Helvetica, Helv;
+    font-size: x-small;
+    font-style: normal;
+    font-weight: normal;
+}
+.ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .parskip > col, .ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .parskip > colgroup > col, .ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .parskip > colgroup, .ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .parskip > tr, .ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .parskip > * > tr, .ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .parskip > thead, .ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .parskip > tbody, .ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .parskip > tfoot { border: none; }
+.ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .parskip {
+    border: none;
+    border-spacing: 0;
+    font-family: Arial, 'Albany AMT', Helvetica, Helv;
+    font-size: x-small;
+    font-style: normal;
+    font-weight: bold;
+    }
+.ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .prepage {
+    background-color: #fafbfe;
+    color: #112277;
+    font-family: Arial, 'Albany AMT', Helvetica, Helv;
+    font-size: x-small;
+    font-style: normal;
+    font-weight: normal;
+    text-align: left;
+}
+.ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .proctitle {
+    background-color: #fafbfe;
+    color: #112277;
+    font-family: Arial, 'Albany AMT', Helvetica, Helv;
+    font-size: x-small;
+    font-style: normal;
+    font-weight: bold;
+}
+.ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .proctitlefixed {
+    background-color: #fafbfe;
+    color: #112277;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: x-small;
+    font-style: normal;
+    font-weight: bold;
+}
+.ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .rowfooter {
+    background-color: #edf2f9;
+    border-color: #b0b7bb;
+    border-style: solid;
+    border-width: 0 1px 1px 0;
+    color: #112277;
+    font-family: Arial, 'Albany AMT', Helvetica, Helv;
+    font-size: x-small;
+    font-style: normal;
+    font-weight: bold;
+}
+.ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .rowfooteremphasis {
+    background-color: #edf2f9;
+    border-color: #b0b7bb;
+    border-style: solid;
+    border-width: 0 1px 1px 0;
+    color: #112277;
+    font-family: Arial, 'Albany AMT', Helvetica, Helv;
+    font-size: x-small;
+    font-style: italic;
+    font-weight: normal;
+}
+.ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .rowfooteremphasisfixed {
+    background-color: #edf2f9;
+    border-color: #b0b7bb;
+    border-style: solid;
+    border-width: 0 1px 1px 0;
+    color: #112277;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: x-small;
+    font-style: italic;
+    font-weight: normal;
+}
+.ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .rowfooterempty {
+    background-color: #edf2f9;
+    border-color: #b0b7bb;
+    border-style: solid;
+    border-width: 0 1px 1px 0;
+    color: #112277;
+    font-family: Arial, 'Albany AMT', Helvetica, Helv;
+    font-size: x-small;
+    font-style: normal;
+    font-weight: bold;
+}
+.ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .rowfooterfixed {
+    background-color: #edf2f9;
+    border-color: #b0b7bb;
+    border-style: solid;
+    border-width: 0 1px 1px 0;
+    color: #112277;
+    font-family: 'Courier New', Courier;
+    font-size: x-small;
+    font-style: normal;
+    font-weight: normal;
+}
+.ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .rowfooterstrong {
+    background-color: #edf2f9;
+    border-color: #b0b7bb;
+    border-style: solid;
+    border-width: 0 1px 1px 0;
+    color: #112277;
+    font-family: Arial, 'Albany AMT', Helvetica, Helv;
+    font-size: x-small;
+    font-style: normal;
+    font-weight: bold;
+}
+.ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .rowfooterstrongfixed {
+    background-color: #edf2f9;
+    border-color: #b0b7bb;
+    border-style: solid;
+    border-width: 0 1px 1px 0;
+    color: #112277;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: x-small;
+    font-style: normal;
+    font-weight: bold;
+}
+.ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .rowheader {
+    background-color: #edf2f9;
+    border-color: #b0b7bb;
+    border-style: solid;
+    border-width: 0 1px 1px 0;
+    color: #112277;
+    font-family: Arial, 'Albany AMT', Helvetica, Helv;
+    font-size: x-small;
+    font-style: normal;
+    font-weight: bold;
+}
+.ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .rowheaderemphasis {
+    background-color: #edf2f9;
+    border-color: #b0b7bb;
+    border-style: solid;
+    border-width: 0 1px 1px 0;
+    color: #112277;
+    font-family: Arial, 'Albany AMT', Helvetica, Helv;
+    font-size: x-small;
+    font-style: italic;
+    font-weight: normal;
+}
+.ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .rowheaderemphasisfixed {
+    background-color: #edf2f9;
+    border-color: #b0b7bb;
+    border-style: solid;
+    border-width: 0 1px 1px 0;
+    color: #112277;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: x-small;
+    font-style: italic;
+    font-weight: normal;
+}
+.ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .rowheaderempty {
+    background-color: #edf2f9;
+    border-color: #b0b7bb;
+    border-style: solid;
+    border-width: 0 1px 1px 0;
+    color: #112277;
+    font-family: Arial, 'Albany AMT', Helvetica, Helv;
+    font-size: x-small;
+    font-style: normal;
+    font-weight: bold;
+}
+.ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .rowheaderfixed {
+    background-color: #edf2f9;
+    border-color: #b0b7bb;
+    border-style: solid;
+    border-width: 0 1px 1px 0;
+    color: #112277;
+    font-family: 'Courier New', Courier;
+    font-size: x-small;
+    font-style: normal;
+    font-weight: normal;
+}
+.ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .rowheaderstrong {
+    background-color: #edf2f9;
+    border-color: #b0b7bb;
+    border-style: solid;
+    border-width: 0 1px 1px 0;
+    color: #112277;
+    font-family: Arial, 'Albany AMT', Helvetica, Helv;
+    font-size: x-small;
+    font-style: normal;
+    font-weight: bold;
+}
+.ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .rowheaderstrongfixed {
+    background-color: #edf2f9;
+    border-color: #b0b7bb;
+    border-style: solid;
+    border-width: 0 1px 1px 0;
+    color: #112277;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: x-small;
+    font-style: normal;
+    font-weight: bold;
+}
+.ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .systemfooter, .ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .systemfooter10, .ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .systemfooter2, .ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .systemfooter3, .ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .systemfooter4, .ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .systemfooter5, .ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .systemfooter6, .ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .systemfooter7, .ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .systemfooter8, .ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .systemfooter9 {
+    background-color: #fafbfe;
+    color: #112277;
+    font-family: Arial, 'Albany AMT', Helvetica, Helv;
+    font-size: x-small;
+    font-style: normal;
+    font-weight: normal;
+}
+.ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .systemtitle, .ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .systemtitle10, .ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .systemtitle2, .ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .systemtitle3, .ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .systemtitle4, .ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .systemtitle5, .ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .systemtitle6, .ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .systemtitle7, .ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .systemtitle8, .ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .systemtitle9 {
+    background-color: #fafbfe;
+    color: #112277;
+    font-family: Arial, 'Albany AMT', Helvetica, Helv;
+    font-size: small;
+    font-style: normal;
+    font-weight: bold;
+}
+.ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .systitleandfootercontainer > col, .ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .systitleandfootercontainer > colgroup > col, .ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .systitleandfootercontainer > colgroup, .ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .systitleandfootercontainer > tr, .ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .systitleandfootercontainer > * > tr, .ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .systitleandfootercontainer > thead, .ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .systitleandfootercontainer > tbody, .ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .systitleandfootercontainer > tfoot { border: none; }
+.ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .systitleandfootercontainer {
+    background-color: #fafbfe;
+    border: none;
+    border-spacing: 1px;
+    color: #000000;
+    font-family: Arial, 'Albany AMT', Helvetica, Helv;
+    font-size: x-small;
+    font-style: normal;
+    font-weight: normal;
+    width: 100%;
+}
+.ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .table > col, .ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .table > colgroup > col {
+    border-left: 1px solid #c1c1c1;
+    border-right: 0 solid #c1c1c1;
+}
+.ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .table > tr, .ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .table > * > tr {
+    border-top: 1px solid #c1c1c1;
+    border-bottom: 0 solid #c1c1c1;
+}
+.ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .table { border: hidden; }
+.ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .table {
+    border-color: #c1c1c1;
+    border-style: solid;
+    border-width: 1px 0 0 1px;
+    border-collapse: collapse;
+    border-spacing: 0;
+    }
+.ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .titleandnotecontainer > col, .ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .titleandnotecontainer > colgroup > col, .ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .titleandnotecontainer > colgroup, .ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .titleandnotecontainer > tr, .ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .titleandnotecontainer > * > tr, .ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .titleandnotecontainer > thead, .ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .titleandnotecontainer > tbody, .ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .titleandnotecontainer > tfoot { border: none; }
+.ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .titleandnotecontainer {
+    background-color: #fafbfe;
+    border: none;
+    border-spacing: 1px;
+    color: #000000;
+    font-family: Arial, 'Albany AMT', Helvetica, Helv;
+    font-size: x-small;
+    font-style: normal;
+    font-weight: normal;
+    width: 100%;
+}
+.ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .titlesandfooters {
+    background-color: #fafbfe;
+    color: #112277;
+    font-family: Arial, 'Albany AMT', Helvetica, Helv;
+    font-size: x-small;
+    font-style: normal;
+    font-weight: bold;
+}
+.ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .usertext {
+    background-color: #fafbfe;
+    color: #112277;
+    font-family: Arial, 'Albany AMT', Helvetica, Helv;
+    font-size: x-small;
+    font-style: normal;
+    font-weight: normal;
+}
+.ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 a:visited { color: #800080 }
+.ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .warnbanner {
+    background-color: #fafbfe;
+    color: #112277;
+    font-family: Arial, 'Albany AMT', Helvetica, Helv;
+    font-size: x-small;
+    font-style: normal;
+    font-weight: bold;
+}
+.ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .warncontent {
+    background-color: #fafbfe;
+    color: #112277;
+    font-family: Arial, 'Albany AMT', Helvetica, Helv;
+    font-size: x-small;
+    font-style: normal;
+    font-weight: normal;
+}
+.ods_65297c55-1f3d-4e6f-b895-8ab7baf7fab5 .warncontentfixed {
+    background-color: #fafbfe;
+    color: #112277;
+    font-family: 'Courier New', Courier;
+    font-size: x-small;
+    font-style: normal;
+    font-weight: normal;
+}
+/*]]>*/
+</style>
+</head>
+<body class="body">
+<div id="div_65297c55-1f3d-4e6f-b895-8ab7baf7fab5" class="c body">
+<h1 class="body toc">Results: Program 1</h1>
+<section data-name="Means" data-sec-type="proc">
+<div id="IDX" class="systitleandfootercontainer" style="border-spacing: 1px">
+<p><span class="c systemtitle">&apos;/home/u63541071/point32health/sample3.xlsx&apos;</span> </p>
+<p><span class="c systemtitle2">NUMERIC ANALYSIS -- ALL</span> </p>
+</div>
+<div class="proc_title_group">
+<p class="c proctitle">The MEANS Procedure</p>
+</div>
+<h1 class="contentprocname toc">The Means Procedure</h1>
+<article aria-label="Summary statistics">
+<h1 class="contentitem toc">Summary statistics</h1>
+<table class="table" style="border-spacing: 0" aria-label="Summary statistics">
+<caption aria-label="Summary statistics"></caption>
+<colgroup><col/><col/></colgroup><colgroup><col/><col/><col/><col/><col/></colgroup>
+<thead>
+<tr>
+<th class="b header" scope="col">Variable</th>
+<th class="b header" scope="col">Label</th>
+<th class="r b header" scope="col">N</th>
+<th class="r b header" scope="col">Mean</th>
+<th class="r b header" scope="col">Std Dev</th>
+<th class="r b header" scope="col">Minimum</th>
+<th class="r b header" scope="col">Maximum</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th class="data">
+<div class="stacked-cell">
+<div>age</div>
+<div>tot_med_cost_pre12</div>
+<div>rx_tot_pre</div>
+<div>total_cost_12m_pre</div>
+<div>pmpm_12m_pre</div>
+<div>std_dev_12m_pre</div>
+<div>total_cost_6m_pre</div>
+<div>total_cost_3m_pre</div>
+<div>pmpm_3m_pre</div>
+<div>total_cost_pre24m</div>
+<div>total_cost_post</div>
+<div>TOT_MED_COST_post</div>
+<div>rx_tot_post</div>
+<div>max_mth_pre</div>
+<div>mth1</div>
+<div>mth2</div>
+<div>mth3</div>
+<div>mth4</div>
+<div>mth5</div>
+<div>mth6</div>
+<div>mth7</div>
+<div>mth8</div>
+<div>mth9</div>
+<div>mth10</div>
+<div>mth11</div>
+<div>mth12</div>
+<div>acute</div>
+<div>mths_above</div>
+<div>risk_score</div>
+<div>risk_score_prev_year</div>
+<div>gender2</div>
+<div>cost_bucket</div>
+<div>cost_bucket_post</div>
+<div>neg_trend</div>
+<div>pos_trend</div>
+<div>bucket5</div>
+<div>alz_ind</div>
+<div>ckd_ind</div>
+<div>diab_ind</div>
+<div>hf_ind</div>
+<div>hbp_ind</div>
+<div>breast_ca_ind</div>
+<div>copd_ind</div>
+<div>colon_ca_ind</div>
+<div>endom_ca_ind</div>
+<div>lung_ca_ind</div>
+<div>prostate_ind</div>
+<div>stroke_ind</div>
+<div>RA_OA_ind</div>
+<div>isch_hd_ind</div>
+<div>osteop_ind</div>
+<div>hi_lipid_ind</div>
+<div>anemia_ind</div>
+<div>asthma_ind</div>
+<div>hemophilia_ind</div>
+<div>subs_abuse_ind</div>
+<div>behav_health_ind</div>
+<div>parkinsons_ind</div>
+<div>sev_disab_ind</div>
+<div>paralysis_ind</div>
+<div>obesity_ind</div>
+<div>brain_ca_ind</div>
+<div>chr_pain_ind</div>
+<div>met_ca_ind</div>
+<div>solid_ca_ind</div>
+<div>myeloid_ca_ind</div>
+<div>lymphoid_ca_ind</div>
+<div>total_chronic_cond</div>
+<div>total_frail</div>
+<div>rad_therapy_ind</div>
+<div>chemo_ind</div>
+<div>log_risk</div>
+<div>gt_50k</div>
+<div>gt_75k</div>
+<div>gt_100k</div>
+<div>gt_200k</div>
+<div>uniqueID</div>
+<div>intervention_status</div>
+</div>
+</th>
+<th class="data">
+<div class="stacked-cell">
+<div>age</div>
+<div>tot_med_cost_pre12</div>
+<div>rx_tot_pre</div>
+<div>total_cost_12m_pre</div>
+<div>pmpm_12m_pre</div>
+<div>std_dev_12m_pre</div>
+<div>total_cost_6m_pre</div>
+<div>total_cost_3m_pre</div>
+<div>pmpm_3m_pre</div>
+<div>total_cost_pre24m</div>
+<div>total_cost_post</div>
+<div>TOT_MED_COST_post</div>
+<div>rx_tot_post</div>
+<div>max_mth_pre</div>
+<div>mth1</div>
+<div>mth2</div>
+<div>mth3</div>
+<div>mth4</div>
+<div>mth5</div>
+<div>mth6</div>
+<div>mth7</div>
+<div>mth8</div>
+<div>mth9</div>
+<div>mth10</div>
+<div>mth11</div>
+<div>mth12</div>
+<div>acute</div>
+<div>mths_above</div>
+<div>risk_score</div>
+<div>risk_score_prev_year</div>
+<div>gender2</div>
+<div>cost_bucket</div>
+<div>cost_bucket_post</div>
+<div>neg_trend</div>
+<div>pos_trend</div>
+<div>bucket5</div>
+<div>alz_ind</div>
+<div>ckd_ind</div>
+<div>diab_ind</div>
+<div>hf_ind</div>
+<div>hbp_ind</div>
+<div>breast_ca_ind</div>
+<div>copd_ind</div>
+<div>colon_ca_ind</div>
+<div>endom_ca_ind</div>
+<div>lung_ca_ind</div>
+<div>prostate_ind</div>
+<div>stroke_ind</div>
+<div>RA_OA_ind</div>
+<div>isch_hd_ind</div>
+<div>osteop_ind</div>
+<div>hi_lipid_ind</div>
+<div>anemia_ind</div>
+<div>asthma_ind</div>
+<div>hemophilia_ind</div>
+<div>subs_abuse_ind</div>
+<div>behav_health_ind</div>
+<div>parkinsons_ind</div>
+<div>sev_disab_ind</div>
+<div>paralysis_ind</div>
+<div>obesity_ind</div>
+<div>brain_ca_ind</div>
+<div>chr_pain_ind</div>
+<div>met_ca_ind</div>
+<div>solid_ca_ind</div>
+<div>myeloid_ca_ind</div>
+<div>lymphoid_ca_ind</div>
+<div>total_chronic_cond</div>
+<div>total_frail</div>
+<div>rad_therapy_ind</div>
+<div>chemo_ind</div>
+<div>log_risk</div>
+<div>gt_50k</div>
+<div>gt_75k</div>
+<div>gt_100k</div>
+<div>gt_200k</div>
+<div>uniqueID</div>
+<div>intervention_status</div>
+</div>
+</th>
+<td class="r data">
+<div class="stacked-cell">
+<div class="r">12420</div>
+<div class="r">12425</div>
+<div class="r">12425</div>
+<div class="r">12425</div>
+<div class="r">12425</div>
+<div class="r">12425</div>
+<div class="r">12425</div>
+<div class="r">12425</div>
+<div class="r">12425</div>
+<div class="r">12425</div>
+<div class="r">12425</div>
+<div class="r">12425</div>
+<div class="r">12425</div>
+<div class="r">12425</div>
+<div class="r">12425</div>
+<div class="r">12425</div>
+<div class="r">12425</div>
+<div class="r">12425</div>
+<div class="r">12425</div>
+<div class="r">12425</div>
+<div class="r">12425</div>
+<div class="r">12425</div>
+<div class="r">12425</div>
+<div class="r">12425</div>
+<div class="r">12425</div>
+<div class="r">12424</div>
+<div class="r">12425</div>
+<div class="r">12425</div>
+<div class="r">12416</div>
+<div class="r">12394</div>
+<div class="r">12425</div>
+<div class="r">12425</div>
+<div class="r">12425</div>
+<div class="r">12425</div>
+<div class="r">12425</div>
+<div class="r">12425</div>
+<div class="r">12318</div>
+<div class="r">12318</div>
+<div class="r">12318</div>
+<div class="r">12318</div>
+<div class="r">12318</div>
+<div class="r">12318</div>
+<div class="r">12318</div>
+<div class="r">12318</div>
+<div class="r">12318</div>
+<div class="r">12318</div>
+<div class="r">12318</div>
+<div class="r">12318</div>
+<div class="r">12318</div>
+<div class="r">12318</div>
+<div class="r">12318</div>
+<div class="r">12318</div>
+<div class="r">12318</div>
+<div class="r">12318</div>
+<div class="r">12318</div>
+<div class="r">12318</div>
+<div class="r">12318</div>
+<div class="r">12318</div>
+<div class="r">12318</div>
+<div class="r">12318</div>
+<div class="r">12318</div>
+<div class="r">12318</div>
+<div class="r">12318</div>
+<div class="r">12318</div>
+<div class="r">12318</div>
+<div class="r">12318</div>
+<div class="r">12318</div>
+<div class="r">12318</div>
+<div class="r">12229</div>
+<div class="r">12229</div>
+<div class="r">12229</div>
+<div class="r">12416</div>
+<div class="r">12425</div>
+<div class="r">12425</div>
+<div class="r">12425</div>
+<div class="r">12425</div>
+<div class="r">12425</div>
+<div class="r">12425</div>
+</div>
+</td>
+<td class="r data">
+<div class="stacked-cell">
+<div class="r">50.1321256</div>
+<div class="r">20135.34</div>
+<div class="r">6553.27</div>
+<div class="r">26688.60</div>
+<div class="r">2224.02</div>
+<div class="r">2471.26</div>
+<div class="r">14192.79</div>
+<div class="r">7176.22</div>
+<div class="r">2392.00</div>
+<div class="r">50702.39</div>
+<div class="r">38820.44</div>
+<div class="r">30915.06</div>
+<div class="r">7905.38</div>
+<div class="r">8410.36</div>
+<div class="r">1917.64</div>
+<div class="r">2005.83</div>
+<div class="r">2179.02</div>
+<div class="r">2109.24</div>
+<div class="r">2248.28</div>
+<div class="r">2035.80</div>
+<div class="r">2260.36</div>
+<div class="r">2231.09</div>
+<div class="r">2525.12</div>
+<div class="r">2319.73</div>
+<div class="r">2256.69</div>
+<div class="r">2599.82</div>
+<div class="r">0.2106237</div>
+<div class="r">3.9270020</div>
+<div class="r">3.6007813</div>
+<div class="r">3.1753562</div>
+<div class="r">0.5639437</div>
+<div class="r">2.0519920</div>
+<div class="r">2.5516298</div>
+<div class="r">0.5369819</div>
+<div class="r">0.4630181</div>
+<div class="r">0.0358149</div>
+<div class="r">0.0043026</div>
+<div class="r">0.1384153</div>
+<div class="r">0.1836337</div>
+<div class="r">0.0210261</div>
+<div class="r">0.3572008</div>
+<div class="r">0.0316610</div>
+<div class="r">0.0609677</div>
+<div class="r">0</div>
+<div class="r">0.0034908</div>
+<div class="r">0.0057639</div>
+<div class="r">0.0158305</div>
+<div class="r">0.0153434</div>
+<div class="r">0.2194350</div>
+<div class="r">0.0677870</div>
+<div class="r">0.0056827</div>
+<div class="r">0.3838285</div>
+<div class="r">0.1024517</div>
+<div class="r">0.1328950</div>
+<div class="r">0</div>
+<div class="r">0.1079721</div>
+<div class="r">0.3021594</div>
+<div class="r">0.0028414</div>
+<div class="r">0</div>
+<div class="r">0.0014613</div>
+<div class="r">0.1078097</div>
+<div class="r">0.0021919</div>
+<div class="r">0</div>
+<div class="r">0.0155058</div>
+<div class="r">0.0813444</div>
+<div class="r">0.0083617</div>
+<div class="r">0.0112843</div>
+<div class="r">2.2719597</div>
+<div class="r">0.2597923</div>
+<div class="r">0.0117753</div>
+<div class="r">0.0306648</div>
+<div class="r">0.8989939</div>
+<div class="r">0.1863179</div>
+<div class="r">0.1196781</div>
+<div class="r">0.0812877</div>
+<div class="r">0.0222133</div>
+<div class="r">6213.00</div>
+<div class="r">0.2539235</div>
+</div>
+</td>
+<td class="r data">
+<div class="stacked-cell">
+<div class="r">13.1841167</div>
+<div class="r">43291.69</div>
+<div class="r">17616.00</div>
+<div class="r">54258.51</div>
+<div class="r">4521.54</div>
+<div class="r">5174.43</div>
+<div class="r">31287.07</div>
+<div class="r">17394.88</div>
+<div class="r">5798.29</div>
+<div class="r">98489.66</div>
+<div class="r">67927.19</div>
+<div class="r">56145.56</div>
+<div class="r">20763.99</div>
+<div class="r">17586.68</div>
+<div class="r">6229.46</div>
+<div class="r">5539.82</div>
+<div class="r">6591.93</div>
+<div class="r">6550.43</div>
+<div class="r">7265.13</div>
+<div class="r">7694.77</div>
+<div class="r">6536.81</div>
+<div class="r">6791.04</div>
+<div class="r">8896.98</div>
+<div class="r">6968.79</div>
+<div class="r">6250.57</div>
+<div class="r">9117.13</div>
+<div class="r">0.4077680</div>
+<div class="r">1.9149409</div>
+<div class="r">4.0524194</div>
+<div class="r">3.6205647</div>
+<div class="r">0.4959143</div>
+<div class="r">1.1291523</div>
+<div class="r">0.8213354</div>
+<div class="r">0.4986505</div>
+<div class="r">0.4986505</div>
+<div class="r">0.1858358</div>
+<div class="r">0.0654560</div>
+<div class="r">0.3453494</div>
+<div class="r">0.3872009</div>
+<div class="r">0.1434772</div>
+<div class="r">0.4791942</div>
+<div class="r">0.1751030</div>
+<div class="r">0.2392808</div>
+<div class="r">0</div>
+<div class="r">0.0589824</div>
+<div class="r">0.0757045</div>
+<div class="r">0.1248245</div>
+<div class="r">0.1229195</div>
+<div class="r">0.4138806</div>
+<div class="r">0.2513902</div>
+<div class="r">0.0751725</div>
+<div class="r">0.4863367</div>
+<div class="r">0.3032537</div>
+<div class="r">0.3394749</div>
+<div class="r">0</div>
+<div class="r">0.3103577</div>
+<div class="r">0.4592126</div>
+<div class="r">0.0532309</div>
+<div class="r">0</div>
+<div class="r">0.0382003</div>
+<div class="r">0.3101525</div>
+<div class="r">0.0467684</div>
+<div class="r">0</div>
+<div class="r">0.1235580</div>
+<div class="r">0.2733743</div>
+<div class="r">0.0910632</div>
+<div class="r">0.1056308</div>
+<div class="r">1.9862917</div>
+<div class="r">0.6378914</div>
+<div class="r">0.1078776</div>
+<div class="r">0.1724149</div>
+<div class="r">0.8703393</div>
+<div class="r">0.3893787</div>
+<div class="r">0.3245978</div>
+<div class="r">0.2732875</div>
+<div class="r">0.1473825</div>
+<div class="r">3586.93</div>
+<div class="r">0.4352719</div>
+</div>
+</td>
+<td class="r data">
+<div class="stacked-cell">
+<div class="r">19.0000000</div>
+<div class="r">166.6000000</div>
+<div class="r">0</div>
+<div class="r">166.6000000</div>
+<div class="r">13.8833333</div>
+<div class="r">0.1870991</div>
+<div class="r">87.7200000</div>
+<div class="r">43.8600000</div>
+<div class="r">14.6200000</div>
+<div class="r">440.9200000</div>
+<div class="r">8190.23</div>
+<div class="r">4331.43</div>
+<div class="r">0</div>
+<div class="r">14.6200000</div>
+<div class="r">5.7300000</div>
+<div class="r">5.7300000</div>
+<div class="r">5.7300000</div>
+<div class="r">5.7300000</div>
+<div class="r">14.6200000</div>
+<div class="r">14.6200000</div>
+<div class="r">14.6200000</div>
+<div class="r">14.6200000</div>
+<div class="r">14.6200000</div>
+<div class="r">14.6200000</div>
+<div class="r">14.6200000</div>
+<div class="r">14.6200000</div>
+<div class="r">0</div>
+<div class="r">1.0000000</div>
+<div class="r">0.1160000</div>
+<div class="r">0.1160000</div>
+<div class="r">0</div>
+<div class="r">1.0000000</div>
+<div class="r">2.0000000</div>
+<div class="r">0</div>
+<div class="r">0</div>
+<div class="r">0</div>
+<div class="r">0</div>
+<div class="r">0</div>
+<div class="r">0</div>
+<div class="r">0</div>
+<div class="r">0</div>
+<div class="r">0</div>
+<div class="r">0</div>
+<div class="r">0</div>
+<div class="r">0</div>
+<div class="r">0</div>
+<div class="r">0</div>
+<div class="r">0</div>
+<div class="r">0</div>
+<div class="r">0</div>
+<div class="r">0</div>
+<div class="r">0</div>
+<div class="r">0</div>
+<div class="r">0</div>
+<div class="r">0</div>
+<div class="r">0</div>
+<div class="r">0</div>
+<div class="r">0</div>
+<div class="r">0</div>
+<div class="r">0</div>
+<div class="r">0</div>
+<div class="r">0</div>
+<div class="r">0</div>
+<div class="r">0</div>
+<div class="r">0</div>
+<div class="r">0</div>
+<div class="r">0</div>
+<div class="r">0</div>
+<div class="r">0</div>
+<div class="r">0</div>
+<div class="r">0</div>
+<div class="r" style="white-space: nowrap">-2.1541651</div>
+<div class="r">0</div>
+<div class="r">0</div>
+<div class="r">0</div>
+<div class="r">0</div>
+<div class="r">1.0000000</div>
+<div class="r">0</div>
+</div>
+</td>
+<td class="r data">
+<div class="stacked-cell">
+<div class="r">173.0000000</div>
+<div class="r">2202773.17</div>
+<div class="r">390960.07</div>
+<div class="r">2396383.15</div>
+<div class="r">199698.60</div>
+<div class="r">143526.00</div>
+<div class="r">1348615.95</div>
+<div class="r">612163.52</div>
+<div class="r">204054.51</div>
+<div class="r">4832069.49</div>
+<div class="r">3422225.38</div>
+<div class="r">2982503.63</div>
+<div class="r">439721.75</div>
+<div class="r">510038.85</div>
+<div class="r">229491.98</div>
+<div class="r">170872.13</div>
+<div class="r">197383.21</div>
+<div class="r">198988.36</div>
+<div class="r">247336.56</div>
+<div class="r">433612.04</div>
+<div class="r">200643.89</div>
+<div class="r">244012.24</div>
+<div class="r">438992.56</div>
+<div class="r">262711.63</div>
+<div class="r">122370.41</div>
+<div class="r">510038.85</div>
+<div class="r">1.0000000</div>
+<div class="r">11.0000000</div>
+<div class="r">53.2210000</div>
+<div class="r">51.4940000</div>
+<div class="r">1.0000000</div>
+<div class="r">5.0000000</div>
+<div class="r">5.0000000</div>
+<div class="r">1.0000000</div>
+<div class="r">1.0000000</div>
+<div class="r">1.0000000</div>
+<div class="r">1.0000000</div>
+<div class="r">1.0000000</div>
+<div class="r">1.0000000</div>
+<div class="r">1.0000000</div>
+<div class="r">1.0000000</div>
+<div class="r">1.0000000</div>
+<div class="r">1.0000000</div>
+<div class="r">0</div>
+<div class="r">1.0000000</div>
+<div class="r">1.0000000</div>
+<div class="r">1.0000000</div>
+<div class="r">1.0000000</div>
+<div class="r">1.0000000</div>
+<div class="r">1.0000000</div>
+<div class="r">1.0000000</div>
+<div class="r">1.0000000</div>
+<div class="r">1.0000000</div>
+<div class="r">1.0000000</div>
+<div class="r">0</div>
+<div class="r">1.0000000</div>
+<div class="r">1.0000000</div>
+<div class="r">1.0000000</div>
+<div class="r">0</div>
+<div class="r">1.0000000</div>
+<div class="r">1.0000000</div>
+<div class="r">1.0000000</div>
+<div class="r">0</div>
+<div class="r">1.0000000</div>
+<div class="r">1.0000000</div>
+<div class="r">1.0000000</div>
+<div class="r">1.0000000</div>
+<div class="r">13.0000000</div>
+<div class="r">8.0000000</div>
+<div class="r">1.0000000</div>
+<div class="r">1.0000000</div>
+<div class="r">3.9744531</div>
+<div class="r">1.0000000</div>
+<div class="r">1.0000000</div>
+<div class="r">1.0000000</div>
+<div class="r">1.0000000</div>
+<div class="r">12425.00</div>
+<div class="r">1.0000000</div>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</article>
+</section>
+<section data-name="Means" data-sec-type="proc">
+<hr class="pagebreak"/>
+<div id="IDX1" class="systitleandfootercontainer" style="border-spacing: 1px">
+<p><span class="c systemtitle">&apos;/home/u63541071/point32health/sample3.xlsx&apos;</span> </p>
+<p><span class="c systemtitle2">COST -- PRE AND POST PERIOD BY INTERVENTION STATUS</span> </p>
+</div>
+<div class="proc_title_group">
+<p class="c proctitle">The MEANS Procedure</p>
+</div>
+<h1 class="contentprocname toc">The Means Procedure</h1>
+<article aria-label="Summary statistics">
+<h1 class="contentitem toc">Summary statistics</h1>
+<table class="table" style="border-spacing: 0" aria-label="Summary statistics">
+<caption aria-label="Summary statistics"></caption>
+<colgroup><col/><col/><col/><col/></colgroup><colgroup><col/><col/><col/><col/><col/></colgroup>
+<thead>
+<tr>
+<th class="r b header" scope="col">intervention_status</th>
+<th class="r b header" scope="col">N Obs</th>
+<th class="b header" scope="col">Variable</th>
+<th class="b header" scope="col">Label</th>
+<th class="r b header" scope="col">N</th>
+<th class="r b header" scope="col">Mean</th>
+<th class="r b header" scope="col">Std Dev</th>
+<th class="r b header" scope="col">Minimum</th>
+<th class="r b header" scope="col">Maximum</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th class="r t data">0</th>
+<th class="r t data">9270</th>
+<th class="data">
+<div class="stacked-cell">
+<div>total_cost_12m_pre</div>
+<div>total_cost_post</div>
+</div>
+</th>
+<th class="data">
+<div class="stacked-cell">
+<div>total_cost_12m_pre</div>
+<div>total_cost_post</div>
+</div>
+</th>
+<td class="r data">
+<div class="stacked-cell">
+<div class="r">9270</div>
+<div class="r">9270</div>
+</div>
+</td>
+<td class="r data">
+<div class="stacked-cell">
+<div class="r">27237.21</div>
+<div class="r">39388.96</div>
+</div>
+</td>
+<td class="r data">
+<div class="stacked-cell">
+<div class="r">56535.78</div>
+<div class="r">72711.09</div>
+</div>
+</td>
+<td class="r data">
+<div class="stacked-cell">
+<div class="r">166.6000000</div>
+<div class="r">8190.23</div>
+</div>
+</td>
+<td class="r data">
+<div class="stacked-cell">
+<div class="r">2396383.15</div>
+<div class="r">3422225.38</div>
+</div>
+</td>
+</tr>
+<tr>
+<th class="r t data">1</th>
+<th class="r t data">3155</th>
+<th class="data">
+<div class="stacked-cell">
+<div>total_cost_12m_pre</div>
+<div>total_cost_post</div>
+</div>
+</th>
+<th class="data">
+<div class="stacked-cell">
+<div>total_cost_12m_pre</div>
+<div>total_cost_post</div>
+</div>
+</th>
+<td class="r data">
+<div class="stacked-cell">
+<div class="r">3155</div>
+<div class="r">3155</div>
+</div>
+</td>
+<td class="r data">
+<div class="stacked-cell">
+<div class="r">25076.68</div>
+<div class="r">37150.02</div>
+</div>
+</td>
+<td class="r data">
+<div class="stacked-cell">
+<div class="r">46903.63</div>
+<div class="r">51328.33</div>
+</div>
+</td>
+<td class="r data">
+<div class="stacked-cell">
+<div class="r">166.6800000</div>
+<div class="r">8190.26</div>
+</div>
+</td>
+<td class="r data">
+<div class="stacked-cell">
+<div class="r">660215.44</div>
+<div class="r">507837.23</div>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</article>
+</section>
+<section data-name="Freq" data-sec-type="proc">
+<hr class="pagebreak"/>
+<div id="IDX2" class="systitleandfootercontainer" style="border-spacing: 1px">
+<p><span class="c systemtitle">&apos;/home/u63541071/point32health/sample3.xlsx&apos;</span> </p>
+<p><span class="c systemtitle2">FREQUENCIES OF CHARACTER VARIABLES</span> </p>
+</div>
+<div class="proc_title_group">
+<p class="c proctitle">The FREQ Procedure</p>
+</div>
+<h1 class="contentprocname toc">The Freq Procedure</h1>
+<section>
+<h1 class="contentfolder toc">Table multiple_drug _class</h1>
+<article aria-label="One-Way Frequencies">
+<h1 class="contentitem toc">One-Way Frequencies</h1>
+<table class="table" style="border-spacing: 0" aria-label="One-Way Frequencies">
+<caption aria-label="One-Way Frequencies"></caption>
+<colgroup><col/></colgroup><colgroup><col/><col/><col/><col/></colgroup>
+<thead>
+<tr>
+<th class="c b header" colspan="5" scope="colgroup">multiple_drug _class</th>
+</tr>
+<tr>
+<th class="b header" scope="col">multiple_drug _class</th>
+<th class="r b header" scope="col">Frequency</th>
+<th class="r b header" scope="col">Percent</th>
+<th class="r b header" scope="col">Cumulative<br/>Frequency</th>
+<th class="r b header" scope="col">Cumulative<br/>Percent</th>
+</tr>
+</thead>
+<tfoot>
+<tr>
+<th class="c b footer" colspan="5">Frequency Missing = 9</th>
+</tr>
+</tfoot>
+<tbody>
+<tr>
+<th class="rowheader" scope="row">NO</th>
+<td class="r data">7485</td>
+<td class="r data">60.29</td>
+<td class="r data">7485</td>
+<td class="r data">60.29</td>
+</tr>
+<tr>
+<th class="rowheader" scope="row">YES</th>
+<td class="r data">4931</td>
+<td class="r data">39.71</td>
+<td class="r data">12416</td>
+<td class="r data">100.00</td>
+</tr>
+</tbody>
+</table>
+</article>
+</section>
+<section id="IDX3">
+<h1 class="contentfolder toc">Table more_than_7rx</h1>
+<article aria-label="One-Way Frequencies">
+<h1 class="contentitem toc">One-Way Frequencies</h1>
+<table class="table" style="border-spacing: 0" aria-label="One-Way Frequencies">
+<caption aria-label="One-Way Frequencies"></caption>
+<colgroup><col/></colgroup><colgroup><col/><col/><col/><col/></colgroup>
+<thead>
+<tr>
+<th class="c b header" colspan="5" scope="colgroup">more_than_7rx</th>
+</tr>
+<tr>
+<th class="b header" scope="col">more_than_7rx</th>
+<th class="r b header" scope="col">Frequency</th>
+<th class="r b header" scope="col">Percent</th>
+<th class="r b header" scope="col">Cumulative<br/>Frequency</th>
+<th class="r b header" scope="col">Cumulative<br/>Percent</th>
+</tr>
+</thead>
+<tfoot>
+<tr>
+<th class="c b footer" colspan="5">Frequency Missing = 9</th>
+</tr>
+</tfoot>
+<tbody>
+<tr>
+<th class="rowheader" scope="row">NO</th>
+<td class="r data">6400</td>
+<td class="r data">51.55</td>
+<td class="r data">6400</td>
+<td class="r data">51.55</td>
+</tr>
+<tr>
+<th class="rowheader" scope="row">YES</th>
+<td class="r data">6016</td>
+<td class="r data">48.45</td>
+<td class="r data">12416</td>
+<td class="r data">100.00</td>
+</tr>
+</tbody>
+</table>
+</article>
+</section>
+<section id="IDX4">
+<h1 class="contentfolder toc">Table more_than_10rx</h1>
+<article aria-label="One-Way Frequencies">
+<h1 class="contentitem toc">One-Way Frequencies</h1>
+<table class="table" style="border-spacing: 0" aria-label="One-Way Frequencies">
+<caption aria-label="One-Way Frequencies"></caption>
+<colgroup><col/></colgroup><colgroup><col/><col/><col/><col/></colgroup>
+<thead>
+<tr>
+<th class="c b header" colspan="5" scope="colgroup">more_than_10rx</th>
+</tr>
+<tr>
+<th class="b header" scope="col">more_than_10rx</th>
+<th class="r b header" scope="col">Frequency</th>
+<th class="r b header" scope="col">Percent</th>
+<th class="r b header" scope="col">Cumulative<br/>Frequency</th>
+<th class="r b header" scope="col">Cumulative<br/>Percent</th>
+</tr>
+</thead>
+<tfoot>
+<tr>
+<th class="c b footer" colspan="5">Frequency Missing = 9</th>
+</tr>
+</tfoot>
+<tbody>
+<tr>
+<th class="rowheader" scope="row">NO</th>
+<td class="r data">8958</td>
+<td class="r data">72.15</td>
+<td class="r data">8958</td>
+<td class="r data">72.15</td>
+</tr>
+<tr>
+<th class="rowheader" scope="row">YES</th>
+<td class="r data">3458</td>
+<td class="r data">27.85</td>
+<td class="r data">12416</td>
+<td class="r data">100.00</td>
+</tr>
+</tbody>
+</table>
+</article>
+</section>
+<section id="IDX5">
+<h1 class="contentfolder toc">Table age_group</h1>
+<article aria-label="One-Way Frequencies">
+<h1 class="contentitem toc">One-Way Frequencies</h1>
+<table class="table" style="border-spacing: 0" aria-label="One-Way Frequencies">
+<caption aria-label="One-Way Frequencies"></caption>
+<colgroup><col/></colgroup><colgroup><col/><col/><col/><col/></colgroup>
+<thead>
+<tr>
+<th class="c b header" colspan="5" scope="colgroup">age_group</th>
+</tr>
+<tr>
+<th class="b header" scope="col">age_group</th>
+<th class="r b header" scope="col">Frequency</th>
+<th class="r b header" scope="col">Percent</th>
+<th class="r b header" scope="col">Cumulative<br/>Frequency</th>
+<th class="r b header" scope="col">Cumulative<br/>Percent</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th class="rowheader" scope="row">18to24</th>
+<td class="r data">638</td>
+<td class="r data">5.13</td>
+<td class="r data">638</td>
+<td class="r data">5.13</td>
+</tr>
+<tr>
+<th class="rowheader" scope="row">25to34</th>
+<td class="r data">1262</td>
+<td class="r data">10.16</td>
+<td class="r data">1900</td>
+<td class="r data">15.29</td>
+</tr>
+<tr>
+<th class="rowheader" scope="row">35to44</th>
+<td class="r data">1961</td>
+<td class="r data">15.78</td>
+<td class="r data">3861</td>
+<td class="r data">31.07</td>
+</tr>
+<tr>
+<th class="rowheader" scope="row">45to54</th>
+<td class="r data">3076</td>
+<td class="r data">24.76</td>
+<td class="r data">6937</td>
+<td class="r data">55.83</td>
+</tr>
+<tr>
+<th class="rowheader" scope="row">55to64</th>
+<td class="r data">4237</td>
+<td class="r data">34.10</td>
+<td class="r data">11174</td>
+<td class="r data">89.93</td>
+</tr>
+<tr>
+<th class="rowheader" scope="row">65 and older</th>
+<td class="r data">1251</td>
+<td class="r data">10.07</td>
+<td class="r data">12425</td>
+<td class="r data">100.00</td>
+</tr>
+</tbody>
+</table>
+</article>
+</section>
+<section id="IDX6">
+<h1 class="contentfolder toc">Table chronic_cond</h1>
+<article aria-label="One-Way Frequencies">
+<h1 class="contentitem toc">One-Way Frequencies</h1>
+<table class="table" style="border-spacing: 0" aria-label="One-Way Frequencies">
+<caption aria-label="One-Way Frequencies"></caption>
+<colgroup><col/></colgroup><colgroup><col/><col/><col/><col/></colgroup>
+<thead>
+<tr>
+<th class="c b header" colspan="5" scope="colgroup">chronic_cond</th>
+</tr>
+<tr>
+<th class="b header" scope="col">chronic_cond</th>
+<th class="r b header" scope="col">Frequency</th>
+<th class="r b header" scope="col">Percent</th>
+<th class="r b header" scope="col">Cumulative<br/>Frequency</th>
+<th class="r b header" scope="col">Cumulative<br/>Percent</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th class="rowheader" scope="row">1 chronic condition</th>
+<td class="r data">2606</td>
+<td class="r data">20.97</td>
+<td class="r data">2606</td>
+<td class="r data">20.97</td>
+</tr>
+<tr>
+<th class="rowheader" scope="row">2 chronic conditions</th>
+<td class="r data">2233</td>
+<td class="r data">17.97</td>
+<td class="r data">4839</td>
+<td class="r data">38.95</td>
+</tr>
+<tr>
+<th class="rowheader" scope="row">3 or more chronic con</th>
+<td class="r data">4843</td>
+<td class="r data">38.98</td>
+<td class="r data">9682</td>
+<td class="r data">77.92</td>
+</tr>
+<tr>
+<th class="rowheader" scope="row">no chronic conditions</th>
+<td class="r data">2743</td>
+<td class="r data">22.08</td>
+<td class="r data">12425</td>
+<td class="r data">100.00</td>
+</tr>
+</tbody>
+</table>
+</article>
+</section>
+<section id="IDX7">
+<h1 class="contentfolder toc">Table post_cost</h1>
+<article aria-label="One-Way Frequencies">
+<h1 class="contentitem toc">One-Way Frequencies</h1>
+<table class="table" style="border-spacing: 0" aria-label="One-Way Frequencies">
+<caption aria-label="One-Way Frequencies"></caption>
+<colgroup><col/></colgroup><colgroup><col/><col/><col/><col/></colgroup>
+<thead>
+<tr>
+<th class="c b header" colspan="5" scope="colgroup">post_cost</th>
+</tr>
+<tr>
+<th class="b header" scope="col">post_cost</th>
+<th class="r b header" scope="col">Frequency</th>
+<th class="r b header" scope="col">Percent</th>
+<th class="r b header" scope="col">Cumulative<br/>Frequency</th>
+<th class="r b header" scope="col">Cumulative<br/>Percent</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th class="rowheader" scope="row">Hi cost</th>
+<td class="r data">1764</td>
+<td class="r data">14.20</td>
+<td class="r data">1764</td>
+<td class="r data">14.20</td>
+</tr>
+<tr>
+<th class="rowheader" scope="row">Mod cost</th>
+<td class="r data">10661</td>
+<td class="r data">85.80</td>
+<td class="r data">12425</td>
+<td class="r data">100.00</td>
+</tr>
+</tbody>
+</table>
+</article>
+</section>
+<section id="IDX8">
+<h1 class="contentfolder toc">Table race</h1>
+<article aria-label="One-Way Frequencies">
+<h1 class="contentitem toc">One-Way Frequencies</h1>
+<table class="table" style="border-spacing: 0" aria-label="One-Way Frequencies">
+<caption aria-label="One-Way Frequencies"></caption>
+<colgroup><col/></colgroup><colgroup><col/><col/><col/><col/></colgroup>
+<thead>
+<tr>
+<th class="c b header" colspan="5" scope="colgroup">race</th>
+</tr>
+<tr>
+<th class="b header" scope="col">race</th>
+<th class="r b header" scope="col">Frequency</th>
+<th class="r b header" scope="col">Percent</th>
+<th class="r b header" scope="col">Cumulative<br/>Frequency</th>
+<th class="r b header" scope="col">Cumulative<br/>Percent</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th class="rowheader" scope="row">4.Multiracial</th>
+<td class="r data">10</td>
+<td class="r data">0.08</td>
+<td class="r data">10</td>
+<td class="r data">0.08</td>
+</tr>
+<tr>
+<th class="rowheader" scope="row">Asian/Pacific Islander</th>
+<td class="r data">321</td>
+<td class="r data">2.58</td>
+<td class="r data">331</td>
+<td class="r data">2.66</td>
+</tr>
+<tr>
+<th class="rowheader" scope="row">Black</th>
+<td class="r data">296</td>
+<td class="r data">2.38</td>
+<td class="r data">627</td>
+<td class="r data">5.05</td>
+</tr>
+<tr>
+<th class="rowheader" scope="row">Hispanic</th>
+<td class="r data">350</td>
+<td class="r data">2.82</td>
+<td class="r data">977</td>
+<td class="r data">7.86</td>
+</tr>
+<tr>
+<th class="rowheader" scope="row">White</th>
+<td class="r data">9138</td>
+<td class="r data">73.55</td>
+<td class="r data">10115</td>
+<td class="r data">81.41</td>
+</tr>
+<tr>
+<th class="rowheader" scope="row">unknown</th>
+<td class="r data">2310</td>
+<td class="r data">18.59</td>
+<td class="r data">12425</td>
+<td class="r data">100.00</td>
+</tr>
+</tbody>
+</table>
+</article>
+</section>
+<section id="IDX9">
+<h1 class="contentfolder toc">Table frailty_index</h1>
+<article aria-label="One-Way Frequencies">
+<h1 class="contentitem toc">One-Way Frequencies</h1>
+<table class="table" style="border-spacing: 0" aria-label="One-Way Frequencies">
+<caption aria-label="One-Way Frequencies"></caption>
+<colgroup><col/></colgroup><colgroup><col/><col/><col/><col/></colgroup>
+<thead>
+<tr>
+<th class="c b header" colspan="5" scope="colgroup">frailty_index</th>
+</tr>
+<tr>
+<th class="b header" scope="col">frailty_index</th>
+<th class="r b header" scope="col">Frequency</th>
+<th class="r b header" scope="col">Percent</th>
+<th class="r b header" scope="col">Cumulative<br/>Frequency</th>
+<th class="r b header" scope="col">Cumulative<br/>Percent</th>
+</tr>
+</thead>
+<tfoot>
+<tr>
+<th class="c b footer" colspan="5">Frequency Missing = 196</th>
+</tr>
+</tfoot>
+<tbody>
+<tr>
+<th class="rowheader" scope="row">frail</th>
+<td class="r data">511</td>
+<td class="r data">4.18</td>
+<td class="r data">511</td>
+<td class="r data">4.18</td>
+</tr>
+<tr>
+<th class="rowheader" scope="row">not frail</th>
+<td class="r data">9860</td>
+<td class="r data">80.63</td>
+<td class="r data">10371</td>
+<td class="r data">84.81</td>
+</tr>
+<tr>
+<th class="rowheader" scope="row">pre_fail</th>
+<td class="r data">1858</td>
+<td class="r data">15.19</td>
+<td class="r data">12229</td>
+<td class="r data">100.00</td>
+</tr>
+</tbody>
+</table>
+</article>
+</section>
+</section>
+</div>
+</body>
+</html>
