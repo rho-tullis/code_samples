@@ -1,0 +1,470 @@
+ 
+ 1          OPTIONS NONOTES NOSTIMER NOSOURCE NOSYNTAXCHECK;
+ 68         
+ 69         /*-------------------------------------------------------------------*/
+ 70         /*  Program Name: DESYNPUF_PDE_READIN.SAS                            */
+ 71         /*  SAS Version:  Tested under SAS 9.3 Windows XP                    */
+ 72         /*  Purpose:      Create SAS data sets from PDE synthetic PUF CSV    */
+ 73         /*                files.                                             */
+ 74         /*                                                                   */
+ 75         /*  BACKGROUND:   Each data type in the CMS Linkable 2008-2010       */
+ 76         /*  Medicare DE-SynPUFs was released in 20 separate subsamples. The  */
+ 77         /*  same group of beneficiary IDs are in subsamples with the same    */
+ 78         /*  number. The suffix of each CSV filename contains the subsample   */
+ 79         /*  number. This design allows DE-SynPUFs users who do not need the  */
+ 80         /*  entire synthetic population of DE-SynPUFs to read in only as many*/
+ 81         /*  subsamples as they desire. This read-in program allows users to  */
+ 82         /*  specify which PDE subsamples to read in and to combine.          */
+ 83         /*                                                                   */
+ 84         /*-------------------------------------------------------------------*/
+ 85         /*  USER INSTRUCTIONS: Modify the following as necessary.            */
+ 86         /*  1. Assign to macro variable INFILEPATH the path where the CSV    */
+ 87         /*     files are stored.                                             */
+ 88         /*  2. Assign to macro variable INFILENAME the filename of the CSV   */
+ 89         /*     file without the subsample number suffix and without the CSV  */
+ 90         /*     extension. The program will add the subsample number suffix   */
+ 91         /*     and it will add the CSV extension.                            */
+ 92         /*  3. Specify path for DESYNPUF LIBNAME. This is the location where */
+ 93         /*     the data sets created by this program will be stored.         */
+ 94         /*  4. Assign to macro variable OUTDSNAME the name you want to assign*/
+ 95         /*     to the SAS data set created from the CSV file. Do not include */
+ 96         /*     the subsample number suffix since the program will add that to*/
+ 97         /*     the data set name. The name must conform to SAS naming rules  */
+ 98         /*     and be 30 characters or less in length. The 30 characters     */
+ 99         /*     limit allows for the addition of the subsample number to the  */
+ 100        /*     name.                                                         */
+ 101        /*  5. Set parameters on calls to macro program DESYNPUF_PDE_READIN. */
+ 102        /*     Keep only the calls to macro program DESYNPUF_PDE_READIN for  */
+ 103        /*     the subsamples that you want to process. Comment out the calls*/
+ 104        /*     to DESYNPUF_PDE_READIN for the subsamples that you do not want*/
+ 105        /*     to process (or delete the calls).                             */
+ 106        /*     This macro has two parameters and both are required:          */
+ 107        /*     FILENUMBER= and SORTDS=.                                      */
+ 108        /*     - Set the FILENUMBER= parameter value to the subsample number */
+ 109        /*       suffix of the CSV file that you want to read in. The SAS    */
+ 110        /*       data set that is created will have the same numeric suffix. */
+ 111        /*     - The SORTDS= parameter specifies whether you want to sort the*/
+ 112        /*       new data set by DESYNPUF_ID. The CSV files are saved in     */
+ 113        /*       ASCII DESYNPUF_ID order and so you may not need to sort the */
+ 114        /*       files if you intend to use them in ASCII DESYNPUF_ID order. */
+ 115        /*  6. Optionally, call macro program DESYNPUF_PDE_COMBINE if you    */
+ 116        /*     want to combine the new PDE data sets into one data set. This */
+ 117        /*     code requires that the data sets you want to combine are      */
+ 118        /*     consecutively numbered subsamples.                            */
+ 119        /*       The name of the output data set created by this macro       */
+ 120        /*     is the name specified by macro variable OUTDSNAME. No         */
+ 121        /*     subsample numbers will be added as a suffix to the data set   */
+ 122        /*     name.                                                         */
+ 123        /*     NOTE: If you do not have consecutively numbered subsamples,   */
+ 124        /*     you will need to write a DATA step that concatenates these    */
+ 125        /*     subsample data sets.                                          */
+ 126        /*       This code interleaves the data sets by DESYNPUF_ID.         */
+ 127        /*     Therefore, the data sets that you want to combine must be in  */
+ 128        /*     order by DESYNPUF_ID. If you do not want to call macro program*/
+ 129        /*     DESYNPUF_PDE_COMBINE, comment out (or delete) the call to this*/
+ 130        /*     macro program.                                                */
+ 131        /*       This macro program has two parameters STARTNUMBER= and      */
+ 132        /*     ENDNUMBER=. These parameters specify the numeric range of     */
+ 133        /*     files (the subsample numbers) that you want to combine.       */
+ 134        /*       If you want to combine the data sets at a later time, you   */
+ 135        /*     can run this macro program by itself. Do steps 1-4. Do not do */
+ 136        /*     Step 5 and remove the calls to macro program                  */
+ 137        /*     DESYNPUF_PDE_READIN. Depending on any post-processing that you*/
+ 138        /*     may have done, you might need to sort the files that you want */
+ 139        /*     to combine by DESYNPUF_ID before you call                     */
+ 140        /*     DESYNPUF_PDE_COMBINE.                                         */
+ 141        /*-------------------------------------------------------------------*/
+ 142        /*                                                                   */
+ 143        /*  Date:         13 Nov 2012                                        */
+ 144        /*  Last Updated: 11 Dec 2012 11:41:45                               */
+ 145        /*-------------------------------------------------------------------*/
+ WARNING: Attempt to delete macro variable INFILEPATH failed. Variable not found.
+ WARNING: Attempt to delete macro variable INFILENAME failed. Variable not found.
+ WARNING: Attempt to delete macro variable OUTDSNAME failed. Variable not found.
+ 146        
+ 147        /*********************************************************************/
+ 148        /* Declare global macro variables used by this program.              */
+ 149        /*********************************************************************/
+ 150        %symdel infilepath infilename outdsname;
+ 151        %global infilepath infilename outdsname;
+ 152        
+ 153        /*********************************************************************/
+ 154        /* 1. Specify path of input CSV files. Do not enclose value in       */
+ 155        /*    quotation marks.                                               */
+ 156        /*********************************************************************/
+ 157        %let infilepath= /home/u63541071/emac293/rxante/raw/;
+ 158        
+ 159        /**************************************************************************/
+ 160        /* 2. Specify filename of input CSV file. Do not include the numeric      */
+ 161        /*    suffix and do not include the CSV extension. The program assigns    */
+ 162        /*    both of these values. Do not enclose the filename in quotation      */
+ 163        /*    marks.                                                              */
+ 164        /**************************************************************************/
+ 165        %let infilename=DE1_0_2008_to_2010_Prescription_Drug_Events_Sample_;
+ 166        
+ 167        /**************************************************/
+ 168        /* 3. Specify LIBNAME of DE-SynPUF PDE files      */
+ 169        /**************************************************/
+ 170        libname desynpuf "/home/u63541071/emac293/rxante/created/";
+ NOTE: Libref DESYNPUF was successfully assigned as follows: 
+       Engine:        V9 
+       Physical Name: /home/u63541071/emac293/rxante/created
+ 171        
+ 172        /**************************************************************************/
+ 173        /* 4. Specify filename(30 characters or less) of SAS datasets created by  */
+ 174        /*    this program. Do not include the subsample number suffix. The       */
+ 175        /*    program adds that value to the end of the SAS data set name.        */
+ 176        /**************************************************************************/
+ 177        %let outdsname=DE1_0_2008_to_2010_PDE_Sample_;
+ 178        
+ 179        /**************************************************************************/
+ 180        /* Set SAS options for this program: 11 Dec 2012 10:40:34                 */
+ 181        /*   VALIDVARNAME=UPCASE: Ensure that all variable names are in uppercase.*/
+ 182        /*   COMPRESS=BINARY: Compress data sets created by this program.         */
+ 183        /*   MPRINT: View resolved code in SAS log (optional -- NOMPRINT turns it */
+ 184        /*           off)                                                         */
+ 185        /**************************************************************************/
+ 186        options validvarname=upcase
+ 187                compress=binary
+ 188                mprint
+ 189                ls=100 ps=60;
+ 190        
+ 191        /*********************************************************************************/
+ 192        /*********************************************************************************/
+ 193        /* START OF SECTION THAT SHOULD NOT BE MODIFIED                                  */
+ 194        /*********************************************************************************/
+ 195        
+ 196        %macro desynpuf_pde_readin(filenumber=,sortds=);
+ 197          %******************************************************************************;
+ 198          %* Macro program DESYNPUF_PDE_READIN creates a data set by reading a single    ;
+ 199          %* Synthetic PUF PDE CSV file. The required FILENUMBER= parameter identifies   ;
+ 200          %* which PDE CSV file to read in. The CSV files are stored with a numeric      ;
+ 201          %* suffix, which is the subsample number. If you want to read in multiple      ;
+ 202          %* subsamples, you must call DESYNPUF_PDE_READIN once for each subsample.      ;
+ 203          %*                                                                             ;
+ 204          %* The required SORTDS= parameter can take values Y, YES, N, and NO. The value ;
+ 205          %* of SORTDS specifies whether the data set that is created should be sorted   ;
+ 206          %* by DESYNPUF_ID.                                                             ;
+ 207          %*                                                                             ;
+ 208          %* The input path and input filename are determined by the values of global    ;
+ 209          %* macro variables that are defined at the top of this program.                ;
+ 210          %*                                                                             ;
+ 211          %* The DESYNPUF libname and output data set name are determined by the values  ;
+ 212          %* of the global macro variables that are defined at the top of this program.  ;
+ 213          %*                                                                             ;
+ 214          %* See instructions at the top of this program for how to assign path and      ;
+ 215          %* filename values to the global macro variables.                              ;
+ 216          %*                                                                             ;
+ 217          %* After the new data set is created, output is generated using PROCs CONTENTS,;
+ 218          %* PRINT, MEANS, and FREQ to verify the data set contents.                     ;
+ 219          %******************************************************************************;
+ 220        
+ 221          %let sortds=%upcase(&sortds);
+ 222        
+ 223          filename inpde "&infilepath\&infilename.&filenumber..csv" ;
+ 224        
+ 225          data
+ 225      ! desynpuf.&outdsname&filenumber(label="DE1_0_2008_to_2010_Prescription_Drug_Events_Sample_
+ 225      ! &filenumber");
+ 226            infile inpde dsd dlm=',' lrecl=125 firstobs=2 stopover;
+ 227        
+ 228            attrib DESYNPUF_ID     length=$16 format=$16. label='DESYNPUF: Beneficiary Code'
+ 229                   PDE_ID          length=$15 format=$15. label='DESYNPUF: CCW Part D Event
+ 229      ! Number'
+ 230                   SRVC_DT         length=4   informat=yymmdd8. format=yymmddn8. label='DESYNPUF:
+ 230      !  RX Service Date'
+ 231                   PROD_SRVC_ID    length=$19 format=$19. label='DESYNPUF: Product Service ID'
+ 232                   QTY_DSPNSD_NUM  length=8   format=12.3 label='DESYNPUF: Quantity Dispensed'
+ 233                   DAYS_SUPLY_NUM  length=3   format=3.   label='DESYNPUF: Days Supply'
+ 234                   PTNT_PAY_AMT    length=8   format=10.2 label='DESYNPUF: Patient Pay Amount'
+ 235                   TOT_RX_CST_AMT  length=8   format=10.2 label='DESYNPUF: Gross Drug Cost'
+ 236                ;
+ 237        
+ 238            input desynpuf_id
+ 239                  pde_id
+ 240                  srvc_dt
+ 241                  prod_srvc_id
+ 242                  qty_dspnsd_num
+ 243                  days_suply_num
+ 244                  ptnt_pay_amt
+ 245                  tot_rx_cst_amt ;
+ 246          run;
+ 247        
+ 248          filename inpde clear;
+ 249        
+ 250          /*********************************************************************/
+ 251          /* Sort the data set if SORTDS=Y or SORTDS=YES.                      */
+ 252          /*********************************************************************/
+ 253          %if &sortds=Y or &sortds=YES %then %do;
+ 254            proc sort data=desynpuf.&outdsname&filenumber;
+ 255              by desynpuf_id;
+ 256            run;
+ 257          %end;
+ 258        
+ 259          /*********************************************************************/
+ 260          /* Examine new data set                                              */
+ 261          /*********************************************************************/
+ 262          title "Processing DE1_0_2008_to_2010_Prescription_Drug_Events_Sample_&filenumber";
+ 263          proc contents data=desynpuf.&outdsname&filenumber varnum;
+ 264          run;
+ 265          proc print data=desynpuf.&outdsname&filenumber(obs=5);
+ 266            title2 'Subsample Listing - First 5 Rows';
+ 267          run;
+ 268          proc means data=desynpuf.&outdsname&filenumber;
+ 269            title2 'Simple Means';
+ 270          run;
+ 271          proc freq data=desynpuf.&outdsname&filenumber;
+ 272            title2 'Simple Frequencies';
+ 273            table srvc_dt / missing;
+ 274            format srvc_dt year4.;
+ 275          run;
+ 276        
+ 277        %mend desynpuf_pde_readin;
+ 278        
+ 279        %macro desynpuf_pde_combine(startnumber=,endnumber=);
+ 280          %******************************************************************************;
+ 281          %* Macro program DESYNPUF_PDE_COMBINE concatenates several PDE data sets.      ;
+ 282          %* The data sets with the suffix starting with the numeric value assigned to   ;
+ 283          %* STARTNUMBER and ending with the numeric value assigned to ENDNUMBER are     ;
+ 284          %* concatenated.                                                               ;
+ 285          %*                                                                             ;
+ 286          %* Both the STARTNUMBER= and ENDNUMBER= parameters are required.               ;
+ 287          %*                                                                             ;
+ 288          %* After the new data set is created, output is generated                      ;
+ 289          %******************************************************************************;
+ 290          %local i;
+ 291        
+ 292          data
+ 292      ! desynpuf.&outdsname(label="DE1_0_2008_to_2010_Prescription_Drug_Events_Sample_&startnumbe
+ 292      ! r to &endnumber");
+ 293            set
+ 294            %do i=&startnumber %to &endnumber;
+ 295              desynpuf.&outdsname.&i
+ 296            %end;
+ 297            ;;;
+ 298            by desynpuf_id;
+ 299          run;
+ 300        
+ 301          /*********************************************************************/
+ 302          /* Examine new data set                                              */
+ 303          /*********************************************************************/
+ 304          title "Processing DE1_0_2008_to_2010_Prescription_Drug_Events_Sample_&startnumber to
+ 304      ! &endnumber";
+ 305          proc contents data=desynpuf.&outdsname varnum;
+ 306          run;
+ 307          proc means data=desynpuf.&outdsname;
+ 308            title2 'Simple Means';
+ 309          run;
+ 310          proc freq data=desynpuf.&outdsname;
+ 311            title2 'Simple Frequencies';
+ 312            table srvc_dt / missing;
+ 313            format srvc_dt year4.;
+ 314          run;
+ 315        
+ 316        %mend desynpuf_pde_combine;
+ 317        
+ 318        /*********************************************************************************/
+ 319        /* END OF SECTION THAT SHOULD NOT BE MODIFIED.                                   */
+ 320        /*********************************************************************************/
+ 321        /*********************************************************************************/
+ 322        
+ 323        /*********************************************************************************/
+ 324        /* START OF SECTION THAT SHOULD BE REVIEWED AND/OR MODIFIED                      */
+ 325        /*********************************************************************************/
+ 326        
+ 327        /*********************************************************************************/
+ 328        /* 5. Call macro program DESYNPUF_PDE_READIN once for each PDE CSV file you want */
+ 329        /*    to read in. Assign to FILENUMBER= the numeric suffix (the subsample number)*/
+ 330        /*    of the CSV file. Assign to SORTDS a value of Y, YES, N, or NO depending on */
+ 331        /*    whether you want the data set that is created to be sorted by DESYNPUF_ID. */
+ 332        /*    Do not terminate the macro calls with a semicolon.                         */
+ 333        /*********************************************************************************/
+ 334        %desynpuf_pde_readin(filenumber=1,sortds=no)
+ MPRINT(DESYNPUF_PDE_READIN):   filename inpde 
+ "/home/u63541071/emac293/rxante/raw/\DE1_0_2008_to_2010_Prescription_Drug_Events_Sample_1.csv" ;
+ MPRINT(DESYNPUF_PDE_READIN):   data 
+ desynpuf.DE1_0_2008_to_2010_PDE_Sample_1(label="DE1_0_2008_to_2010_Prescription_Drug_Events_Sample_1
+ ");
+ MPRINT(DESYNPUF_PDE_READIN):   infile inpde dsd dlm=',' lrecl=125 firstobs=2 stopover;
+ MPRINT(DESYNPUF_PDE_READIN):   attrib DESYNPUF_ID length=$16 format=$16. label='DESYNPUF: 
+ Beneficiary Code' PDE_ID length=$15 format=$15. label='DESYNPUF: CCW Part D Event Number' SRVC_DT 
+ length=4 informat=yymmdd8. format=yymmddn8. label='DESYNPUF: RX Service Date' PROD_SRVC_ID 
+ length=$19 format=$19. label='DESYNPUF: Product Service ID' QTY_DSPNSD_NUM length=8 format=12.3 
+ label='DESYNPUF: Quantity Dispensed' DAYS_SUPLY_NUM length=3 format=3. label='DESYNPUF: Days 
+ Supply' PTNT_PAY_AMT length=8 format=10.2 label='DESYNPUF: Patient Pay Amount' TOT_RX_CST_AMT 
+ length=8 format=10.2 label='DESYNPUF: Gross Drug Cost' ;
+ MPRINT(DESYNPUF_PDE_READIN):   input desynpuf_id pde_id srvc_dt prod_srvc_id qty_dspnsd_num 
+ days_suply_num ptnt_pay_amt tot_rx_cst_amt ;
+ MPRINT(DESYNPUF_PDE_READIN):   run;
+ 
+ NOTE: The infile INPDE is:
+       
+       Filename=/home/u63541071/emac293/rxante/raw/\DE1_0_2008_to_2010_Prescription_Drug_Events_Sampl
+       e_1.csv,
+       Owner Name=u63541071,Group Name=oda,
+       Access Permission=-rw-r--r--,
+       Last Modified=25Jun2024:17:47:18,
+       File Size (bytes)=425001860
+ 
+ NOTE: 5552421 records were read from the infile INPDE.
+       The minimum record length was 67.
+       The maximum record length was 78.
+ NOTE: The data set DESYNPUF.DE1_0_2008_TO_2010_PDE_SAMPLE_1 has 5552421 observations and 8 
+       variables.
+ NOTE: Compressing data set DESYNPUF.DE1_0_2008_TO_2010_PDE_SAMPLE_1 increased size by 19.27 
+       percent. 
+       Compressed is 4457 pages; un-compressed would require 3737 pages.
+ NOTE: DATA statement used (Total process time):
+       real time           7.06 seconds
+       user cpu time       5.35 seconds
+       system cpu time     0.60 seconds
+       memory              2509.50k
+       OS Memory           22692.00k
+       Timestamp           07/07/2024 11:59:18 PM
+       Step Count                        24  Switch Count  1
+       Page Faults                       0
+       Page Reclaims                     602
+       Page Swaps                        0
+       Voluntary Context Switches        27042
+       Involuntary Context Switches      20
+       Block Input Operations            0
+       Block Output Operations           1141520
+       
+ 
+ MPRINT(DESYNPUF_PDE_READIN):   filename inpde clear;
+ NOTE: Fileref INPDE has been deassigned.
+ MPRINT(DESYNPUF_PDE_READIN):   title "Processing 
+ DE1_0_2008_to_2010_Prescription_Drug_Events_Sample_1";
+ MPRINT(DESYNPUF_PDE_READIN):   proc contents data=desynpuf.DE1_0_2008_to_2010_PDE_Sample_1 varnum;
+ MPRINT(DESYNPUF_PDE_READIN):   run;
+ 
+ NOTE: PROCEDURE CONTENTS used (Total process time):
+       real time           0.09 seconds
+       user cpu time       0.03 seconds
+       system cpu time     0.06 seconds
+       memory              4120.25k
+       OS Memory           23976.00k
+       Timestamp           07/07/2024 11:59:18 PM
+       Step Count                        25  Switch Count  0
+       Page Faults                       0
+       Page Reclaims                     762
+       Page Swaps                        0
+       Voluntary Context Switches        21
+       Involuntary Context Switches      10
+       Block Input Operations            0
+       Block Output Operations           16
+       
+ 
+ MPRINT(DESYNPUF_PDE_READIN):   proc print data=desynpuf.DE1_0_2008_to_2010_PDE_Sample_1(obs=5);
+ MPRINT(DESYNPUF_PDE_READIN):   title2 'Subsample Listing - First 5 Rows';
+ MPRINT(DESYNPUF_PDE_READIN):   run;
+ NOTE: There were 5 observations read from the data set DESYNPUF.DE1_0_2008_TO_2010_PDE_SAMPLE_1.
+ NOTE: PROCEDURE PRINT used (Total process time):
+       real time           0.01 seconds
+       user cpu time       0.02 seconds
+       system cpu time     0.00 seconds
+       memory              2658.25k
+       OS Memory           23972.00k
+       Timestamp           07/07/2024 11:59:18 PM
+       Step Count                        26  Switch Count  1
+       Page Faults                       0
+       Page Reclaims                     361
+       Page Swaps                        0
+       Voluntary Context Switches        15
+       Involuntary Context Switches      0
+       Block Input Operations            0
+       Block Output Operations           16
+       
+ 
+ MPRINT(DESYNPUF_PDE_READIN):   proc means data=desynpuf.DE1_0_2008_to_2010_PDE_Sample_1;
+ MPRINT(DESYNPUF_PDE_READIN):   title2 'Simple Means';
+ MPRINT(DESYNPUF_PDE_READIN):   run;
+ NOTE: There were 5552421 observations read from the data set 
+       DESYNPUF.DE1_0_2008_TO_2010_PDE_SAMPLE_1.
+ NOTE: PROCEDURE MEANS used (Total process time):
+       real time           1.00 seconds
+       user cpu time       1.19 seconds
+       system cpu time     0.29 seconds
+       memory              8200.96k
+       OS Memory           29624.00k
+       Timestamp           07/07/2024 11:59:19 PM
+       Step Count                        27  Switch Count  26
+       Page Faults                       0
+       Page Reclaims                     1822
+       Page Swaps                        0
+       Voluntary Context Switches        11486
+       Involuntary Context Switches      13
+       Block Input Operations            0
+       Block Output Operations           0
+       
+ 
+ MPRINT(DESYNPUF_PDE_READIN):   proc freq data=desynpuf.DE1_0_2008_to_2010_PDE_Sample_1;
+ MPRINT(DESYNPUF_PDE_READIN):   title2 'Simple Frequencies';
+ MPRINT(DESYNPUF_PDE_READIN):   table srvc_dt / missing;
+ MPRINT(DESYNPUF_PDE_READIN):   format srvc_dt year4.;
+ MPRINT(DESYNPUF_PDE_READIN):   run;
+ 
+ NOTE: There were 5552421 observations read from the data set 
+       DESYNPUF.DE1_0_2008_TO_2010_PDE_SAMPLE_1.
+ NOTE: PROCEDURE FREQ used (Total process time):
+       real time           1.34 seconds
+       user cpu time       1.18 seconds
+       system cpu time     0.16 seconds
+       memory              2807.84k
+       OS Memory           25000.00k
+       Timestamp           07/07/2024 11:59:21 PM
+       Step Count                        28  Switch Count  4
+       Page Faults                       0
+       Page Reclaims                     425
+       Page Swaps                        0
+       Voluntary Context Switches        28
+       Involuntary Context Switches      4
+       Block Input Operations            0
+       Block Output Operations           264
+       
+ 
+ 335        *%desynpuf_pde_readin(filenumber=2,sortds=no)
+ 336        *%desynpuf_pde_readin(filenumber=3,sortds=no)
+ 337        *%desynpuf_pde_readin(filenumber=4,sortds=no)
+ 338        *%desynpuf_pde_readin(filenumber=5,sortds=no)
+ 339        *%desynpuf_pde_readin(filenumber=6,sortds=no)
+ 340        *%desynpuf_pde_readin(filenumber=7,sortds=no)
+ 341        *%desynpuf_pde_readin(filenumber=8,sortds=no)
+ 342        *%desynpuf_pde_readin(filenumber=9,sortds=no)
+ 343        *%desynpuf_pde_readin(filenumber=10,sortds=no)
+ 344        *%desynpuf_pde_readin(filenumber=11,sortds=no)
+ 345        *%desynpuf_pde_readin(filenumber=12,sortds=no)
+ 346        *%desynpuf_pde_readin(filenumber=13,sortds=no)
+ 347        *%desynpuf_pde_readin(filenumber=14,sortds=no)
+ 348        *%desynpuf_pde_readin(filenumber=15,sortds=no)
+ 349        *%desynpuf_pde_readin(filenumber=16,sortds=no)
+ 350        *%desynpuf_pde_readin(filenumber=17,sortds=no)
+ 351        *%desynpuf_pde_readin(filenumber=18,sortds=no)
+ 352        *%desynpuf_pde_readin(filenumber=19,sortds=no)
+ 353        *%desynpuf_pde_readin(filenumber=20,sortds=no)
+ 354        
+ 355        /*********************************************************************************/
+ 356        /* 6. OPTIONAL: Call macro program DESYNPUF_PDE_COMBINE if you want to           */
+ 357        /*    concatenate the data sets created above that have consecutively numbered   */
+ 358        /*    suffixes. Both STARTNUMBER= and ENDNUMBER= values must be specified.       */
+ 359        /*    ENDNUMBER= must be greater than or equal to STARTNUMBER=.                  */
+ 360        /*      If you want to combine data sets that are not consecutively numbered, you*/
+ 361        /*    will need to write a DATA step to concatenate them.                        */
+ 362        /*********************************************************************************/
+ 363        *%desynpuf_pde_combine(startnumber=1,endnumber=20)
+ 364        
+ 365        /*********************************************************************************/
+ 366        /* Clear some of the settings this program has made.                             */
+ 367        /*********************************************************************************/
+ 368        filename inpde clear;
+ 369        libname desynpuf clear;
+ NOTE: Libref DESYNPUF has been deassigned.
+ 370        
+ 371        options validvarname=v7 nomprint ;
+ 372        
+ 373        %symdel infilepath infilename outdsname;
+ 374        
+ 375        
+ 376        OPTIONS NONOTES NOSTIMER NOSOURCE NOSYNTAXCHECK;
+ 386        
+ User: u63541071

@@ -1,0 +1,930 @@
+1          OPTIONS NONOTES NOSTIMER NOSOURCE NOSYNTAXCHECK;
+ 68         
+ 69         /*-------------------------------------------------------------------*/
+ 70         /*  Program Name: DESYNPUF_BENE_READIN.SAS                           */
+ 71         /*  SAS Version:  Tested under SAS 9.3 Windows XP                    */
+ 72         /*  Purpose:      Create SAS data sets from BENE synthetic PUF CSV   */
+ 73         /*                files. Each BENE CSV file contains beneficiary data*/
+ 74         /*                for one year.                                      */
+ 75         /*                                                                   */
+ 76         /*  BACKGROUND:   Each data type in the CMS Linkable 2008-2010       */
+ 77         /*  Medicare DE-SynPUFs was released in 20 separate subsamples. The  */
+ 78         /*  same group of beneficiary IDs are in subsamples with the same    */
+ 79         /*  number. The suffix of each CSV filename contains the subsample   */
+ 80         /*  number. This design allows DE-SynPUFs users who do not need the  */
+ 81         /*  entire synthetic population of DE-SynPUFs to read in only as many*/
+ 82         /*  subsamples as they desire. This read-in program allows users to  */
+ 83         /*  specify which Beneficiary subsamples to read in and to combine.  */
+ 84         /*  A Beneficiary subsample contains three CSV files, one for each   */
+ 85         /*  year (2008, 2009, 2010). All three annual CSV files in a         */
+ 86         /*  subsample must be downloaded before processing this program.     */
+ 87         /*                                                                   */
+ 88         /*-------------------------------------------------------------------*/
+ 89         /*  USER INSTRUCTIONS: Modify the following as necessary.            */
+ 90         /*  1. Assign to macro variable INFILEPATH the path where the CSV    */
+ 91         /*     files are stored.                                             */
+ 92         /*  2. Assign to macro variables INFILENAME2008, INFILENAME2009, and */
+ 93         /*     INFILENAME2010 the filenames of the CSV files for each year.  */
+ 94         /*     Do not include the subsample number and the CSV extension. The*/
+ 95         /*     program will add the subsample number and the CSV extension to*/
+ 96         /*     the filename.                                                 */
+ 97         /*  3. Specify path for DESYNPUF LIBNAME. This is the location where */
+ 98         /*     the SAS data sets created by this program will be stored.     */
+ 99         /*  4. Assign to macro variables OUTDSNAME2008, OUTDSNAME2009, and   */
+ 100        /*     OUTDSNAME2010 the names of the SAS data sets created from the */
+ 101        /*     CSV files. Do not include the subsample number. The program   */
+ 102        /*     will add that as a suffix to your SAS data set names. The name*/
+ 103        /*     must conform to SAS naming rules and be 30 charactersor less  */
+ 104        /*     in length. The 30 characters limit allows for the addition of */
+ 105        /*     the subsample number to the name.                             */
+ 106        /*  5. Set parameters on calls to macro program DESYNPUF_BENE_READIN.*/
+ 107        /*     Keep only the calls to macro program DESYNPUF_BENE_READIN for */
+ 108        /*     the subsamples that you want to process. Comment out the calls*/
+ 109        /*     to DESYNPUF_BENE_READIN for the subsamples that you do not    */
+ 110        /*     want to process (or delete the calls).                        */
+ 111        /*     This macro has two parameters and both are required:          */
+ 112        /*     FILENUMBER= and SORTDS=.                                      */
+ 113        /*     - Set the FILENUMBER= parameter value to the numeric suffix of*/
+ 114        /*       the CSV files that you want to read in. A single subsample  */
+ 115        /*       is separated into one CSV file per year (2008, 2009, 2010). */
+ 116        /*       This macro program creates a data set from each CSV file.   */
+ 117        /*       The FILENUMBER= value is the subsample number. The SAS data */
+ 118        /*       sets that are created will have the same numeric suffix.    */
+ 119        /*     - The SORTDS= parameter specifies whether you want to sort the*/
+ 120        /*       new data sets by DESYNPUF_ID. The CSV files are saved in    */
+ 121        /*       ASCII DESYNPUF_ID order and so you may not need to sort the */
+ 122        /*       files if you intend to use them in ASCII DESYNPUF_ID order. */
+ 123        /*  6. Optionally, call macro program DESYNPUF_BENE_COMBINE if you   */
+ 124        /*     want to combine the new BENE data sets into one data set per  */
+ 125        /*     year. This code requires that the data sets you want to       */
+ 126        /*     combine are consecutively numbered subsamples.                */
+ 127        /*       The name of the output data set created by this macro       */
+ 128        /*     is the name specified by macro variable OUTDSNAME. No         */
+ 129        /*     subsample numbers will be added as a suffix to the data set   */
+ 130        /*     name.                                                         */
+ 131        /*     NOTE: If you do not have consecutively numbered subsamples,   */
+ 132        /*     you will need to write a DATA step that concatenates these    */
+ 133        /*     subsample data sets.                                          */
+ 134        /*       This code interleaves the data sets for a year by           */
+ 135        /*     DESYNPUF_ID. Therefore, the data sets that you want to combine*/
+ 136        /*     must be in order by DESYNPUF_ID. If you do not want to call   */
+ 137        /*     macro program DESYNPUF_BENE_COMBINE, comment out (or delete)  */
+ 138        /*     the call to this macro program.                               */
+ 139        /*       This macro program has two parameters STARTNUMBER= and      */
+ 140        /*     ENDNUMBER=. These parameters specify the numeric range of     */
+ 141        /*     files (the subsample numbers) that you want to combine. All   */
+ 142        /*     three years are processed and a data set is created for each  */
+ 143        /*     year.                                                         */
+ 144        /*       If you want to combine the data sets at a later time, you   */
+ 145        /*     can run this macro program by itself. Do steps 1-4. Do not do */
+ 146        /*     Step 5 and remove the calls to macro program                  */
+ 147        /*     DESYNPUF_BENE_READIN. Depending on any post-processing that   */
+ 148        /*     you may have done, you might need to sort the data sets that  */
+ 149        /*     you want to combine by DESYNPUF_ID before you call            */
+ 150        /*     DESYNPUF_BENE_COMBINE.                                        */
+ 151        /*                                                                   */
+ 152        /*-------------------------------------------------------------------*/
+ 153        /*                                                                   */
+ 154        /*  Date:         13 Nov 2012                                        */
+ 155        /*  Last Updated: 11 Dec 2012 11:42:44ec 2012 11:39:19               */
+ 156        /*-------------------------------------------------------------------*/
+ 157        
+ WARNING: Attempt to delete macro variable INFILEPATH failed. Variable not found.
+ WARNING: Attempt to delete macro variable INFILENAME2008 failed. Variable not found.
+ WARNING: Attempt to delete macro variable INFILENAME2009 failed. Variable not found.
+ WARNING: Attempt to delete macro variable INFILENAME2010 failed. Variable not found.
+ WARNING: Attempt to delete macro variable OUTDSNAME2008 failed. Variable not found.
+ WARNING: Attempt to delete macro variable OUTDSNAME2009 failed. Variable not found.
+ WARNING: Attempt to delete macro variable OUTDSNAME2010 failed. Variable not found.
+ 158        /*********************************************************************/
+ 159        /* Declare global macro variables used by this program.              */
+ 160        /*********************************************************************/
+ 161        %symdel infilepath infilename2008 infilename2009 infilename2010
+ 162                           outdsname2008  outdsname2009 outdsname2010;
+ 163        %global infilepath infilename2008 infilename2009 infilename2010
+ 164                           outdsname2008  outdsname2009 outdsname2010;
+ 165        
+ 166        /*********************************************************************/
+ 167        /* 1. Specify path of input CSV files. Do not enclose value in       */
+ 168        /*    quotation marks.                                               */
+ 169        /*********************************************************************/
+ 170        %let infilepath = /home/u63541071/emac293/rxante/raw/;
+ 171        
+ 172        /**************************************************************************/
+ 173        /* 2. Specify first part of filename for input CSV files. Do not include  */
+ 174        /*    the subsample number and do not include the CSV extension. The      */
+ 175        /*    program assigns these values. Do not enclose the filenames in       */
+ 176        /*    quotation marks. There is one macro variable per year.              */
+ 177        /**************************************************************************/
+ 178        %let infilename2008=DE1_0_2008_Beneficiary_Summary_File_Sample_;
+ 179        %let infilename2009=DE1_0_2009_Beneficiary_Summary_File_Sample_;
+ 180        %let infilename2010=DE1_0_2010_Beneficiary_Summary_File_Sample_;
+ 181        
+ 182        /**************************************************/
+ 183        /* 3. Specify LIBNAME of DE-SynPUF BENE files     */
+ 184        /**************************************************/
+ 185        libname desynpuf "/home/u63541071/emac293/rxante/created";
+ NOTE: Libref DESYNPUF was successfully assigned as follows: 
+       Engine:        V9 
+       Physical Name: /home/u63541071/emac293/rxante/created
+ 186        
+ 187        /**************************************************************************/
+ 188        /* 4. Specify filenames(30 characters or less) of SAS datasets created by */
+ 189        /*    this program. For Beneficiary data, a data set is created for each  */
+ 190        /*    of the three years. Do not include the subsample number suffix. The */
+ 191        /*    program adds that value to the end of the SAS data set name. There  */
+ 192        /*    is one macro variable per year.                                     */
+ 193        /**************************************************************************/
+ 194        %let outdsname2008=DE1_0_2008_Bene_Sample_;
+ 195        %let outdsname2009=DE1_0_2009_Bene_Sample_;
+ 196        %let outdsname2010=DE1_0_2010_Bene_Sample_;
+ 197        
+ 198        /**************************************************************************/
+ 199        /* Set SAS options for this program:                                      */
+ 200        /*   VALIDVARNAME=UPCASE: Ensure that all variable names are in uppercase.*/
+ 201        /*   COMPRESS=BINARY: Compress data sets created by this program.         */
+ 202        /*   MPRINT: View resolved code in SAS log (optional -- NOMPRINT turns it */
+ 203        /*           off)                                                         */
+ 204        /**************************************************************************/
+ 205        options validvarname=upcase
+ 206                compress=binary
+ 207                mprint
+ 208                ls=100 ps=60;
+ 209        
+ 210        /*********************************************************************************/
+ 211        /*********************************************************************************/
+ 212        /* START OF SECTION THAT SHOULD NOT BE MODIFIED                                  */
+ 213        /*********************************************************************************/
+ 214        
+ 215        %macro desynpuf_bene_readin(filenumber=,sortds=);
+ 216          %******************************************************************************;
+ 217          %* Macro program DESYNPUF_BENE_READIN creates a data set by reading a single   ;
+ 218          %* Synthetic PUF BENE subsample. The required FILENUMBER= parameter identifies ;
+ 219          %* which Beneficiary subsample to read in. Each subsample contains 3 CSV files,;
+ 220          %* one for each year.  The CSV files are stored with a numeric suffix, which is;
+ 221          %* the subsample number. If you want to read in multiple subsamples, you must  ;
+ 222          %* call DESYNPUF_BENE_READIN once for each subsample.                          ;
+ 223          %*                                                                             ;
+ 224          %* The required SORTDS= parameter can take values Y, YES, N, and NO. The value ;
+ 225          %* of SORTDS specifies whether the data sets that are created should be sorted ;
+ 226          %* by DESYNPUF_ID.                                                             ;
+ 227          %*                                                                             ;
+ 228          %* The input path and input filename are determined by the values of global    ;
+ 229          %* macro variables that are defined at the top of this program.                ;
+ 230          %*                                                                             ;
+ 231          %* The DESYNPUF libname and output data set name are determined by the values  ;
+ 232          %* of the global macro variables that are defined at the top of this program.  ;
+ 233          %*                                                                             ;
+ 234          %* See instructions at the top of this program for how to assign path and      ;
+ 235          %* filename values to the global macro variables.                              ;
+ 236          %*                                                                             ;
+ 237          %* After the new data set is created, output is generated using PROCs CONTENTS,;
+ 238          %* PRINT, MEANS, and FREQ to verify the data set contents.                     ;
+ 239          %******************************************************************************;
+ 240        
+ 241          %local startyear endyear y infilename outdsname;
+ 242          %let startyear=2008;
+ 243          %let endyear=2010;
+ 244        
+ 245          %let sortds=%upcase(&sortds);
+ 246        
+ 247          %do y=&startyear %to &endyear;
+ 248            %let infilename=&&infilename&y;
+ 249            %let outdsname=&&outdsname&y;
+ 250            filename inbene "&infilepath\&infilename&filenumber..csv" ;
+ 251        
+ 252            data desynpuf.&outdsname&filenumber(label="&infilename.&filenumber");
+ 253              infile inbene dsd dlm=',' lrecl=500 firstobs=2 stopover;
+ 254        
+ 255              attrib DESYNPUF_ID     length=$16 format=$16.       label='DESYNPUF: Beneficiary
+ 255      ! Code'
+ 256                     BENE_BIRTH_DT   length=4 format=YYMMDDN8. informat=yymmdd8.
+ 256      ! label='DESYNPUF: Date of birth'
+ 257                     BENE_DEATH_DT   length=4 format=YYMMDDN8. informat=yymmdd8.
+ 257      ! label='DESYNPUF: Date of death'
+ 258                     BENE_SEX_IDENT_CD  length=$1 format=$1.      label='DESYNPUF: Sex'
+ 259                     BENE_RACE_CD    length=$1 format=$1.         label='DESYNPUF: Beneficiary
+ 259      ! Race Code'
+ 260                     BENE_ESRD_IND   length=$1 format=$1.         label='DESYNPUF: End stage
+ 260      ! renal disease Indicator'
+ 261                     SP_STATE_CODE      length=$2 format=$2.         label='DESYNPUF: State Code'
+ 262                     BENE_COUNTY_CD  length=$3 format=$3.         label='DESYNPUF: County Code'
+ 263                     BENE_HI_CVRAGE_TOT_MONS  length=3 format=2.  label='DESYNPUF: Total number
+ 263      ! of months of part A coverage for the beneficiary.'
+ 264                     BENE_SMI_CVRAGE_TOT_MONS length=3 format=2.  label='DESYNPUF: Total number
+ 264      ! of months of part B coverage for the beneficiary.'
+ 265                     BENE_HMO_CVRAGE_TOT_MONS length=3 format=2.  label='DESYNPUF: Total number
+ 265      ! of months of HMO coverage for the beneficiary.'
+ 266                     PLAN_CVRG_MOS_NUM  length=$2 format=$2.      label='DESYNPUF: Total number
+ 266      ! of months of part D plan coverage for the beneficiary.'
+ 267                     SP_ALZHDMTA     length=3 format=1.           label='DESYNPUF: Chronic
+ 267      ! Condition: Alzheimer or related disorders or senile'
+ 268                     SP_CHF          length=3 format=1.           label='DESYNPUF: Chronic
+ 268      ! Condition: Heart Failure'
+ 269                     SP_CHRNKIDN     length=3 format=1.           label='DESYNPUF: Chronic
+ 269      ! Condition: Chronic Kidney Disease'
+ 270                     SP_CNCR         length=3 format=1.           label='DESYNPUF: Chronic
+ 270      ! Condition: Cancer'
+ 271                     SP_COPD         length=3 format=1.           label='DESYNPUF: Chronic
+ 271      ! Condition: Chronic Obstructive Pulmonary Disease'
+ 272                     SP_DEPRESSN     length=3 format=1.           label='DESYNPUF: Chronic
+ 272      ! Condition: Depression'
+ 273                     SP_DIABETES     length=3 format=1.           label='DESYNPUF: Chronic
+ 273      ! Condition: Diabetes'
+ 274                     SP_ISCHMCHT     length=3 format=1.           label='DESYNPUF: Chronic
+ 274      ! Condition: Ischemic Heart Disease'
+ 275                     SP_OSTEOPRS     length=3 format=1.           label='DESYNPUF: Chronic
+ 275      ! Condition: Osteoporosis'
+ 276                     SP_RA_OA        length=3 format=1.           label='DESYNPUF: Chronic
+ 276      ! Condition: RA/OA'
+ 277                     SP_STRKETIA     length=3 format=1.           label='DESYNPUF: Chronic
+ 277      ! Condition: Stroke/transient Ischemic Attack'
+ 278                     MEDREIMB_IP     length=8 format=10.2         label='DESYNPUF: Inpatient
+ 278      ! annual Medicare reimbursement amount'
+ 279                     BENRES_IP       length=8 format=10.2         label='DESYNPUF: Inpatient
+ 279      ! annual beneficiary responsibility amount'
+ 280                     PPPYMT_IP       length=8 format=10.2         label='DESYNPUF: Inpatient
+ 280      ! annual primary payer reimbursement amount'
+ 281                     MEDREIMB_OP     length=8 format=10.2         label='DESYNPUF: Outpatient
+ 281      ! Institutional annual Medicare reimbursement amount'
+ 282                     BENRES_OP       length=8 format=10.2         label='DESYNPUF: Outpatient
+ 282      ! Institutional annual beneficiary responsibility amount'
+ 283                     PPPYMT_OP       length=8 format=10.2         label='DESYNPUF: Outpatient
+ 283      ! Institutional annual primary payer reimbursement amount'
+ 284                     MEDREIMB_CAR    length=8 format=10.2         label='DESYNPUF: Carrier annual
+ 284      !  Medicare reimbursement amount'
+ 285                     BENRES_CAR      length=8 format=10.2         label='DESYNPUF: Carrier annual
+ 285      !  beneficiary responsibility amount'
+ 286                     PPPYMT_CAR      length=8 format=10.2         label='DESYNPUF: Carrier annual
+ 286      !  primary payer reimbursement amount'
+ 287                  ;
+ 288        
+ 289              input DESYNPUF_ID
+ 290                    BENE_BIRTH_DT
+ 291                    BENE_DEATH_DT
+ 292                    BENE_SEX_IDENT_CD
+ 293                    BENE_RACE_CD
+ 294                    BENE_ESRD_IND
+ 295                    SP_STATE_CODE
+ 296                    BENE_COUNTY_CD
+ 297                    BENE_HI_CVRAGE_TOT_MONS
+ 298                    BENE_SMI_CVRAGE_TOT_MONS
+ 299                    BENE_HMO_CVRAGE_TOT_MONS
+ 300                    PLAN_CVRG_MOS_NUM
+ 301                    SP_ALZHDMTA
+ 302                    SP_CHF
+ 303                    SP_CHRNKIDN
+ 304                    SP_CNCR
+ 305                    SP_COPD
+ 306                    SP_DEPRESSN
+ 307                    SP_DIABETES
+ 308                    SP_ISCHMCHT
+ 309                    SP_OSTEOPRS
+ 310                    SP_RA_OA
+ 311                    SP_STRKETIA
+ 312                    MEDREIMB_IP
+ 313                    BENRES_IP
+ 314                    PPPYMT_IP
+ 315                    MEDREIMB_OP
+ 316                    BENRES_OP
+ 317                    PPPYMT_OP
+ 318                    MEDREIMB_CAR
+ 319                    BENRES_CAR
+ 320                    PPPYMT_CAR;
+ 321        
+ 322            run;
+ 323            filename inbene clear;
+ 324        
+ 325        
+ 326            /*********************************************************************/
+ 327            /* Sort the data set if SORTDS=Y or SORTDS=YES.                      */
+ 328            /*********************************************************************/
+ 329            %if &sortds=Y or &sortds=YES %then %do;
+ 330              proc sort data=desynpuf.&outdsname&filenumber;
+ 331                by desynpuf_id;
+ 332              run;
+ 333            %end;
+ 334        
+ 335            /*********************************************************************/
+ 336            /* Examine new data set                                              */
+ 337            /*********************************************************************/
+ 338            title "Processing &infilename._&filenumber";
+ 339            proc contents data=desynpuf.&outdsname&filenumber varnum;
+ 340            run;
+ 341            proc print data=desynpuf.&outdsname&filenumber(obs=5);
+ 342              title2 'Subsample Listing - First 5 Rows';
+ 343            run;
+ 344            proc means data=desynpuf.&outdsname&filenumber;
+ 345              title2 'Simple Means';
+ 346            run;
+ 347            proc freq data=desynpuf.&outdsname&filenumber;
+ 348              title2 'Simple Frequencies';
+ 349              table bene_birth_dt bene_death_dt / missing;
+ 350              format bene_birth_dt bene_death_dt year4.;
+ 351            run;
+ 352        
+ 353          %end;
+ 354        
+ 355        %mend desynpuf_bene_readin;
+ 356        
+ 357        %macro desynpuf_bene_combine(startnumber=,endnumber=);
+ 358          %******************************************************************************;
+ 359          %* Macro program DESYNPUF_BENE_COMBINE concatenates several BENE data sets.    ;
+ 360          %* The data sets with the suffix starting with the numeric value assigned to   ;
+ 361          %* STARTNUMBER and ending with the numeric value assigned to ENDNUMBER are     ;
+ 362          %* concatenated.                                                               ;
+ 363          %*                                                                             ;
+ 364          %* Both the STARTNUMBER= and ENDNUMBER= parameters are required.               ;
+ 365          %*                                                                             ;
+ 366          %* After the new data set is created, output is generated                      ;
+ 367          %******************************************************************************;
+ 368          %local startyear endyear y i outdsname infilename;
+ 369        
+ 370          %let startyear=2008;
+ 371          %let endyear=2010;
+ 372        
+ 373          %do y=&startyear %to &endyear;
+ 374            %let outdsname=&&outdsname&y;
+ 375            %let infilename=&&infilename&y;
+ 376        
+ 377            data desynpuf.&outdsname(label="&infilename.&startnumber to &endnumber");
+ 378              set
+ 379              %do i=&startnumber %to &endnumber;
+ 380                desynpuf.&outdsname.&i
+ 381              %end;
+ 382              ;;;
+ 383              by desynpuf_id;
+ 384            run;
+ 385        
+ 386            /*********************************************************************/
+ 387            /* Examine new data set                                              */
+ 388            /*********************************************************************/
+ 389            title "Processing &infilename.&startnumber to &endnumber";
+ 390            proc contents data=desynpuf.&outdsname varnum;
+ 391            run;
+ 392            proc means data=desynpuf.&outdsname;
+ 393              title2 'Simple Means';
+ 394            run;
+ 395            proc freq data=desynpuf.&outdsname;
+ 396              title2 'Simple Frequencies';
+ 397              table bene_birth_dt bene_death_dt / missing;
+ 398              format bene_birth_dt bene_death_dt year4.;
+ 399            run;
+ 400        
+ 401          %end;
+ 402        
+ 403        %mend desynpuf_bene_combine;
+ 404        
+ 405        /*********************************************************************************/
+ 406        /* END OF SECTION THAT SHOULD NOT BE MODIFIED.                                   */
+ 407        /*********************************************************************************/
+ 408        /*********************************************************************************/
+ 409        
+ 410        /*********************************************************************************/
+ 411        /* START OF SECTION THAT SHOULD BE REVIEWED AND/OR MODIFIED                      */
+ 412        /*********************************************************************************/
+ 413        
+ 414        /*********************************************************************************/
+ 415        /* 5. Call macro program DESYNPUF_BENE_READIN once for BENE CSV file group of 3  */
+ 416        /*    annual files (2008, 2009, 2010) you want to read in. Assign to FILENUMBER= */
+ 417        /*    the numeric suffix (subsample number) of the CSV files for the group of    */
+ 418        /*    annual files. Do not terminate the macro calls with a semicolon.           */
+ 419        /*********************************************************************************/
+ 420        %desynpuf_bene_readin(filenumber=1,sortds=no)
+ MPRINT(DESYNPUF_BENE_READIN):   filename inbene 
+ "/home/u63541071/emac293/rxante/raw/\DE1_0_2008_Beneficiary_Summary_File_Sample_1.csv" ;
+ MPRINT(DESYNPUF_BENE_READIN):   data 
+ desynpuf.DE1_0_2008_Bene_Sample_1(label="DE1_0_2008_Beneficiary_Summary_File_Sample_1");
+ MPRINT(DESYNPUF_BENE_READIN):   infile inbene dsd dlm=',' lrecl=500 firstobs=2 stopover;
+ MPRINT(DESYNPUF_BENE_READIN):   attrib DESYNPUF_ID length=$16 format=$16. label='DESYNPUF: 
+ Beneficiary Code' BENE_BIRTH_DT length=4 format=YYMMDDN8. informat=yymmdd8. label='DESYNPUF: Date 
+ of birth' BENE_DEATH_DT length=4 format=YYMMDDN8. informat=yymmdd8. label='DESYNPUF: Date of death' 
+ BENE_SEX_IDENT_CD length=$1 format=$1. label='DESYNPUF: Sex' BENE_RACE_CD length=$1 format=$1. 
+ label='DESYNPUF: Beneficiary Race Code' BENE_ESRD_IND length=$1 format=$1. label='DESYNPUF: End 
+ stage renal disease Indicator' SP_STATE_CODE length=$2 format=$2. label='DESYNPUF: State Code' 
+ BENE_COUNTY_CD length=$3 format=$3. label='DESYNPUF: County Code' BENE_HI_CVRAGE_TOT_MONS length=3 
+ format=2. label='DESYNPUF: Total number of months of part A coverage for the beneficiary.' 
+ BENE_SMI_CVRAGE_TOT_MONS length=3 format=2. label='DESYNPUF: Total number of months of part B 
+ coverage for the beneficiary.' BENE_HMO_CVRAGE_TOT_MONS length=3 format=2. label='DESYNPUF: Total 
+ number of months of HMO coverage for the beneficiary.' PLAN_CVRG_MOS_NUM length=$2 format=$2. 
+ label='DESYNPUF: Total number of months of part D plan coverage for the beneficiary.' SP_ALZHDMTA 
+ length=3 format=1. label='DESYNPUF: Chronic Condition: Alzheimer or related disorders or senile' 
+ SP_CHF length=3 format=1. label='DESYNPUF: Chronic Condition: Heart Failure' SP_CHRNKIDN length=3 
+ format=1. label='DESYNPUF: Chronic Condition: Chronic Kidney Disease' SP_CNCR length=3 format=1. 
+ label='DESYNPUF: Chronic Condition: Cancer' SP_COPD length=3 format=1. label='DESYNPUF: Chronic 
+ Condition: Chronic Obstructive Pulmonary Disease' SP_DEPRESSN length=3 format=1. label='DESYNPUF: 
+ Chronic Condition: Depression' SP_DIABETES length=3 format=1. label='DESYNPUF: Chronic Condition: 
+ Diabetes' SP_ISCHMCHT length=3 format=1. label='DESYNPUF: Chronic Condition: Ischemic Heart 
+ Disease' SP_OSTEOPRS length=3 format=1. label='DESYNPUF: Chronic Condition: Osteoporosis' SP_RA_OA 
+ length=3 format=1. label='DESYNPUF: Chronic Condition: RA/OA' SP_STRKETIA length=3 format=1. 
+ label='DESYNPUF: Chronic Condition: Stroke/transient Ischemic Attack' MEDREIMB_IP length=8 
+ format=10.2 label='DESYNPUF: Inpatient annual Medicare reimbursement amount' BENRES_IP length=8 
+ format=10.2 label='DESYNPUF: Inpatient annual beneficiary responsibility amount' PPPYMT_IP length=8 
+ format=10.2 label='DESYNPUF: Inpatient annual primary payer reimbursement amount' MEDREIMB_OP 
+ length=8 format=10.2 label='DESYNPUF: Outpatient Institutional annual Medicare reimbursement 
+ amount' BENRES_OP length=8 format=10.2 label='DESYNPUF: Outpatient Institutional annual beneficiary 
+ responsibility amount' PPPYMT_OP length=8 format=10.2 label='DESYNPUF: Outpatient Institutional 
+ annual primary payer reimbursement amount' MEDREIMB_CAR length=8 format=10.2 label='DESYNPUF: 
+ Carrier annual Medicare reimbursement amount' BENRES_CAR length=8 format=10.2 label='DESYNPUF: 
+ Carrier annual beneficiary responsibility amount' PPPYMT_CAR length=8 format=10.2 label='DESYNPUF: 
+ Carrier annual primary payer reimbursement amount' ;
+ MPRINT(DESYNPUF_BENE_READIN):   input DESYNPUF_ID BENE_BIRTH_DT BENE_DEATH_DT BENE_SEX_IDENT_CD 
+ BENE_RACE_CD BENE_ESRD_IND SP_STATE_CODE BENE_COUNTY_CD BENE_HI_CVRAGE_TOT_MONS 
+ BENE_SMI_CVRAGE_TOT_MONS BENE_HMO_CVRAGE_TOT_MONS PLAN_CVRG_MOS_NUM SP_ALZHDMTA SP_CHF SP_CHRNKIDN 
+ SP_CNCR SP_COPD SP_DEPRESSN SP_DIABETES SP_ISCHMCHT SP_OSTEOPRS SP_RA_OA SP_STRKETIA MEDREIMB_IP 
+ BENRES_IP PPPYMT_IP MEDREIMB_OP BENRES_OP PPPYMT_OP MEDREIMB_CAR BENRES_CAR PPPYMT_CAR;
+ MPRINT(DESYNPUF_BENE_READIN):   run;
+ 
+ NOTE: The infile INBENE is:
+       Filename=/home/u63541071/emac293/rxante/raw/\DE1_0_2008_Beneficiary_Summary_File_Sample_1.csv,
+       Owner Name=u63541071,Group Name=oda,
+       Access Permission=-rw-r--r--,
+       Last Modified=25Jun2024:17:48:02,
+       File Size (bytes)=14588413
+ 
+ NOTE: 116352 records were read from the infile INBENE.
+       The minimum record length was 115.
+       The maximum record length was 148.
+ NOTE: The data set DESYNPUF.DE1_0_2008_BENE_SAMPLE_1 has 116352 observations and 32 variables.
+ NOTE: Compressing data set DESYNPUF.DE1_0_2008_BENE_SAMPLE_1 decreased size by 27.94 percent. 
+       Compressed is 98 pages; un-compressed would require 136 pages.
+ NOTE: DATA statement used (Total process time):
+       real time           0.36 seconds
+       user cpu time       0.31 seconds
+       system cpu time     0.01 seconds
+       memory              2521.15k
+       OS Memory           24228.00k
+       Timestamp           07/08/2024 12:04:35 AM
+       Step Count                        34  Switch Count  1
+       Page Faults                       0
+       Page Reclaims                     298
+       Page Swaps                        0
+       Voluntary Context Switches        486
+       Involuntary Context Switches      3
+       Block Input Operations            0
+       Block Output Operations           25624
+       
+ 
+ MPRINT(DESYNPUF_BENE_READIN):   filename inbene clear;
+ NOTE: Fileref INBENE has been deassigned.
+ MPRINT(DESYNPUF_BENE_READIN):   title "Processing DE1_0_2008_Beneficiary_Summary_File_Sample__1";
+ MPRINT(DESYNPUF_BENE_READIN):   proc contents data=desynpuf.DE1_0_2008_Bene_Sample_1 varnum;
+ MPRINT(DESYNPUF_BENE_READIN):   run;
+ 
+ NOTE: PROCEDURE CONTENTS used (Total process time):
+       real time           0.04 seconds
+       user cpu time       0.05 seconds
+       system cpu time     0.01 seconds
+       memory              3699.50k
+       OS Memory           24488.00k
+       Timestamp           07/08/2024 12:04:35 AM
+       Step Count                        35  Switch Count  0
+       Page Faults                       0
+       Page Reclaims                     445
+       Page Swaps                        0
+       Voluntary Context Switches        17
+       Involuntary Context Switches      2
+       Block Input Operations            0
+       Block Output Operations           32
+       
+ 
+ MPRINT(DESYNPUF_BENE_READIN):   proc print data=desynpuf.DE1_0_2008_Bene_Sample_1(obs=5);
+ MPRINT(DESYNPUF_BENE_READIN):   title2 'Subsample Listing - First 5 Rows';
+ MPRINT(DESYNPUF_BENE_READIN):   run;
+ NOTE: There were 5 observations read from the data set DESYNPUF.DE1_0_2008_BENE_SAMPLE_1.
+ NOTE: PROCEDURE PRINT used (Total process time):
+       real time           0.02 seconds
+       user cpu time       0.02 seconds
+       system cpu time     0.00 seconds
+       memory              2680.93k
+       OS Memory           24228.00k
+       Timestamp           07/08/2024 12:04:35 AM
+       Step Count                        36  Switch Count  1
+       Page Faults                       0
+       Page Reclaims                     307
+       Page Swaps                        0
+       Voluntary Context Switches        17
+       Involuntary Context Switches      1
+       Block Input Operations            0
+       Block Output Operations           16
+       
+ 
+ MPRINT(DESYNPUF_BENE_READIN):   proc means data=desynpuf.DE1_0_2008_Bene_Sample_1;
+ MPRINT(DESYNPUF_BENE_READIN):   title2 'Simple Means';
+ MPRINT(DESYNPUF_BENE_READIN):   run;
+ NOTE: There were 116352 observations read from the data set DESYNPUF.DE1_0_2008_BENE_SAMPLE_1.
+ NOTE: PROCEDURE MEANS used (Total process time):
+       real time           0.12 seconds
+       user cpu time       0.17 seconds
+       system cpu time     0.01 seconds
+       memory              8087.09k
+       OS Memory           29872.00k
+       Timestamp           07/08/2024 12:04:36 AM
+       Step Count                        37  Switch Count  23
+       Page Faults                       0
+       Page Reclaims                     1621
+       Page Swaps                        0
+       Voluntary Context Switches        237
+       Involuntary Context Switches      6
+       Block Input Operations            0
+       Block Output Operations           16
+       
+ 
+ MPRINT(DESYNPUF_BENE_READIN):   proc freq data=desynpuf.DE1_0_2008_Bene_Sample_1;
+ MPRINT(DESYNPUF_BENE_READIN):   title2 'Simple Frequencies';
+ MPRINT(DESYNPUF_BENE_READIN):   table bene_birth_dt bene_death_dt / missing;
+ MPRINT(DESYNPUF_BENE_READIN):   format bene_birth_dt bene_death_dt year4.;
+ MPRINT(DESYNPUF_BENE_READIN):   run;
+ 
+ NOTE: There were 116352 observations read from the data set DESYNPUF.DE1_0_2008_BENE_SAMPLE_1.
+ NOTE: PROCEDURE FREQ used (Total process time):
+       real time           0.12 seconds
+       user cpu time       0.12 seconds
+       system cpu time     0.00 seconds
+       memory              2672.12k
+       OS Memory           25000.00k
+       Timestamp           07/08/2024 12:04:36 AM
+       Step Count                        38  Switch Count  3
+       Page Faults                       0
+       Page Reclaims                     352
+       Page Swaps                        0
+       Voluntary Context Switches        35
+       Involuntary Context Switches      2
+       Block Input Operations            0
+       Block Output Operations           296
+       
+ 
+ MPRINT(DESYNPUF_BENE_READIN):   filename inbene 
+ "/home/u63541071/emac293/rxante/raw/\DE1_0_2009_Beneficiary_Summary_File_Sample_1.csv" ;
+ MPRINT(DESYNPUF_BENE_READIN):   data 
+ desynpuf.DE1_0_2009_Bene_Sample_1(label="DE1_0_2009_Beneficiary_Summary_File_Sample_1");
+ MPRINT(DESYNPUF_BENE_READIN):   infile inbene dsd dlm=',' lrecl=500 firstobs=2 stopover;
+ MPRINT(DESYNPUF_BENE_READIN):   attrib DESYNPUF_ID length=$16 format=$16. label='DESYNPUF: 
+ Beneficiary Code' BENE_BIRTH_DT length=4 format=YYMMDDN8. informat=yymmdd8. label='DESYNPUF: Date 
+ of birth' BENE_DEATH_DT length=4 format=YYMMDDN8. informat=yymmdd8. label='DESYNPUF: Date of death' 
+ BENE_SEX_IDENT_CD length=$1 format=$1. label='DESYNPUF: Sex' BENE_RACE_CD length=$1 format=$1. 
+ label='DESYNPUF: Beneficiary Race Code' BENE_ESRD_IND length=$1 format=$1. label='DESYNPUF: End 
+ stage renal disease Indicator' SP_STATE_CODE length=$2 format=$2. label='DESYNPUF: State Code' 
+ BENE_COUNTY_CD length=$3 format=$3. label='DESYNPUF: County Code' BENE_HI_CVRAGE_TOT_MONS length=3 
+ format=2. label='DESYNPUF: Total number of months of part A coverage for the beneficiary.' 
+ BENE_SMI_CVRAGE_TOT_MONS length=3 format=2. label='DESYNPUF: Total number of months of part B 
+ coverage for the beneficiary.' BENE_HMO_CVRAGE_TOT_MONS length=3 format=2. label='DESYNPUF: Total 
+ number of months of HMO coverage for the beneficiary.' PLAN_CVRG_MOS_NUM length=$2 format=$2. 
+ label='DESYNPUF: Total number of months of part D plan coverage for the beneficiary.' SP_ALZHDMTA 
+ length=3 format=1. label='DESYNPUF: Chronic Condition: Alzheimer or related disorders or senile' 
+ SP_CHF length=3 format=1. label='DESYNPUF: Chronic Condition: Heart Failure' SP_CHRNKIDN length=3 
+ format=1. label='DESYNPUF: Chronic Condition: Chronic Kidney Disease' SP_CNCR length=3 format=1. 
+ label='DESYNPUF: Chronic Condition: Cancer' SP_COPD length=3 format=1. label='DESYNPUF: Chronic 
+ Condition: Chronic Obstructive Pulmonary Disease' SP_DEPRESSN length=3 format=1. label='DESYNPUF: 
+ Chronic Condition: Depression' SP_DIABETES length=3 format=1. label='DESYNPUF: Chronic Condition: 
+ Diabetes' SP_ISCHMCHT length=3 format=1. label='DESYNPUF: Chronic Condition: Ischemic Heart 
+ Disease' SP_OSTEOPRS length=3 format=1. label='DESYNPUF: Chronic Condition: Osteoporosis' SP_RA_OA 
+ length=3 format=1. label='DESYNPUF: Chronic Condition: RA/OA' SP_STRKETIA length=3 format=1. 
+ label='DESYNPUF: Chronic Condition: Stroke/transient Ischemic Attack' MEDREIMB_IP length=8 
+ format=10.2 label='DESYNPUF: Inpatient annual Medicare reimbursement amount' BENRES_IP length=8 
+ format=10.2 label='DESYNPUF: Inpatient annual beneficiary responsibility amount' PPPYMT_IP length=8 
+ format=10.2 label='DESYNPUF: Inpatient annual primary payer reimbursement amount' MEDREIMB_OP 
+ length=8 format=10.2 label='DESYNPUF: Outpatient Institutional annual Medicare reimbursement 
+ amount' BENRES_OP length=8 format=10.2 label='DESYNPUF: Outpatient Institutional annual beneficiary 
+ responsibility amount' PPPYMT_OP length=8 format=10.2 label='DESYNPUF: Outpatient Institutional 
+ annual primary payer reimbursement amount' MEDREIMB_CAR length=8 format=10.2 label='DESYNPUF: 
+ Carrier annual Medicare reimbursement amount' BENRES_CAR length=8 format=10.2 label='DESYNPUF: 
+ Carrier annual beneficiary responsibility amount' PPPYMT_CAR length=8 format=10.2 label='DESYNPUF: 
+ Carrier annual primary payer reimbursement amount' ;
+ MPRINT(DESYNPUF_BENE_READIN):   input DESYNPUF_ID BENE_BIRTH_DT BENE_DEATH_DT BENE_SEX_IDENT_CD 
+ BENE_RACE_CD BENE_ESRD_IND SP_STATE_CODE BENE_COUNTY_CD BENE_HI_CVRAGE_TOT_MONS 
+ BENE_SMI_CVRAGE_TOT_MONS BENE_HMO_CVRAGE_TOT_MONS PLAN_CVRG_MOS_NUM SP_ALZHDMTA SP_CHF SP_CHRNKIDN 
+ SP_CNCR SP_COPD SP_DEPRESSN SP_DIABETES SP_ISCHMCHT SP_OSTEOPRS SP_RA_OA SP_STRKETIA MEDREIMB_IP 
+ BENRES_IP PPPYMT_IP MEDREIMB_OP BENRES_OP PPPYMT_OP MEDREIMB_CAR BENRES_CAR PPPYMT_CAR;
+ MPRINT(DESYNPUF_BENE_READIN):   run;
+ 
+ NOTE: The infile INBENE is:
+       Filename=/home/u63541071/emac293/rxante/raw/\DE1_0_2009_Beneficiary_Summary_File_Sample_1.csv,
+       Owner Name=u63541071,Group Name=oda,
+       Access Permission=-rw-r--r--,
+       Last Modified=25Jun2024:17:49:28,
+       File Size (bytes)=14494380
+ 
+ NOTE: 114538 records were read from the infile INBENE.
+       The minimum record length was 115.
+       The maximum record length was 148.
+ NOTE: The data set DESYNPUF.DE1_0_2009_BENE_SAMPLE_1 has 114538 observations and 32 variables.
+ NOTE: Compressing data set DESYNPUF.DE1_0_2009_BENE_SAMPLE_1 decreased size by 26.12 percent. 
+       Compressed is 99 pages; un-compressed would require 134 pages.
+ NOTE: DATA statement used (Total process time):
+       real time           0.35 seconds
+       user cpu time       0.30 seconds
+       system cpu time     0.02 seconds
+       memory              2526.00k
+       OS Memory           25252.00k
+       Timestamp           07/08/2024 12:04:36 AM
+       Step Count                        39  Switch Count  1
+       Page Faults                       0
+       Page Reclaims                     267
+       Page Swaps                        0
+       Voluntary Context Switches        678
+       Involuntary Context Switches      3
+       Block Input Operations            0
+       Block Output Operations           25360
+       
+ 
+ MPRINT(DESYNPUF_BENE_READIN):   filename inbene clear;
+ NOTE: Fileref INBENE has been deassigned.
+ MPRINT(DESYNPUF_BENE_READIN):   title "Processing DE1_0_2009_Beneficiary_Summary_File_Sample__1";
+ MPRINT(DESYNPUF_BENE_READIN):   proc contents data=desynpuf.DE1_0_2009_Bene_Sample_1 varnum;
+ MPRINT(DESYNPUF_BENE_READIN):   run;
+ 
+ NOTE: PROCEDURE CONTENTS used (Total process time):
+       real time           0.04 seconds
+       user cpu time       0.05 seconds
+       system cpu time     0.00 seconds
+       memory              2733.37k
+       OS Memory           25000.00k
+       Timestamp           07/08/2024 12:04:36 AM
+       Step Count                        40  Switch Count  0
+       Page Faults                       0
+       Page Reclaims                     318
+       Page Swaps                        0
+       Voluntary Context Switches        18
+       Involuntary Context Switches      2
+       Block Input Operations            0
+       Block Output Operations           40
+       
+ 
+ MPRINT(DESYNPUF_BENE_READIN):   proc print data=desynpuf.DE1_0_2009_Bene_Sample_1(obs=5);
+ MPRINT(DESYNPUF_BENE_READIN):   title2 'Subsample Listing - First 5 Rows';
+ MPRINT(DESYNPUF_BENE_READIN):   run;
+ NOTE: There were 5 observations read from the data set DESYNPUF.DE1_0_2009_BENE_SAMPLE_1.
+ NOTE: PROCEDURE PRINT used (Total process time):
+       real time           0.02 seconds
+       user cpu time       0.02 seconds
+       system cpu time     0.00 seconds
+       memory              2620.18k
+       OS Memory           24740.00k
+       Timestamp           07/08/2024 12:04:36 AM
+       Step Count                        41  Switch Count  1
+       Page Faults                       0
+       Page Reclaims                     294
+       Page Swaps                        0
+       Voluntary Context Switches        17
+       Involuntary Context Switches      1
+       Block Input Operations            0
+       Block Output Operations           0
+       
+ 
+ MPRINT(DESYNPUF_BENE_READIN):   proc means data=desynpuf.DE1_0_2009_Bene_Sample_1;
+ MPRINT(DESYNPUF_BENE_READIN):   title2 'Simple Means';
+ MPRINT(DESYNPUF_BENE_READIN):   run;
+ NOTE: There were 114538 observations read from the data set DESYNPUF.DE1_0_2009_BENE_SAMPLE_1.
+ NOTE: PROCEDURE MEANS used (Total process time):
+       real time           0.11 seconds
+       user cpu time       0.17 seconds
+       system cpu time     0.01 seconds
+       memory              8030.68k
+       OS Memory           29872.00k
+       Timestamp           07/08/2024 12:04:36 AM
+       Step Count                        42  Switch Count  27
+       Page Faults                       0
+       Page Reclaims                     1081
+       Page Swaps                        0
+       Voluntary Context Switches        239
+       Involuntary Context Switches      6
+       Block Input Operations            0
+       Block Output Operations           16
+       
+ 
+ MPRINT(DESYNPUF_BENE_READIN):   proc freq data=desynpuf.DE1_0_2009_Bene_Sample_1;
+ MPRINT(DESYNPUF_BENE_READIN):   title2 'Simple Frequencies';
+ MPRINT(DESYNPUF_BENE_READIN):   table bene_birth_dt bene_death_dt / missing;
+ MPRINT(DESYNPUF_BENE_READIN):   format bene_birth_dt bene_death_dt year4.;
+ MPRINT(DESYNPUF_BENE_READIN):   run;
+ 
+ NOTE: There were 114538 observations read from the data set DESYNPUF.DE1_0_2009_BENE_SAMPLE_1.
+ NOTE: PROCEDURE FREQ used (Total process time):
+       real time           0.12 seconds
+       user cpu time       0.12 seconds
+       system cpu time     0.01 seconds
+       memory              2627.46k
+       OS Memory           25000.00k
+       Timestamp           07/08/2024 12:04:36 AM
+       Step Count                        43  Switch Count  3
+       Page Faults                       0
+       Page Reclaims                     346
+       Page Swaps                        0
+       Voluntary Context Switches        28
+       Involuntary Context Switches      4
+       Block Input Operations            0
+       Block Output Operations           296
+       
+ 
+ MPRINT(DESYNPUF_BENE_READIN):   filename inbene 
+ "/home/u63541071/emac293/rxante/raw/\DE1_0_2010_Beneficiary_Summary_File_Sample_1.csv" ;
+ MPRINT(DESYNPUF_BENE_READIN):   data 
+ desynpuf.DE1_0_2010_Bene_Sample_1(label="DE1_0_2010_Beneficiary_Summary_File_Sample_1");
+ MPRINT(DESYNPUF_BENE_READIN):   infile inbene dsd dlm=',' lrecl=500 firstobs=2 stopover;
+ MPRINT(DESYNPUF_BENE_READIN):   attrib DESYNPUF_ID length=$16 format=$16. label='DESYNPUF: 
+ Beneficiary Code' BENE_BIRTH_DT length=4 format=YYMMDDN8. informat=yymmdd8. label='DESYNPUF: Date 
+ of birth' BENE_DEATH_DT length=4 format=YYMMDDN8. informat=yymmdd8. label='DESYNPUF: Date of death' 
+ BENE_SEX_IDENT_CD length=$1 format=$1. label='DESYNPUF: Sex' BENE_RACE_CD length=$1 format=$1. 
+ label='DESYNPUF: Beneficiary Race Code' BENE_ESRD_IND length=$1 format=$1. label='DESYNPUF: End 
+ stage renal disease Indicator' SP_STATE_CODE length=$2 format=$2. label='DESYNPUF: State Code' 
+ BENE_COUNTY_CD length=$3 format=$3. label='DESYNPUF: County Code' BENE_HI_CVRAGE_TOT_MONS length=3 
+ format=2. label='DESYNPUF: Total number of months of part A coverage for the beneficiary.' 
+ BENE_SMI_CVRAGE_TOT_MONS length=3 format=2. label='DESYNPUF: Total number of months of part B 
+ coverage for the beneficiary.' BENE_HMO_CVRAGE_TOT_MONS length=3 format=2. label='DESYNPUF: Total 
+ number of months of HMO coverage for the beneficiary.' PLAN_CVRG_MOS_NUM length=$2 format=$2. 
+ label='DESYNPUF: Total number of months of part D plan coverage for the beneficiary.' SP_ALZHDMTA 
+ length=3 format=1. label='DESYNPUF: Chronic Condition: Alzheimer or related disorders or senile' 
+ SP_CHF length=3 format=1. label='DESYNPUF: Chronic Condition: Heart Failure' SP_CHRNKIDN length=3 
+ format=1. label='DESYNPUF: Chronic Condition: Chronic Kidney Disease' SP_CNCR length=3 format=1. 
+ label='DESYNPUF: Chronic Condition: Cancer' SP_COPD length=3 format=1. label='DESYNPUF: Chronic 
+ Condition: Chronic Obstructive Pulmonary Disease' SP_DEPRESSN length=3 format=1. label='DESYNPUF: 
+ Chronic Condition: Depression' SP_DIABETES length=3 format=1. label='DESYNPUF: Chronic Condition: 
+ Diabetes' SP_ISCHMCHT length=3 format=1. label='DESYNPUF: Chronic Condition: Ischemic Heart 
+ Disease' SP_OSTEOPRS length=3 format=1. label='DESYNPUF: Chronic Condition: Osteoporosis' SP_RA_OA 
+ length=3 format=1. label='DESYNPUF: Chronic Condition: RA/OA' SP_STRKETIA length=3 format=1. 
+ label='DESYNPUF: Chronic Condition: Stroke/transient Ischemic Attack' MEDREIMB_IP length=8 
+ format=10.2 label='DESYNPUF: Inpatient annual Medicare reimbursement amount' BENRES_IP length=8 
+ format=10.2 label='DESYNPUF: Inpatient annual beneficiary responsibility amount' PPPYMT_IP length=8 
+ format=10.2 label='DESYNPUF: Inpatient annual primary payer reimbursement amount' MEDREIMB_OP 
+ length=8 format=10.2 label='DESYNPUF: Outpatient Institutional annual Medicare reimbursement 
+ amount' BENRES_OP length=8 format=10.2 label='DESYNPUF: Outpatient Institutional annual beneficiary 
+ responsibility amount' PPPYMT_OP length=8 format=10.2 label='DESYNPUF: Outpatient Institutional 
+ annual primary payer reimbursement amount' MEDREIMB_CAR length=8 format=10.2 label='DESYNPUF: 
+ Carrier annual Medicare reimbursement amount' BENRES_CAR length=8 format=10.2 label='DESYNPUF: 
+ Carrier annual beneficiary responsibility amount' PPPYMT_CAR length=8 format=10.2 label='DESYNPUF: 
+ Carrier annual primary payer reimbursement amount' ;
+ MPRINT(DESYNPUF_BENE_READIN):   input DESYNPUF_ID BENE_BIRTH_DT BENE_DEATH_DT BENE_SEX_IDENT_CD 
+ BENE_RACE_CD BENE_ESRD_IND SP_STATE_CODE BENE_COUNTY_CD BENE_HI_CVRAGE_TOT_MONS 
+ BENE_SMI_CVRAGE_TOT_MONS BENE_HMO_CVRAGE_TOT_MONS PLAN_CVRG_MOS_NUM SP_ALZHDMTA SP_CHF SP_CHRNKIDN 
+ SP_CNCR SP_COPD SP_DEPRESSN SP_DIABETES SP_ISCHMCHT SP_OSTEOPRS SP_RA_OA SP_STRKETIA MEDREIMB_IP 
+ BENRES_IP PPPYMT_IP MEDREIMB_OP BENRES_OP PPPYMT_OP MEDREIMB_CAR BENRES_CAR PPPYMT_CAR;
+ MPRINT(DESYNPUF_BENE_READIN):   run;
+ 
+ NOTE: The infile INBENE is:
+       Filename=/home/u63541071/emac293/rxante/raw/\DE1_0_2010_Beneficiary_Summary_File_Sample_1.csv,
+       Owner Name=u63541071,Group Name=oda,
+       Access Permission=-rw-r--r--,
+       Last Modified=25Jun2024:17:49:55,
+       File Size (bytes)=14083582
+ 
+ NOTE: 112754 records were read from the infile INBENE.
+       The minimum record length was 115.
+       The maximum record length was 149.
+ NOTE: The data set DESYNPUF.DE1_0_2010_BENE_SAMPLE_1 has 112754 observations and 32 variables.
+ NOTE: Compressing data set DESYNPUF.DE1_0_2010_BENE_SAMPLE_1 decreased size by 28.03 percent. 
+       Compressed is 95 pages; un-compressed would require 132 pages.
+ NOTE: DATA statement used (Total process time):
+       real time           0.34 seconds
+       user cpu time       0.29 seconds
+       system cpu time     0.01 seconds
+       memory              2532.90k
+       OS Memory           25252.00k
+       Timestamp           07/08/2024 12:04:37 AM
+       Step Count                        44  Switch Count  1
+       Page Faults                       0
+       Page Reclaims                     265
+       Page Swaps                        0
+       Voluntary Context Switches        699
+       Involuntary Context Switches      2
+       Block Input Operations            0
+       Block Output Operations           24336
+       
+ 
+ MPRINT(DESYNPUF_BENE_READIN):   filename inbene clear;
+ NOTE: Fileref INBENE has been deassigned.
+ MPRINT(DESYNPUF_BENE_READIN):   title "Processing DE1_0_2010_Beneficiary_Summary_File_Sample__1";
+ MPRINT(DESYNPUF_BENE_READIN):   proc contents data=desynpuf.DE1_0_2010_Bene_Sample_1 varnum;
+ MPRINT(DESYNPUF_BENE_READIN):   run;
+ 
+ NOTE: PROCEDURE CONTENTS used (Total process time):
+       real time           0.04 seconds
+       user cpu time       0.05 seconds
+       system cpu time     0.00 seconds
+       memory              2730.37k
+       OS Memory           25000.00k
+       Timestamp           07/08/2024 12:04:37 AM
+       Step Count                        45  Switch Count  0
+       Page Faults                       0
+       Page Reclaims                     319
+       Page Swaps                        0
+       Voluntary Context Switches        21
+       Involuntary Context Switches      2
+       Block Input Operations            0
+       Block Output Operations           48
+       
+ 
+ MPRINT(DESYNPUF_BENE_READIN):   proc print data=desynpuf.DE1_0_2010_Bene_Sample_1(obs=5);
+ MPRINT(DESYNPUF_BENE_READIN):   title2 'Subsample Listing - First 5 Rows';
+ MPRINT(DESYNPUF_BENE_READIN):   run;
+ NOTE: There were 5 observations read from the data set DESYNPUF.DE1_0_2010_BENE_SAMPLE_1.
+ NOTE: PROCEDURE PRINT used (Total process time):
+       real time           0.02 seconds
+       user cpu time       0.02 seconds
+       system cpu time     0.00 seconds
+       memory              2620.46k
+       OS Memory           24740.00k
+       Timestamp           07/08/2024 12:04:37 AM
+       Step Count                        46  Switch Count  1
+       Page Faults                       0
+       Page Reclaims                     290
+       Page Swaps                        0
+       Voluntary Context Switches        17
+       Involuntary Context Switches      2
+       Block Input Operations            0
+       Block Output Operations           16
+       
+ 
+ MPRINT(DESYNPUF_BENE_READIN):   proc means data=desynpuf.DE1_0_2010_Bene_Sample_1;
+ MPRINT(DESYNPUF_BENE_READIN):   title2 'Simple Means';
+ MPRINT(DESYNPUF_BENE_READIN):   run;
+ NOTE: There were 112754 observations read from the data set DESYNPUF.DE1_0_2010_BENE_SAMPLE_1.
+ NOTE: PROCEDURE MEANS used (Total process time):
+       real time           0.11 seconds
+       user cpu time       0.17 seconds
+       system cpu time     0.01 seconds
+       memory              8033.90k
+       OS Memory           29872.00k
+       Timestamp           07/08/2024 12:04:37 AM
+       Step Count                        47  Switch Count  26
+       Page Faults                       0
+       Page Reclaims                     1086
+       Page Swaps                        0
+       Voluntary Context Switches        234
+       Involuntary Context Switches      4
+       Block Input Operations            0
+       Block Output Operations           16
+       
+ 
+ MPRINT(DESYNPUF_BENE_READIN):   proc freq data=desynpuf.DE1_0_2010_Bene_Sample_1;
+ MPRINT(DESYNPUF_BENE_READIN):   title2 'Simple Frequencies';
+ MPRINT(DESYNPUF_BENE_READIN):   table bene_birth_dt bene_death_dt / missing;
+ MPRINT(DESYNPUF_BENE_READIN):   format bene_birth_dt bene_death_dt year4.;
+ MPRINT(DESYNPUF_BENE_READIN):   run;
+ 
+ NOTE: There were 112754 observations read from the data set DESYNPUF.DE1_0_2010_BENE_SAMPLE_1.
+ NOTE: PROCEDURE FREQ used (Total process time):
+       real time           0.11 seconds
+       user cpu time       0.11 seconds
+       system cpu time     0.01 seconds
+       memory              2621.53k
+       OS Memory           25000.00k
+       Timestamp           07/08/2024 12:04:37 AM
+       Step Count                        48  Switch Count  5
+       Page Faults                       0
+       Page Reclaims                     346
+       Page Swaps                        0
+       Voluntary Context Switches        33
+       Involuntary Context Switches      4
+       Block Input Operations            0
+       Block Output Operations           296
+       
+ 
+ 421        *%desynpuf_bene_readin(filenumber=2,sortds=no)
+ 422        *%desynpuf_bene_readin(filenumber=3,sortds=no)
+ 423        *%desynpuf_bene_readin(filenumber=4,sortds=no)
+ 424        *%desynpuf_bene_readin(filenumber=5,sortds=no)
+ 425        *%desynpuf_bene_readin(filenumber=6,sortds=no)
+ 426        *%desynpuf_bene_readin(filenumber=7,sortds=no)
+ 427        *%desynpuf_bene_readin(filenumber=8,sortds=no)
+ 428        *%desynpuf_bene_readin(filenumber=9,sortds=no)
+ 429        *%desynpuf_bene_readin(filenumber=10,sortds=no)
+ 430        *%desynpuf_bene_readin(filenumber=11,sortds=no)
+ 431        *%desynpuf_bene_readin(filenumber=12,sortds=no)
+ 432        *%desynpuf_bene_readin(filenumber=13,sortds=no)
+ 433        *%desynpuf_bene_readin(filenumber=14,sortds=no)
+ 434        *%desynpuf_bene_readin(filenumber=15,sortds=no)
+ 435        *%desynpuf_bene_readin(filenumber=16,sortds=no)
+ 436        *%desynpuf_bene_readin(filenumber=17,sortds=no)
+ 437        *%desynpuf_bene_readin(filenumber=18,sortds=no)
+ 438        *%desynpuf_bene_readin(filenumber=19,sortds=no)
+ 439        *%desynpuf_bene_readin(filenumber=20,sortds=no)
+ 440        
+ 441        
+ 442        /*********************************************************************************/
+ 443        /* 6. OPTIONAL: Call macro program DESYNPUF_BENE_COMBINE if you want to          */
+ 444        /*    concatenate the data sets created above that have consecutively numbered   */
+ 445        /*    suffixes. Both STARTNUMBER= and ENDNUMBER= values must be specified.       */
+ 446        /*    ENDNUMBER= must be greater than or equal to STARTNUMBER=. A data set will  */
+ 447        /*    be created for each of the three years (2008, 2009, and 2010).             */
+ 448        /*      If you want to combine data sets that are not consecutively numbered, you*/
+ 449        /*    will need to write a DATA step to concatenate them.                        */
+ 450        /*********************************************************************************/
+ 451        *%desynpuf_bene_combine(startnumber=1,endnumber=1)
+ 452        
+ 453        /*********************************************************************************/
+ 454        /* Clear some of the settings this program has made.                             */
+ 455        /*********************************************************************************/
+ 456        filename inbene clear;
+ 457        libname desynpuf clear;
+ NOTE: Libref DESYNPUF has been deassigned.
+ 458        
+ 459        options validvarname=v7 nomprint ;
+ 460        
+ 461        %symdel infilepath infilename2008 infilename2009 infilename2010
+ 462                           outdsname2008  outdsname2009  outdsname2010;
+ 463        
+ 464        
+ 465        OPTIONS NONOTES NOSTIMER NOSOURCE NOSYNTAXCHECK;
+ 475        
+ User: u63541071
