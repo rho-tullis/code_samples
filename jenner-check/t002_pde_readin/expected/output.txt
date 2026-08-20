@@ -1,0 +1,62 @@
+                  Processing DE1_0_2008_to_2010_Prescription_Drug_Events_Sample_1
+
+
+PROC CONTENTS
+-------------------------------------------------------------------------------
+
+Data Set Name: desynpuf.DE1_0_2008_to_2010_PDE_Sample_1
+Observations:  12
+Variables:     8
+
+Variables (in creation order):
+
+  #  Variable        Type    Len  Format     Label
+---  --------------  ----  -----  ---------  ---------------------------------
+  1  DESYNPUF_ID     Char     16  $16.       DESYNPUF: Beneficiary Code
+  2  PDE_ID          Char     15  $15.       DESYNPUF: CCW Part D Event Number
+  3  SRVC_DT          Num      4  YYMMDDN8.  DESYNPUF: RX Service Date
+  4  PROD_SRVC_ID    Char     19  $19.       DESYNPUF: Product Service ID
+  5  QTY_DSPNSD_NUM   Num      8  12.3       DESYNPUF: Quantity Dispensed
+  6  DAYS_SUPLY_NUM   Num      3  3.         DESYNPUF: Days Supply
+  7  PTNT_PAY_AMT     Num      8  10.2       DESYNPUF: Patient Pay Amount
+  8  TOT_RX_CST_AMT   Num      8  10.2       DESYNPUF: Gross Drug Cost
+
+-------------------------------------------------------------------------------
+
+                  Processing DE1_0_2008_to_2010_Prescription_Drug_Events_Sample_1
+                                  Subsample Listing - First 5 Rows
+
+  Obs       DESYNPUF_ID           PDE_ID   SRVC_DT         PROD_SRVC_ID  QTY_DSPNSD_NUM  DAYS_SUPLY_NUM  PTNT_PAY_AMT  TOT_RX_CST_AMT
+    1  00013D2EFD8E45D1  700004706230801  20080115  00185006201                  30.000              30          5.00           42.50
+    2  00013D2EFD8E45D1  700004706230802  20080302  00185006201                  30.000              30          5.00           42.50
+    3  00016F745862898F  700004706230901  20080422  00093715498                  90.000              90         12.00          180.00
+    4  00016F745862899A  700004706231001  20080110  54868590100                  60.000              30          3.50           28.00
+    5  0001FDD721E223DC  700004706231101  20080619  00071015523                  30.000              30         45.00          410.00
+
+... 7 more observations (showing 5 of 12)
+
+                  Processing DE1_0_2008_to_2010_Prescription_Drug_Events_Sample_1
+                                            Simple Means
+
+                                        The MEANS Procedure
+
+ Variable        Label                               N              Mean         Std Dev           Minimum           Maximum
+ ---------------------------------------------------------------------------------------------------------------------------
+ SRVC_DT         DESYNPUF: RX Service Date          12     17651.8333333     105.5486388     17536.0000000     17820.0000000
+ QTY_DSPNSD_NUM  DESYNPUF: Quantity Dispensed       12        55.0000000      28.1231060        30.0000000        90.0000000
+ DAYS_SUPLY_NUM  DESYNPUF: Days Supply              12        52.5000000      28.9592190        30.0000000        90.0000000
+ PTNT_PAY_AMT    DESYNPUF: Patient Pay Amount       12        11.8333333      11.8366406         2.0000000        45.0000000
+ TOT_RX_CST_AMT  DESYNPUF: Gross Drug Cost          12       111.2500000     109.5244888        15.0000000       410.0000000
+ ---------------------------------------------------------------------------------------------------------------------------
+
+                  Processing DE1_0_2008_to_2010_Prescription_Drug_Events_Sample_1
+                                            Simple Means
+
+                                         The FREQ Procedure
+
+                                                       Cumulative    Cumulative
+DESYNPUF: RX Service Date    Frequency    Percent     Frequency      Percent
+----------------------------------------------------------------------------------
+2008                                12    100.00           12       100.00
+
+
