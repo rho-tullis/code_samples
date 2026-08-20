@@ -1,0 +1,119 @@
+NOTE: Option OBS changed to 100.
+NOTE: DATA _null_
+
+NOTE: Writing to fileref /tmp/work/r_3825bdd74ec64c56b1ecb34f24319d6a/work/3fa0f1d4-7e0f-44d8-ac3f-6fb76876a556/bene_sample_1.csv (/tmp/work/r_3825bdd74ec64c56b1ecb34f24319d6a/work/3fa0f1d4-7e0f-44d8-ac3f-6fb76876a556/bene_sample_1.csv)
+NOTE: DATA _null_ completed. Output written to fileref /tmp/work/r_3825bdd74ec64c56b1ecb34f24319d6a/work/3fa0f1d4-7e0f-44d8-ac3f-6fb76876a556/bene_sample_1.csv (/tmp/work/r_3825bdd74ec64c56b1ecb34f24319d6a/work/3fa0f1d4-7e0f-44d8-ac3f-6fb76876a556/bene_sample_1.csv)
+NOTE: Library DESYNPUF assigned path=/tmp/work/r_3825bdd74ec64c56b1ecb34f24319d6a/work/3fa0f1d4-7e0f-44d8-ac3f-6fb76876a556.
+NOTE: Option VALIDVARNAME changed to UPCASE.
+NOTE: Option COMPRESS changed to BINARY.
+NOTE: Option LS changed to 100.
+NOTE: Option PS changed to 60.
+MPRINT(DESYNPUF_BENE_READIN):   filename inbene "/tmp/work/r_3825bdd74ec64c56b1ecb34f24319d6a/work/3fa0f1d4-7e0f-44d8-ac3f-6fb76876a556/bene_sample_1.csv" ;
+MPRINT(DESYNPUF_BENE_READIN):   data desynpuf.DE1_0_2008_Bene_Sample_1(label="bene_sample_1");
+MPRINT(DESYNPUF_BENE_READIN):   infile inbene dsd dlm=',' lrecl=500 firstobs=2 stopover;
+MPRINT(DESYNPUF_BENE_READIN):   attrib DESYNPUF_ID     length=$16 format=$16.       label='DESYNPUF: Beneficiary Code'
+MPRINT(DESYNPUF_BENE_READIN):   BENE_BIRTH_DT   length=4 format=YYMMDDN8. informat=yymmdd8.  label='DESYNPUF: Date of birth'
+MPRINT(DESYNPUF_BENE_READIN):   BENE_DEATH_DT   length=4 format=YYMMDDN8. informat=yymmdd8.  label='DESYNPUF: Date of death'
+MPRINT(DESYNPUF_BENE_READIN):   BENE_SEX_IDENT_CD  length=$1 format=$1.      label='DESYNPUF: Sex'
+MPRINT(DESYNPUF_BENE_READIN):   BENE_RACE_CD    length=$1 format=$1.         label='DESYNPUF: Beneficiary Race Code'
+MPRINT(DESYNPUF_BENE_READIN):   BENE_ESRD_IND   length=$1 format=$1.         label='DESYNPUF: End stage renal disease Indicator'
+MPRINT(DESYNPUF_BENE_READIN):   SP_STATE_CODE      length=$2 format=$2.         label='DESYNPUF: State Code'
+MPRINT(DESYNPUF_BENE_READIN):   BENE_COUNTY_CD  length=$3 format=$3.         label='DESYNPUF: County Code'
+MPRINT(DESYNPUF_BENE_READIN):   BENE_HI_CVRAGE_TOT_MONS  length=3 format=2.  label='DESYNPUF: Total number of months of part A coverage for the beneficiary.'
+MPRINT(DESYNPUF_BENE_READIN):   BENE_SMI_CVRAGE_TOT_MONS length=3 format=2.  label='DESYNPUF: Total number of months of part B coverage for the beneficiary.'
+MPRINT(DESYNPUF_BENE_READIN):   BENE_HMO_CVRAGE_TOT_MONS length=3 format=2.  label='DESYNPUF: Total number of months of HMO coverage for the beneficiary.'
+MPRINT(DESYNPUF_BENE_READIN):   PLAN_CVRG_MOS_NUM  length=$2 format=$2.      label='DESYNPUF: Total number of months of part D plan coverage for the beneficiary.'
+MPRINT(DESYNPUF_BENE_READIN):   SP_ALZHDMTA     length=3 format=1.           label='DESYNPUF: Chronic Condition: Alzheimer or related disorders or senile'
+MPRINT(DESYNPUF_BENE_READIN):   SP_CHF          length=3 format=1.           label='DESYNPUF: Chronic Condition: Heart Failure'
+MPRINT(DESYNPUF_BENE_READIN):   SP_CHRNKIDN     length=3 format=1.           label='DESYNPUF: Chronic Condition: Chronic Kidney Disease'
+MPRINT(DESYNPUF_BENE_READIN):   SP_CNCR         length=3 format=1.           label='DESYNPUF: Chronic Condition: Cancer'
+MPRINT(DESYNPUF_BENE_READIN):   SP_COPD         length=3 format=1.           label='DESYNPUF: Chronic Condition: Chronic Obstructive Pulmonary Disease'
+MPRINT(DESYNPUF_BENE_READIN):   SP_DEPRESSN     length=3 format=1.           label='DESYNPUF: Chronic Condition: Depression'
+MPRINT(DESYNPUF_BENE_READIN):   SP_DIABETES     length=3 format=1.           label='DESYNPUF: Chronic Condition: Diabetes'
+MPRINT(DESYNPUF_BENE_READIN):   SP_ISCHMCHT     length=3 format=1.           label='DESYNPUF: Chronic Condition: Ischemic Heart Disease'
+MPRINT(DESYNPUF_BENE_READIN):   SP_OSTEOPRS     length=3 format=1.           label='DESYNPUF: Chronic Condition: Osteoporosis'
+MPRINT(DESYNPUF_BENE_READIN):   SP_RA_OA        length=3 format=1.           label='DESYNPUF: Chronic Condition: RA/OA'
+MPRINT(DESYNPUF_BENE_READIN):   SP_STRKETIA     length=3 format=1.           label='DESYNPUF: Chronic Condition: Stroke/transient Ischemic Attack'
+MPRINT(DESYNPUF_BENE_READIN):   MEDREIMB_IP     length=8 format=10.2         label='DESYNPUF: Inpatient annual Medicare reimbursement amount'
+MPRINT(DESYNPUF_BENE_READIN):   BENRES_IP       length=8 format=10.2         label='DESYNPUF: Inpatient annual beneficiary responsibility amount'
+MPRINT(DESYNPUF_BENE_READIN):   PPPYMT_IP       length=8 format=10.2         label='DESYNPUF: Inpatient annual primary payer reimbursement amount'
+MPRINT(DESYNPUF_BENE_READIN):   MEDREIMB_OP     length=8 format=10.2         label='DESYNPUF: Outpatient Institutional annual Medicare reimbursement amount'
+MPRINT(DESYNPUF_BENE_READIN):   BENRES_OP       length=8 format=10.2         label='DESYNPUF: Outpatient Institutional annual beneficiary responsibility amount'
+MPRINT(DESYNPUF_BENE_READIN):   PPPYMT_OP       length=8 format=10.2         label='DESYNPUF: Outpatient Institutional annual primary payer reimbursement amount'
+MPRINT(DESYNPUF_BENE_READIN):   MEDREIMB_CAR    length=8 format=10.2         label='DESYNPUF: Carrier annual Medicare reimbursement amount'
+MPRINT(DESYNPUF_BENE_READIN):   BENRES_CAR      length=8 format=10.2         label='DESYNPUF: Carrier annual beneficiary responsibility amount'
+MPRINT(DESYNPUF_BENE_READIN):   PPPYMT_CAR      length=8 format=10.2         label='DESYNPUF: Carrier annual primary payer reimbursement amount'
+MPRINT(DESYNPUF_BENE_READIN):   ;
+MPRINT(DESYNPUF_BENE_READIN):   input DESYNPUF_ID
+MPRINT(DESYNPUF_BENE_READIN):   BENE_BIRTH_DT
+MPRINT(DESYNPUF_BENE_READIN):   BENE_DEATH_DT
+MPRINT(DESYNPUF_BENE_READIN):   BENE_SEX_IDENT_CD
+MPRINT(DESYNPUF_BENE_READIN):   BENE_RACE_CD
+MPRINT(DESYNPUF_BENE_READIN):   BENE_ESRD_IND
+MPRINT(DESYNPUF_BENE_READIN):   SP_STATE_CODE
+MPRINT(DESYNPUF_BENE_READIN):   BENE_COUNTY_CD
+MPRINT(DESYNPUF_BENE_READIN):   BENE_HI_CVRAGE_TOT_MONS
+MPRINT(DESYNPUF_BENE_READIN):   BENE_SMI_CVRAGE_TOT_MONS
+MPRINT(DESYNPUF_BENE_READIN):   BENE_HMO_CVRAGE_TOT_MONS
+MPRINT(DESYNPUF_BENE_READIN):   PLAN_CVRG_MOS_NUM
+MPRINT(DESYNPUF_BENE_READIN):   SP_ALZHDMTA
+MPRINT(DESYNPUF_BENE_READIN):   SP_CHF
+MPRINT(DESYNPUF_BENE_READIN):   SP_CHRNKIDN
+MPRINT(DESYNPUF_BENE_READIN):   SP_CNCR
+MPRINT(DESYNPUF_BENE_READIN):   SP_COPD
+MPRINT(DESYNPUF_BENE_READIN):   SP_DEPRESSN
+MPRINT(DESYNPUF_BENE_READIN):   SP_DIABETES
+MPRINT(DESYNPUF_BENE_READIN):   SP_ISCHMCHT
+MPRINT(DESYNPUF_BENE_READIN):   SP_OSTEOPRS
+MPRINT(DESYNPUF_BENE_READIN):   SP_RA_OA
+MPRINT(DESYNPUF_BENE_READIN):   SP_STRKETIA
+MPRINT(DESYNPUF_BENE_READIN):   MEDREIMB_IP
+MPRINT(DESYNPUF_BENE_READIN):   BENRES_IP
+MPRINT(DESYNPUF_BENE_READIN):   PPPYMT_IP
+MPRINT(DESYNPUF_BENE_READIN):   MEDREIMB_OP
+MPRINT(DESYNPUF_BENE_READIN):   BENRES_OP
+MPRINT(DESYNPUF_BENE_READIN):   PPPYMT_OP
+MPRINT(DESYNPUF_BENE_READIN):   MEDREIMB_CAR
+MPRINT(DESYNPUF_BENE_READIN):   BENRES_CAR
+MPRINT(DESYNPUF_BENE_READIN):   PPPYMT_CAR;
+MPRINT(DESYNPUF_BENE_READIN):   run;
+MPRINT(DESYNPUF_BENE_READIN):   filename inbene clear;
+MPRINT(DESYNPUF_BENE_READIN):   title "Processing bene_sample__1";
+MPRINT(DESYNPUF_BENE_READIN):   proc contents data=desynpuf.DE1_0_2008_Bene_Sample_1 varnum;
+MPRINT(DESYNPUF_BENE_READIN):   run;
+MPRINT(DESYNPUF_BENE_READIN):   proc print data=desynpuf.DE1_0_2008_Bene_Sample_1(obs=5);
+MPRINT(DESYNPUF_BENE_READIN):   title2 'Subsample Listing - First 5 Rows';
+MPRINT(DESYNPUF_BENE_READIN):   run;
+MPRINT(DESYNPUF_BENE_READIN):   proc means data=desynpuf.DE1_0_2008_Bene_Sample_1;
+MPRINT(DESYNPUF_BENE_READIN):   title2 'Simple Means';
+MPRINT(DESYNPUF_BENE_READIN):   run;
+MPRINT(DESYNPUF_BENE_READIN):   proc freq data=desynpuf.DE1_0_2008_Bene_Sample_1;
+MPRINT(DESYNPUF_BENE_READIN):   title2 'Simple Frequencies';
+MPRINT(DESYNPUF_BENE_READIN):   table bene_birth_dt bene_death_dt / missing;
+MPRINT(DESYNPUF_BENE_READIN):   format bene_birth_dt bene_death_dt year4.;
+MPRINT(DESYNPUF_BENE_READIN):   run;
+NOTE: Fileref INBENE assigned to /tmp/work/r_3825bdd74ec64c56b1ecb34f24319d6a/work/3fa0f1d4-7e0f-44d8-ac3f-6fb76876a556/bene_sample_1.csv.
+NOTE: DATA desynpuf.DE1_0_2008_Bene_Sample_1
+
+NOTE: Reading from fileref inbene (work/3fa0f1d4-7e0f-44d8-ac3f-6fb76876a556/bene_sample_1.csv)
+
+NOTE: Read 10 rows from inbene.
+NOTE: Wrote desynpuf.DE1_0_2008_Bene_Sample_1 (10 rows, 32 columns).
+NOTE: DATA elapsed:
+  wall  0.00 seconds
+  cpu   0.00 seconds
+NOTE: Fileref INBENE cleared.
+NOTE: Option TITLE changed to Processing bene_sample__1.
+NOTE: PROC CONTENTS data=desynpuf.DE1_0_2008_Bene_Sample_1
+
+NOTE: PROC CONTENTS completed: 10 observations, 32 variables
+NOTE: PROC PRINT data=desynpuf.DE1_0_2008_Bene_Sample_1
+
+NOTE: PROC PRINT completed: 5 observations printed, 32 variables
+NOTE: PROC MEANS
+NOTE: PROC MEANS statement used.
+NOTE: PROC FREQ
+NOTE: PROC FREQ statement used.
+NOTE: Fileref INBENE cleared.
+NOTE: Library DESYNPUF cleared.
+NOTE: Option VALIDVARNAME changed to V7.

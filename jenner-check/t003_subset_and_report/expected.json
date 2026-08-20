@@ -1,0 +1,16 @@
+{
+  "_captured_at": "2026-08-20T13:35:00Z",
+  "_captured_run_id": "r_46601409299c4262b885b4fd6a9b9d63",
+  "status": "ok",
+  "exit_code": 0,
+  "log_contains": [
+    "NOTE: Wrote source.de1_0_2008_bene_sample_1 (10 rows, 14 columns).",
+    "NOTE: Wrote source.de1_0_2008_to_2010_pde_sample_1 (10 rows, 3 columns).",
+    "NOTE: Read 7 rows from source.de1_0_2008_bene_sample_1.",
+    "NOTE: Wrote work.pde (7 rows, 16 columns).",
+    "NOTE: PROC CONTENTS: OUT=work.chronic_condition_vars created with 11 variables",
+    "NOTE: Read 11 rows from work.chronic_condition_vars."
+  ],
+  "log_does_not_contain": ["ERROR:", "[JENNER-ERROR"],
+  "diagnostics": {"parse_warnings": [], "runtime_warnings": []}
+}

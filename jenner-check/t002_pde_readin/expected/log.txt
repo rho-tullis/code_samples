@@ -1,0 +1,71 @@
+NOTE: Option OBS changed to 100.
+NOTE: DATA _null_
+
+NOTE: Writing to fileref /tmp/work/r_63ceae1cdf834afaadd54f19696fdfbf/work/b56ea7aa-7fe8-405b-9713-d866a6eeb181/pde_sample_1.csv (/tmp/work/r_63ceae1cdf834afaadd54f19696fdfbf/work/b56ea7aa-7fe8-405b-9713-d866a6eeb181/pde_sample_1.csv)
+NOTE: DATA _null_ completed. Output written to fileref /tmp/work/r_63ceae1cdf834afaadd54f19696fdfbf/work/b56ea7aa-7fe8-405b-9713-d866a6eeb181/pde_sample_1.csv (/tmp/work/r_63ceae1cdf834afaadd54f19696fdfbf/work/b56ea7aa-7fe8-405b-9713-d866a6eeb181/pde_sample_1.csv)
+NOTE: Library DESYNPUF assigned path=/tmp/work/r_63ceae1cdf834afaadd54f19696fdfbf/work/b56ea7aa-7fe8-405b-9713-d866a6eeb181.
+NOTE: Option VALIDVARNAME changed to UPCASE.
+NOTE: Option COMPRESS changed to BINARY.
+NOTE: Option LS changed to 100.
+NOTE: Option PS changed to 60.
+MPRINT(DESYNPUF_PDE_READIN):   filename inpde "/tmp/work/r_63ceae1cdf834afaadd54f19696fdfbf/work/b56ea7aa-7fe8-405b-9713-d866a6eeb181/pde_sample_1.csv" ;
+MPRINT(DESYNPUF_PDE_READIN):   data desynpuf.DE1_0_2008_to_2010_PDE_Sample_1(label="DE1_0_2008_to_2010_Prescription_Drug_Events_Sample_1");
+MPRINT(DESYNPUF_PDE_READIN):   infile inpde dsd dlm=',' lrecl=125 firstobs=2 stopover;
+MPRINT(DESYNPUF_PDE_READIN):   attrib DESYNPUF_ID     length=$16 format=$16. label='DESYNPUF: Beneficiary Code'
+MPRINT(DESYNPUF_PDE_READIN):   PDE_ID          length=$15 format=$15. label='DESYNPUF: CCW Part D Event Number'
+MPRINT(DESYNPUF_PDE_READIN):   SRVC_DT         length=4   informat=yymmdd8. format=yymmddn8. label='DESYNPUF: RX Service Date'
+MPRINT(DESYNPUF_PDE_READIN):   PROD_SRVC_ID    length=$19 format=$19. label='DESYNPUF: Product Service ID'
+MPRINT(DESYNPUF_PDE_READIN):   QTY_DSPNSD_NUM  length=8   format=12.3 label='DESYNPUF: Quantity Dispensed'
+MPRINT(DESYNPUF_PDE_READIN):   DAYS_SUPLY_NUM  length=3   format=3.   label='DESYNPUF: Days Supply'
+MPRINT(DESYNPUF_PDE_READIN):   PTNT_PAY_AMT    length=8   format=10.2 label='DESYNPUF: Patient Pay Amount'
+MPRINT(DESYNPUF_PDE_READIN):   TOT_RX_CST_AMT  length=8   format=10.2 label='DESYNPUF: Gross Drug Cost'
+MPRINT(DESYNPUF_PDE_READIN):   ;
+MPRINT(DESYNPUF_PDE_READIN):   input desynpuf_id
+MPRINT(DESYNPUF_PDE_READIN):   pde_id
+MPRINT(DESYNPUF_PDE_READIN):   srvc_dt
+MPRINT(DESYNPUF_PDE_READIN):   prod_srvc_id
+MPRINT(DESYNPUF_PDE_READIN):   qty_dspnsd_num
+MPRINT(DESYNPUF_PDE_READIN):   days_suply_num
+MPRINT(DESYNPUF_PDE_READIN):   ptnt_pay_amt
+MPRINT(DESYNPUF_PDE_READIN):   tot_rx_cst_amt ;
+MPRINT(DESYNPUF_PDE_READIN):   run;
+MPRINT(DESYNPUF_PDE_READIN):   filename inpde clear;
+MPRINT(DESYNPUF_PDE_READIN):   title "Processing DE1_0_2008_to_2010_Prescription_Drug_Events_Sample_1";
+MPRINT(DESYNPUF_PDE_READIN):   proc contents data=desynpuf.DE1_0_2008_to_2010_PDE_Sample_1 varnum;
+MPRINT(DESYNPUF_PDE_READIN):   run;
+MPRINT(DESYNPUF_PDE_READIN):   proc print data=desynpuf.DE1_0_2008_to_2010_PDE_Sample_1(obs=5);
+MPRINT(DESYNPUF_PDE_READIN):   title2 'Subsample Listing - First 5 Rows';
+MPRINT(DESYNPUF_PDE_READIN):   run;
+MPRINT(DESYNPUF_PDE_READIN):   proc means data=desynpuf.DE1_0_2008_to_2010_PDE_Sample_1;
+MPRINT(DESYNPUF_PDE_READIN):   title2 'Simple Means';
+MPRINT(DESYNPUF_PDE_READIN):   run;
+MPRINT(DESYNPUF_PDE_READIN):   proc freq data=desynpuf.DE1_0_2008_to_2010_PDE_Sample_1;
+MPRINT(DESYNPUF_PDE_READIN):   title2 'Simple Frequencies';
+MPRINT(DESYNPUF_PDE_READIN):   table srvc_dt / missing;
+MPRINT(DESYNPUF_PDE_READIN):   format srvc_dt year4.;
+MPRINT(DESYNPUF_PDE_READIN):   run;
+NOTE: Fileref INPDE assigned to /tmp/work/r_63ceae1cdf834afaadd54f19696fdfbf/work/b56ea7aa-7fe8-405b-9713-d866a6eeb181/pde_sample_1.csv.
+NOTE: DATA desynpuf.DE1_0_2008_to_2010_PDE_Sample_1
+
+NOTE: Reading from fileref inpde (work/b56ea7aa-7fe8-405b-9713-d866a6eeb181/pde_sample_1.csv)
+
+NOTE: Read 12 rows from inpde.
+NOTE: Wrote desynpuf.DE1_0_2008_to_2010_PDE_Sample_1 (12 rows, 8 columns).
+NOTE: DATA elapsed:
+  wall  0.00 seconds
+  cpu   0.00 seconds
+NOTE: Fileref INPDE cleared.
+NOTE: Option TITLE changed to Processing DE1_0_2008_to_2010_Prescription_Drug_Events_Sample_1.
+NOTE: PROC CONTENTS data=desynpuf.DE1_0_2008_to_2010_PDE_Sample_1
+
+NOTE: PROC CONTENTS completed: 12 observations, 8 variables
+NOTE: PROC PRINT data=desynpuf.DE1_0_2008_to_2010_PDE_Sample_1
+
+NOTE: PROC PRINT completed: 5 observations printed, 8 variables
+NOTE: PROC MEANS
+NOTE: PROC MEANS statement used.
+NOTE: PROC FREQ
+NOTE: PROC FREQ statement used.
+NOTE: Fileref INPDE cleared.
+NOTE: Library DESYNPUF cleared.
+NOTE: Option VALIDVARNAME changed to V7.

@@ -1,0 +1,124 @@
+                                     Processing bene_sample__1
+
+
+PROC CONTENTS
+-------------------------------------------------------------------------------
+
+Data Set Name: desynpuf.DE1_0_2008_Bene_Sample_1
+Observations:  10
+Variables:     32
+
+Variables (in creation order):
+
+  #  Variable                  Type    Len  Format     Label
+---  ------------------------  ----  -----  ---------  ----------------------------------------
+  1  DESYNPUF_ID               Char     16  $16.       DESYNPUF: Beneficiary Code
+  2  BENE_BIRTH_DT              Num      4  YYMMDDN8.  DESYNPUF: Date of birth
+  3  BENE_DEATH_DT              Num      4  YYMMDDN8.  DESYNPUF: Date of death
+  4  BENE_SEX_IDENT_CD         Char      1  $1.        DESYNPUF: Sex
+  5  BENE_RACE_CD              Char      1  $1.        DESYNPUF: Beneficiary Race Code
+  6  BENE_ESRD_IND             Char      1  $1.        DESYNPUF: End stage renal disease Indicator
+  7  SP_STATE_CODE             Char      2  $2.        DESYNPUF: State Code
+  8  BENE_COUNTY_CD            Char      3  $3.        DESYNPUF: County Code
+  9  BENE_HI_CVRAGE_TOT_MONS    Num      3  2.         DESYNPUF: Total number of months of part A coverage for the beneficiary.
+ 10  BENE_SMI_CVRAGE_TOT_MONS   Num      3  2.         DESYNPUF: Total number of months of part B coverage for the beneficiary.
+ 11  BENE_HMO_CVRAGE_TOT_MONS   Num      3  2.         DESYNPUF: Total number of months of HMO coverage for the beneficiary.
+ 12  PLAN_CVRG_MOS_NUM         Char      2  $2.        DESYNPUF: Total number of months of part D plan coverage for the beneficiary.
+ 13  SP_ALZHDMTA                Num      3  1.         DESYNPUF: Chronic Condition: Alzheimer or related disorders or senile
+ 14  SP_CHF                     Num      3  1.         DESYNPUF: Chronic Condition: Heart Failure
+ 15  SP_CHRNKIDN                Num      3  1.         DESYNPUF: Chronic Condition: Chronic Kidney Disease
+ 16  SP_CNCR                    Num      3  1.         DESYNPUF: Chronic Condition: Cancer
+ 17  SP_COPD                    Num      3  1.         DESYNPUF: Chronic Condition: Chronic Obstructive Pulmonary Disease
+ 18  SP_DEPRESSN                Num      3  1.         DESYNPUF: Chronic Condition: Depression
+ 19  SP_DIABETES                Num      3  1.         DESYNPUF: Chronic Condition: Diabetes
+ 20  SP_ISCHMCHT                Num      3  1.         DESYNPUF: Chronic Condition: Ischemic Heart Disease
+ 21  SP_OSTEOPRS                Num      3  1.         DESYNPUF: Chronic Condition: Osteoporosis
+ 22  SP_RA_OA                   Num      3  1.         DESYNPUF: Chronic Condition: RA/OA
+ 23  SP_STRKETIA                Num      3  1.         DESYNPUF: Chronic Condition: Stroke/transient Ischemic Attack
+ 24  MEDREIMB_IP                Num      8  10.2       DESYNPUF: Inpatient annual Medicare reimbursement amount
+ 25  BENRES_IP                  Num      8  10.2       DESYNPUF: Inpatient annual beneficiary responsibility amount
+ 26  PPPYMT_IP                  Num      8  10.2       DESYNPUF: Inpatient annual primary payer reimbursement amount
+ 27  MEDREIMB_OP                Num      8  10.2       DESYNPUF: Outpatient Institutional annual Medicare reimbursement amount
+ 28  BENRES_OP                  Num      8  10.2       DESYNPUF: Outpatient Institutional annual beneficiary responsibility amount
+ 29  PPPYMT_OP                  Num      8  10.2       DESYNPUF: Outpatient Institutional annual primary payer reimbursement amount
+ 30  MEDREIMB_CAR               Num      8  10.2       DESYNPUF: Carrier annual Medicare reimbursement amount
+ 31  BENRES_CAR                 Num      8  10.2       DESYNPUF: Carrier annual beneficiary responsibility amount
+ 32  PPPYMT_CAR                 Num      8  10.2       DESYNPUF: Carrier annual primary payer reimbursement amount
+
+-------------------------------------------------------------------------------
+
+                                     Processing bene_sample__1
+                                  Subsample Listing - First 5 Rows
+
+  Obs       DESYNPUF_ID  BENE_BIRTH_DT  BENE_DEATH_DT  BENE_SEX_IDENT_CD  BENE_RACE_CD  BENE_ESRD_IND  SP_STATE_CODE  BENE_COUNTY_CD  BENE_HI_CVRAGE_TOT_MONS  BENE_SMI_CVRAGE_TOT_MONS  BENE_HMO_CVRAGE_TOT_MONS  PLAN_CVRG_MOS_NUM  SP_ALZHDMTA  SP_CHF  SP_CHRNKIDN  SP_CNCR  SP_COPD  SP_DEPRESSN  SP_DIABETES  SP_ISCHMCHT  SP_OSTEOPRS  SP_RA_OA  SP_STRKETIA  MEDREIMB_IP   BENRES_IP   PPPYMT_IP  MEDREIMB_OP   BENRES_OP   PPPYMT_OP  MEDREIMB_CAR  BENRES_CAR  PPPYMT_CAR
+    1  00013D2EFD8E45D1       19230501              .  1                  1             0              39             230                                  12                        12                         0  12                           1       1            2        2        1            2            1            1            2         2            2      3200.00      450.00        0.00       890.50      120.00        0.00       1450.75      300.00        0.00
+    2  00016F745862898F       19430901              .  2                  1             0              39             470                                  12                        12                         0  12                           2       2            1        2        2            2            1            1            1         1            2         0.00        0.00        0.00       220.00       55.00        0.00        610.00       90.00        0.00
+    3  00016F745862899A       19360815              .  1                  2             0              26             100                                  12                        12                         0  12                           2       1            2        2        2            2            2            1            2         1            2     15200.00     1100.00        0.00      3400.00      600.00        0.00       2200.00      410.00        0.00
+    4  0001FDD721E223DC       19510214              .  2                  1             0              45             10                                   12                        12                         0  12                           2       2            2        2        2            1            2            2            2         2            2         0.00        0.00        0.00         0.00        0.00        0.00        340.00       60.00        0.00
+    5  00021CA6FF03E670       19291122       20090630  1                  1             0              39             230                                   6                         6                         0  6                            1       1            1        1        1            1            1            1            1         1            1     42000.00     2100.00        0.00      8900.00     1400.00        0.00       5100.00      900.00        0.00
+
+... 5 more observations (showing 5 of 10)
+
+
+
+                                     Processing bene_sample__1
+                                            Simple Means
+
+                                        The MEANS Procedure
+
+ Variable                  Label                                                                               N              Mean           Std Dev            Minimum           Maximum
+ ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ BENE_BIRTH_DT             DESYNPUF: Date of birth                                                            10     -7772.8000000      3997.0444859     -13394.0000000     -1188.0000000
+ BENE_DEATH_DT             DESYNPUF: Date of death                                                             2     17973.5000000       147.7853173      17869.0000000     18078.0000000
+ BENE_HI_CVRAGE_TOT_MONS   DESYNPUF: Total number of months of part A coverage for the beneficiary.           10        10.6000000         2.9888682          4.0000000        12.0000000
+ BENE_SMI_CVRAGE_TOT_MONS  DESYNPUF: Total number of months of part B coverage for the beneficiary.           10        10.6000000         2.9888682          4.0000000        12.0000000
+ BENE_HMO_CVRAGE_TOT_MONS  DESYNPUF: Total number of months of HMO coverage for the beneficiary.              10         0.0000000         0.0000000          0.0000000         0.0000000
+ SP_ALZHDMTA               DESYNPUF: Chronic Condition: Alzheimer or related disorders or senile              10         1.7000000         0.4830459          1.0000000         2.0000000
+ SP_CHF                    DESYNPUF: Chronic Condition: Heart Failure                                         10         1.6000000         0.5163978          1.0000000         2.0000000
+ SP_CHRNKIDN               DESYNPUF: Chronic Condition: Chronic Kidney Disease                                10         1.7000000         0.4830459          1.0000000         2.0000000
+ SP_CNCR                   DESYNPUF: Chronic Condition: Cancer                                                10         1.7000000         0.4830459          1.0000000         2.0000000
+ SP_COPD                   DESYNPUF: Chronic Condition: Chronic Obstructive Pulmonary Disease                 10         1.7000000         0.4830459          1.0000000         2.0000000
+ SP_DEPRESSN               DESYNPUF: Chronic Condition: Depression                                            10         1.8000000         0.4216370          1.0000000         2.0000000
+ SP_DIABETES               DESYNPUF: Chronic Condition: Diabetes                                              10         1.5000000         0.5270463          1.0000000         2.0000000
+ SP_ISCHMCHT               DESYNPUF: Chronic Condition: Ischemic Heart Disease                                10         1.4000000         0.5163978          1.0000000         2.0000000
+ SP_OSTEOPRS               DESYNPUF: Chronic Condition: Osteoporosis                                          10         1.6000000         0.5163978          1.0000000         2.0000000
+ SP_RA_OA                  DESYNPUF: Chronic Condition: RA/OA                                                 10         1.4000000         0.5163978          1.0000000         2.0000000
+ SP_STRKETIA               DESYNPUF: Chronic Condition: Stroke/transient Ischemic Attack                      10         1.9000000         0.3162278          1.0000000         2.0000000
+ MEDREIMB_IP               DESYNPUF: Inpatient annual Medicare reimbursement amount                           10     12530.0000000     21529.0011122          0.0000000     61000.0000000
+ BENRES_IP                 DESYNPUF: Inpatient annual beneficiary responsibility amount                       10       736.0000000      1100.7896156          0.0000000      3200.0000000
+ PPPYMT_IP                 DESYNPUF: Inpatient annual primary payer reimbursement amount                      10         0.0000000         0.0000000          0.0000000         0.0000000
+ MEDREIMB_OP               DESYNPUF: Outpatient Institutional annual Medicare reimbursement amount            10      2702.0500000      4271.4653773          0.0000000     12000.0000000
+ BENRES_OP                 DESYNPUF: Outpatient Institutional annual beneficiary responsibility amount        10       427.5000000       650.1848028          0.0000000      1800.0000000
+ PPPYMT_OP                 DESYNPUF: Outpatient Institutional annual primary payer reimbursement amount       10         0.0000000         0.0000000          0.0000000         0.0000000
+ MEDREIMB_CAR              DESYNPUF: Carrier annual Medicare reimbursement amount                             10      1835.0750000      2451.5000625          0.0000000      7300.0000000
+ BENRES_CAR                DESYNPUF: Carrier annual beneficiary responsibility amount                         10       307.5000000       390.0089030          0.0000000      1100.0000000
+ PPPYMT_CAR                DESYNPUF: Carrier annual primary payer reimbursement amount                        10         0.0000000         0.0000000          0.0000000         0.0000000
+ ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+                                     Processing bene_sample__1
+                                            Simple Means
+
+                                         The FREQ Procedure
+
+                                                     Cumulative    Cumulative
+DESYNPUF: Date of birth    Frequency    Percent     Frequency      Percent
+--------------------------------------------------------------------------------
+1923                               1     10.00            1        10.00
+1926                               1     10.00            2        20.00
+1929                               1     10.00            3        30.00
+1933                               1     10.00            4        40.00
+1936                               1     10.00            5        50.00
+1939                               1     10.00            6        60.00
+1943                               1     10.00            7        70.00
+1947                               1     10.00            8        80.00
+1951                               1     10.00            9        90.00
+1956                               1     10.00           10       100.00
+
+                                                     Cumulative    Cumulative
+DESYNPUF: Date of death    Frequency    Percent     Frequency      Percent
+--------------------------------------------------------------------------------
+.                                  8     80.00            8        80.00
+2008                               1     10.00            9        90.00
+2009                               1     10.00           10       100.00
+
+

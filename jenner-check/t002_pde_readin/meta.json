@@ -1,0 +1,7 @@
+{
+  "bundle": "t002_pde_readin",
+  "source_file": "DESynPUF_PDE_READIN_20121211.sas",
+  "source_blob_sha": "d117dd8647ee1ea21a1703625b8693e05d3725e9",
+  "source_commit": "fd034d380a124f4f412a9aa4a2f8a185a3d9f506",
+  "notes": "The desynpuf_pde_readin macro (INFILE/ATTRIB/INPUT + PROC CONTENTS/PRINT/MEANS/FREQ) reproduced verbatim; libname/filename retargeted to WORK, a 12-row synthetic Part D pharmacy-claims CSV (matching the documented CMS DE-SynPUF PDE layout) staged by autoexec.sas replaces the original local CMS download."
+}

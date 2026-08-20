@@ -1,0 +1,7 @@
+{
+  "bundle": "t003_subset_and_report",
+  "source_file": "subset_and_report.sas",
+  "source_blob_sha": "ffa74603782faa02af0a398012f1791e1f920379",
+  "source_commit": "fd034d380a124f4f412a9aa4a2f8a185a3d9f506",
+  "notes": "run_means and run_per_year macros reproduced verbatim, including the CALL EXECUTE-driven fan-out that generates one %run_means call per chronic-condition variable discovered via PROC CONTENTS. source libname retargeted to WORK; autoexec.sas builds small synthetic bene (10 rows) + PDE (10 rows) datasets in the field layout documented in this repo's DESynPUF_*_READIN scripts, standing in for the CMS DE-SynPUF download. Only 2008 (the year the mock data covers) is run; the original loops 2008-2010 against a real multi-year extract."
+}

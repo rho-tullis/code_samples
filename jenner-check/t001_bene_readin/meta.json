@@ -1,0 +1,7 @@
+{
+  "bundle": "t001_bene_readin",
+  "source_file": "DESynPUF_BENE_READIN_20121211.sas",
+  "source_blob_sha": "883c5047fa0417109b427f08287b310817c636d1",
+  "source_commit": "fd034d380a124f4f412a9aa4a2f8a185a3d9f506",
+  "notes": "The desynpuf_bene_readin macro (INFILE/ATTRIB/INPUT + PROC CONTENTS/PRINT/MEANS/FREQ) reproduced verbatim; libname/filename retargeted to WORK, a small 10-row synthetic beneficiary CSV (matching the documented CMS DE-SynPUF layout) staged by autoexec.sas replaces the original local CMS download, one subsample/year read in to keep the run small."
+}
